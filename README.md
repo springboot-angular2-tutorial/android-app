@@ -25,8 +25,9 @@ mvn spring-boot:run
 
 Configure API URL.
 
-```
-vi app/src/debug/java/com/hana053/micropost/Constants.java
+```java
+# app/src/debug/java/com/hana053/micropost/Constants.java
+public static final String API_URL = "http://192.168.58.1:8080/api/";
 ```
 
 Then, just run from Android Studio.
