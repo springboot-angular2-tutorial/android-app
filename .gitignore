@@ -1,0 +1,14 @@
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+*.iml
+
+## Directory-based project format:
+.idea/
+
+.gradle
+/local.properties
+.DS_Store
+/build
+/captures
+
+# release key
+app/myreleasekey.jks

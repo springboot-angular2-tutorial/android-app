@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rttv="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.hana053.micropost.presentation.core.components.micropostlist.PostItemViewModel" />
+
+        <variable
+            name="avatarModel"
+            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel" />
+
+        <variable
+            name="avatarListener"
+            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/margin_small"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/margin_small">
+
+        <ImageView
+            android:layout_width="@dimen/avatar_size_medium"
+            android:layout_height="@dimen/avatar_size_medium"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:onClick="@{avatarListener.onClick}"
+            android:src="@android:drawable/sym_def_app_icon"
+            app:imageUrl="@{avatarModel.getUrl(72)}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@{model.userName}"
+                android:textStyle="bold" />
+
+            <com.github.curioustechizen.ago.RelativeTimeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                rttv:reference_time="@{model.createdAt}" />
+
+            <TextView
+                android:id="@+id/postContentTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userName"
+                android:text="@{model.content}" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

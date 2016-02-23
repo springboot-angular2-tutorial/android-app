@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Micropost</string>
+    <string name="whats_happening">What\'s happening?</string>
+    <string name="welcome_to_micropost">Welcome to Micropost.</string>
+    <string name="get_real_time_updates_about_what_matters_to_you">Get real-time updates about what matters to you.</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log in</string>
+    <string name="log_in_to_micropost">Log in to Micropost.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_out">Sign out</string>
+    <string name="hi_what_s_your_name">Hi. What\'s your name?</string>
+    <string name="full_name">Full name</string>
+    <string name="next">Next</string>
+    <string name="what_s_your_email">What\'s your email?</string>
+    <string name="you_ll_need_a_password">You\'ll need a password.</string>
+    <string name="password_must_be_longer_than_8_chars">Password must be longer than 8 chars.</string>
+    <string name="full_name_must_be_longer_than_4_chars">Full name must be longer than 4 chars.</string>
+    <string name="please_enter_a_valid_email">Please enter a valid email.</string>
+    <string name="followings">followings</string>
+    <string name="Followings">Followings</string>
+    <string name="followers">followers</string>
+    <string name="Followers">Followers</string>
+</resources>
