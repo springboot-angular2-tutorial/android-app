@@ -12,3 +12,5 @@
 
 # release key
 app/myreleasekey.jks
+
+gradle.properties

@@ -1,6 +1,6 @@
 package com.hana053.micropost.interactors;
 
-import com.hana053.micropost.Constants;
+import com.hana053.micropost.BuildConfig;
 import com.hana053.micropost.presentation.core.services.AuthTokenService;
 
 import javax.inject.Named;
@@ -39,7 +39,7 @@ public class InteractorModule {
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .baseUrl(Constants.API_URL)
+                .baseUrl(BuildConfig.API_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(okHttpClient)
