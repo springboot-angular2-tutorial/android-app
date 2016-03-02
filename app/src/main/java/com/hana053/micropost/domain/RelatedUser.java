@@ -23,11 +23,11 @@ public final class RelatedUser extends User implements Serializable {
         this.relationshipId = relationshipId;
     }
 
-    public RelatedUser(long id, String name, String email, long relationshipId)  {
+    public RelatedUser(long id, String name, String email, long relationshipId) {
         this(id, name, email, relationshipId, null, false);
     }
 
-    public RelatedUser(long id, String name, String email, long relationshipId, UserStats userStats)  {
+    public RelatedUser(long id, String name, String email, long relationshipId, UserStats userStats) {
         this(id, name, email, relationshipId, userStats, false);
     }
 }
