@@ -33,8 +33,8 @@ public class UserShowFragmentTest {
     }
 
     public static class Common extends Base {
-        private final UserStats userStats = new UserStats(0, 1, 2, false, false);
-        private final User user = new User(1, "test user", "test@test.com", userStats);
+        private final UserStats userStats = new UserStats(0, 1, 2, false);
+        private final User user = new User(1, "test user", "test@test.com", false, userStats);
 
         @Before
         public void setup() {
@@ -65,11 +65,11 @@ public class UserShowFragmentTest {
     }
 
     public static class WhenUserIsNotFollowed extends Base {
-        private final UserStats userStats = new UserStats(0, 1, 2, false, false);
+        private final UserStats userStats = new UserStats(0, 1, 2, false);
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", userStats));
+            setupFragment(new User(1, "test user", "test@test.com", false, userStats));
         }
 
         @Test
@@ -79,11 +79,11 @@ public class UserShowFragmentTest {
     }
 
     public static class WhenUserIsFollowed extends Base {
-        private final UserStats userStats = new UserStats(0, 1, 2, true, false);
+        private final UserStats userStats = new UserStats(0, 1, 2, true);
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", userStats));
+            setupFragment(new User(1, "test user", "test@test.com", false, userStats));
         }
 
         @Test
@@ -93,11 +93,11 @@ public class UserShowFragmentTest {
     }
 
     public static class WhenUserIsMyself extends Base {
-        private final UserStats userStats = new UserStats(0, 1, 2, false, true);
+        private final UserStats userStats = new UserStats(0, 1, 2, false);
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", userStats));
+            setupFragment(new User(1, "test user", "test@test.com", true, userStats));
         }
 
         @Test

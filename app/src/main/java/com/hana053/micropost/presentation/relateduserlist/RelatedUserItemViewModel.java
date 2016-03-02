@@ -9,8 +9,4 @@ public class RelatedUserItemViewModel {
 
     public final RelatedUser user;
 
-    public boolean isMyself() {
-        return user.getUserStats().isMyself();
-    }
-
 }

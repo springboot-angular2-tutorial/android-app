@@ -16,18 +16,20 @@ public class User implements Serializable {
     public final long id;
     public final String name;
     public final String email;
+    public final boolean isMyself;
     public final UserStats userStats;
 
     @ParcelConstructor
-    public User(long id, String name, String email, UserStats userStats) {
+    public User(long id, String name, String email, boolean isMyself, UserStats userStats) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.isMyself = isMyself;
         this.userStats = userStats;
     }
 
     public User(long id, String name, String email) {
-        this(id, name, email, new UserStats());
+        this(id, name, email, false, new UserStats());
     }
 
 }

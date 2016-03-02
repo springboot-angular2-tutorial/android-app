@@ -17,9 +17,4 @@ public class UserShowViewModel {
     public UserShowViewModel(User user) {
         this.user = user;
     }
-
-    public boolean isMyself() {
-        return user.getUserStats().isMyself();
-    }
-
 }

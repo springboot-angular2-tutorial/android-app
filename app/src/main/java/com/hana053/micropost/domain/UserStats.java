@@ -17,18 +17,16 @@ public final class UserStats implements Serializable {
     public final int followingCnt;
     public final int followerCnt;
     public final boolean followedByMe;
-    public final boolean myself;
 
     @ParcelConstructor
-    public UserStats(int micropostCnt, int followingCnt, int followerCnt, boolean followedByMe, boolean myself) {
+    public UserStats(int micropostCnt, int followingCnt, int followerCnt, boolean followedByMe) {
         this.micropostCnt = micropostCnt;
         this.followingCnt = followingCnt;
         this.followerCnt = followerCnt;
         this.followedByMe = followedByMe;
-        this.myself = myself;
     }
 
     public UserStats() {
-        this(0, 0, 0, false, false);
+        this(0, 0, 0, false);
     }
 }

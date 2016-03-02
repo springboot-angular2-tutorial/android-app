@@ -30,7 +30,7 @@ public class RelatedUserListAdapterTest extends RobolectricBaseTest {
     public void shouldGetLastItemId() {
         assertThat(userListAdapter.getLastItemId(), nullValue());
         final List<RelatedUser> relatedUsers = Observable.range(100, 2)
-                .map(relationshipId -> new RelatedUser(1, "", "", null, relationshipId))
+                .map(relationshipId -> new RelatedUser(1, "", "", relationshipId))
                 .toList()
                 .toBlocking()
                 .single();
@@ -48,7 +48,7 @@ public class RelatedUserListAdapterTest extends RobolectricBaseTest {
             }
         });
         final List<RelatedUser> relatedUsers = Observable.just(100)
-                .map(relationshipId -> new RelatedUser(1, "", "", null, relationshipId))
+                .map(relationshipId -> new RelatedUser(1, "", "", relationshipId))
                 .toList()
                 .toBlocking()
                 .single();
