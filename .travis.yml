@@ -8,6 +8,7 @@ android:
     - android-23
     - extra-android-m2repository
 
+before_script: cp gradle.properties.example gradle.properties
 script: ./gradlew testDebug
 
 before_cache:
