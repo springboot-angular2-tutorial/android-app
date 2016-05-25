@@ -51,7 +51,7 @@ public class MainFragment extends BaseFragment<List<Micropost>, MainBinding> imp
         public void onScrolledToBottom() {
             final Subscription subscription = mainService.loadPrevFeed()
                     .doOnSubscribe(progressBarHandler::show)
-                    .finallyDo(progressBarHandler::hide)
+                    .doAfterTerminate(progressBarHandler::hide)
                     .subscribe(microposts -> {
                     }, httpErrorHandler::handleError);
             collectSubscription(subscription);
@@ -67,7 +67,7 @@ public class MainFragment extends BaseFragment<List<Micropost>, MainBinding> imp
     public SwipeRefreshLayout.OnRefreshListener onSwipeRefresh() {
         return () -> {
             final Subscription subscription = mainService.loadNextFeed()
-                    .finallyDo(() -> getBinding().swipeRefreshLayout.setRefreshing(false))
+                    .doAfterTerminate(() -> getBinding().swipeRefreshLayout.setRefreshing(false))
                     .subscribe(microposts -> {
                     }, httpErrorHandler::handleError);
             collectSubscription(subscription);
@@ -109,7 +109,7 @@ public class MainFragment extends BaseFragment<List<Micropost>, MainBinding> imp
     public void loadFeed() {
         final Subscription subscription = mainService.loadNextFeed()
                 .doOnSubscribe(progressBarHandler::show)
-                .finallyDo(progressBarHandler::hide)
+                .doAfterTerminate(progressBarHandler::hide)
                 .subscribe(microposts -> {
                 }, httpErrorHandler::handleError);
         collectSubscription(subscription);

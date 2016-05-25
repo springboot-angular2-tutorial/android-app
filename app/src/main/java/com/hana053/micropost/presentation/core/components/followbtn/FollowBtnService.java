@@ -46,7 +46,7 @@ public class FollowBtnService {
         }
         final Subscription subscription = observable
                 .doOnSubscribe(() -> viewModel.isEnabled.set(false))
-                .finallyDo(() -> viewModel.isEnabled.set(true))
+                .doAfterTerminate(() -> viewModel.isEnabled.set(true))
                 .subscribe(x -> {
                 }, httpErrorHandler::handleError);
 

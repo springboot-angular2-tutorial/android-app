@@ -50,7 +50,7 @@ public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBin
         return nextBtnHandler.call(ctrl -> {
             final Subscription subscription = signupService.signup(createSignupRequest())
                     .doOnSubscribe(progressBarHandler::show)
-                    .finallyDo(progressBarHandler::hide)
+                    .doAfterTerminate(progressBarHandler::hide)
                     .subscribe(x -> navigator.navigateToMain(), e -> {
                         if (isEmailAlreadyTaken(e)) {
                             Toast.makeText(getContext(), "This email is already taken.", Toast.LENGTH_LONG).show();

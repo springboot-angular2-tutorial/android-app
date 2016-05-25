@@ -122,7 +122,7 @@ public class RelatedUserListFragment extends BaseFragment<List<RelatedUser>, Rel
     private void loadUsers() {
         final Subscription subscription = relatedUserListService.loadRelatedUsers(getUserId())
                 .doOnSubscribe(progressBarHandler::show)
-                .finallyDo(progressBarHandler::hide)
+                .doAfterTerminate(progressBarHandler::hide)
                 .subscribe(users -> {
                 }, httpErrorHandler::handleError);
         collectSubscription(subscription);

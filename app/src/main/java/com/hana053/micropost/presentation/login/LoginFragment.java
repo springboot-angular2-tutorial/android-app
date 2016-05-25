@@ -41,7 +41,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> im
         return v -> {
             final Subscription subscription = loginService.login(getEmail(), getPassword())
                     .doOnSubscribe(progressBarHandler::show)
-                    .finallyDo(progressBarHandler::hide)
+                    .doAfterTerminate(progressBarHandler::hide)
                     .subscribe(response -> {
                         if (response.code() == 401) {
                             // TODO I'm not sure why 401 error can reach here...

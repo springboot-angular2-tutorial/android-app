@@ -1,6 +1,5 @@
 package com.hana053.micropost.domain;
 
-
 import org.parceler.Parcel;
 import org.parceler.ParcelConstructor;
 

@@ -98,7 +98,7 @@ public class UserShowPostListFragment extends BaseFragment<List<Micropost>, User
     private void loadPosts() {
         final Subscription subscription = userShowService.loadPosts(getUserId())
                 .doOnSubscribe(progressBarHandler::show)
-                .finallyDo(progressBarHandler::hide)
+                .doAfterTerminate(progressBarHandler::hide)
                 .subscribe(posts -> {
                 }, httpErrorHandler::handleError);
         collectSubscription(subscription);
