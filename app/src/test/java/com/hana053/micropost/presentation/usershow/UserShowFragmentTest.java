@@ -6,6 +6,7 @@ import com.hana053.micropost.databinding.UserShowBinding;
 import com.hana053.micropost.domain.User;
 import com.hana053.micropost.domain.UserStats;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.shadows.ShadowFollowBtnServiceFactory;
 import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
 
 import org.junit.Before;
@@ -32,6 +33,7 @@ public class UserShowFragmentTest {
         }
     }
 
+    @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public static class Common extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2, false);
         private final User user = new User(1, "test user", "test@test.com", false, userStats);
@@ -64,6 +66,7 @@ public class UserShowFragmentTest {
         }
     }
 
+    @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public static class WhenUserIsNotFollowed extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2, false);
 
@@ -78,6 +81,7 @@ public class UserShowFragmentTest {
         }
     }
 
+    @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public static class WhenUserIsFollowed extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2, true);
 
@@ -92,6 +96,7 @@ public class UserShowFragmentTest {
         }
     }
 
+    @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public static class WhenUserIsMyself extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2, false);
 

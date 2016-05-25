@@ -73,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:enabled="false"
                 android:onClick="@{listener.onClickLoginBtn}"
                 android:text="@string/log_in" />
         </RelativeLayout>

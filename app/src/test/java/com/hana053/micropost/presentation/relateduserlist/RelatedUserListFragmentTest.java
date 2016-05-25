@@ -30,6 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@Config(shadows = ShadowFollowBtnServiceFactory.class)
 public class RelatedUserListFragmentTest extends RobolectricBaseTest {
 
     private final long userId = 1;
@@ -62,7 +63,6 @@ public class RelatedUserListFragmentTest extends RobolectricBaseTest {
     }
 
     @Test
-    @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public void shouldStartAndStopFollowBtnService() {
         verify(fragment.followBtnService).startObserving();
         fragment.onStop();

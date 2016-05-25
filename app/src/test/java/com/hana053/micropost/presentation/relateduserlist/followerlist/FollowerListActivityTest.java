@@ -3,6 +3,7 @@ package com.hana053.micropost.presentation.relateduserlist.followerlist;
 import android.content.Intent;
 
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.shadows.ShadowFollowBtnServiceFactory;
 import com.hana053.micropost.testing.shadows.ShadowLoginServiceFactory;
 
 import org.junit.Before;
@@ -14,7 +15,7 @@ import org.robolectric.util.ActivityController;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
-@Config(shadows = ShadowLoginServiceFactory.class)
+@Config(shadows = {ShadowLoginServiceFactory.class, ShadowFollowBtnServiceFactory.class})
 public class FollowerListActivityTest extends RobolectricBaseTest {
 
     @SuppressWarnings("FieldCanBeLocal")
