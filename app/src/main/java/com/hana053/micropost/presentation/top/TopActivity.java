@@ -22,7 +22,6 @@ public class TopActivity extends AppCompatActivity implements HasComponent<TopCo
         component = DaggerTopComponent.builder()
                 .appComponent(BaseApplication.component(this))
                 .activityModule(new ActivityModule(this))
-                .topModule(new TopModule())
                 .build();
         component.inject(this);
         setContentView(R.layout.layout_top);

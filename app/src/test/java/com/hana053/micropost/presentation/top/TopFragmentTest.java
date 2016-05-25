@@ -53,7 +53,6 @@ public class TopFragmentTest extends RobolectricBaseTest {
             return DaggerTopComponent.builder()
                     .appComponent(BaseApplication.component(this))
                     .activityModule(new ActivityModule(this))
-                    .topModule(new TopModule())
                     .build();
         }
     }
