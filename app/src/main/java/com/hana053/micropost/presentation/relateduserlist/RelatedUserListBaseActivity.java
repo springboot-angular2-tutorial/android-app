@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressWarnings("ConstantConditions")
@@ -26,7 +26,7 @@ public abstract class RelatedUserListBaseActivity extends AppCompatActivity {
 
     private final EventBus eventBus = EventBus.getDefault();
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Inject

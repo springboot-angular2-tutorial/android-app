@@ -14,7 +14,7 @@ import com.hana053.micropost.presentation.core.services.LoginService;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import lombok.Getter;
 
@@ -24,7 +24,7 @@ public class MicropostNewActivity extends AppCompatActivity implements Micropost
     @Getter
     private MicropostNewComponent component;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Inject

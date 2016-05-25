@@ -17,7 +17,7 @@ import org.parceler.Parcels;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import lombok.Getter;
 
@@ -29,7 +29,7 @@ public class UserShowActivity extends AppCompatActivity implements HasComponent<
     @Getter
     private UserShowComponent component;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Inject

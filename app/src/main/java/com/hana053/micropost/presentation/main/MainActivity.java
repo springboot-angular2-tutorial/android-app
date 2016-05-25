@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import lombok.Getter;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MainCtrl, HasComp
     @Getter
     private MainComponent component;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Inject
