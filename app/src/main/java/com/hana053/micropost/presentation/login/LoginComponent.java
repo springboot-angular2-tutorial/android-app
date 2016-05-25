@@ -13,7 +13,6 @@ import dagger.Component;
         dependencies = {AppComponent.class},
         modules = {
                 ActivityModule.class,
-                LoginModule.class
         }
 )
 interface LoginComponent {

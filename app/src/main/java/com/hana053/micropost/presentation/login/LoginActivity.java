@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements HasComponent<Log
         component = DaggerLoginComponent.builder()
                 .appComponent(BaseApplication.component(this))
                 .activityModule(new ActivityModule(this))
-                .loginModule(new LoginModule())
                 .build();
         component.inject(this);
 

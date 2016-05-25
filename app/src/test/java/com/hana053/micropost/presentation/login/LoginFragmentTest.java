@@ -85,7 +85,6 @@ public class LoginFragmentTest extends RobolectricBaseTest {
             return DaggerLoginComponent.builder()
                     .appComponent(BaseApplication.component(this))
                     .activityModule(new ActivityModule(this))
-                    .loginModule(new LoginModule())
                     .build();
         }
     }
