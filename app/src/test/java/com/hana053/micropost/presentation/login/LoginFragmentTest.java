@@ -20,6 +20,7 @@ import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
@@ -39,10 +40,11 @@ public class LoginFragmentTest extends RobolectricBaseTest {
     @Before
     public void setup() {
         final LoginService loginService = getAppComponent().loginService();
-        when(loginService.login("test@test.com", "NG"))
-                .thenReturn(Observable.just(Response.error(401, new EmptyResponseBody())));
-        when(loginService.login("test@test.com", "OK"))
-                .thenReturn(Observable.just(Response.success(null)));
+
+        final HttpException loginFailure = new HttpException(Response.error(401, new EmptyResponseBody()));
+        when(loginService.login("test@test.com", "NG")).thenReturn(Observable.error(loginFailure));
+
+        when(loginService.login("test@test.com", "OK")).thenReturn(Observable.just(null));
 
         fragment = new LoginFragment();
         SupportFragmentTestUtil.startFragment(fragment, TestActivity.class);

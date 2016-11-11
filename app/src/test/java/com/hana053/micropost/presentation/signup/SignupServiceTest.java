@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.robolectric.annotation.Config;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
@@ -33,7 +32,7 @@ public class SignupServiceTest extends RobolectricBaseTest {
     @Test
     @Config(shadows = ShadowLoginServiceFactory.class)
     public void shouldSignup() {
-        final TestSubscriber<Response<String>> testSubscriber = new TestSubscriber<>();
+        final TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
         final UserInteractor.SignupRequest request = UserInteractor.SignupRequest.builder()
                 .email("test@test.com")
                 .password("secret123")

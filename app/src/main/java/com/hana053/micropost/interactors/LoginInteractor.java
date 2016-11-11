@@ -8,12 +8,17 @@ import rx.Observable;
 
 public interface LoginInteractor {
 
-    @POST("login")
-    Observable<Response<String>> login(@Body LoginRequest request);
+    @POST("auth")
+    Observable<LoginResponse> login(@Body LoginRequest request);
 
     @Value
     class LoginRequest {
         private final String email;
         private final String password;
+    }
+
+    @Value
+    class LoginResponse {
+        private final String token;
     }
 }

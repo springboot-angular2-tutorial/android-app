@@ -70,14 +70,8 @@ public class LoginServiceTest extends RobolectricBaseTest {
         assertThat(loginService.ensureAuthenticated(), is(true));
     }
 
-    private Observable<Response<String>> dummyResponse() {
-        return Observable.just(Response.success("my token",
-                new okhttp3.Response.Builder()
-                        .code(200)
-                        .protocol(Protocol.HTTP_1_1)
-                        .request(new okhttp3.Request.Builder().url(HttpUrl.parse("http://localhost")).build())
-                        .build()
-        ));
+    private Observable<LoginInteractor.LoginResponse> dummyResponse() {
+        return Observable.just(new LoginInteractor.LoginResponse("my token"));
     }
 
 }

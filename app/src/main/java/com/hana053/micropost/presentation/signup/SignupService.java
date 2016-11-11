@@ -1,11 +1,10 @@
 package com.hana053.micropost.presentation.signup;
 
-import com.hana053.micropost.presentation.core.services.LoginService;
 import com.hana053.micropost.interactors.UserInteractor;
+import com.hana053.micropost.presentation.core.services.LoginService;
 
 import javax.inject.Inject;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -21,7 +20,7 @@ public class SignupService {
         this.loginService = loginService;
     }
 
-    public Observable<Response<String>> signup(UserInteractor.SignupRequest request) {
+    public Observable<Void> signup(UserInteractor.SignupRequest request) {
         return userInteractor.create(request)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

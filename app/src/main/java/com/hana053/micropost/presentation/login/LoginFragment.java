@@ -20,6 +20,7 @@ import com.hana053.micropost.presentation.core.services.ProgressBarHandler;
 import javax.inject.Inject;
 
 import lombok.Getter;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 
 public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> implements LoginViewListener {
@@ -43,13 +44,14 @@ public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> im
                     .doOnSubscribe(progressBarHandler::show)
                     .doAfterTerminate(progressBarHandler::hide)
                     .subscribe(response -> {
-                        if (response.code() == 401) {
-                            // TODO I'm not sure why 401 error can reach here...
+                        navigator.navigateToMain();
+                    }, e -> {
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401) {
                             Toast.makeText(getContext(), "Email or Password is wrong.", Toast.LENGTH_LONG).show();
                         } else {
-                            navigator.navigateToMain();
+                            httpErrorHandler.handleError(e);
                         }
-                    }, httpErrorHandler::handleError);
+                    });
             collectSubscription(subscription);
         };
     }

@@ -73,7 +73,7 @@ public class SignupPasswordFragmentTest extends RobolectricBaseTest {
     public void shouldFinishSignupWhenEmailIsUnique() {
         fragment.signupService = mock(SignupService.class);
         when(fragment.signupService.signup(any()))
-                .thenReturn(Observable.just(Response.success(null)));
+                .thenReturn(Observable.just(null));
         nextBtn.performClick();
         applyChanges();
         verify(fragment.navigator).navigateToMain();

@@ -9,7 +9,6 @@ import com.hana053.micropost.presentation.top.TopActivity;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,15 +29,13 @@ public class LoginService {
         this.context = context;
     }
 
-    public Observable<Response<String>> login(String email, String password) {
+    public Observable<Void> login(String email, String password) {
         return loginInteractor
                 .login(new LoginInteractor.LoginRequest(email, password))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(response -> {
-                    final String token = response.body();
-                    authTokenService.setAuthToken(token);
-                });
+                .doOnNext(response -> authTokenService.setAuthToken(response.getToken()))
+                .flatMap(loginResponse -> Observable.empty());
     }
 
     public void logout() {

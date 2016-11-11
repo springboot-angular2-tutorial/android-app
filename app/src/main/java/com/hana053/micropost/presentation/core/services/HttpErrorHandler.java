@@ -39,7 +39,7 @@ public class HttpErrorHandler {
                 Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show();
             }
         } catch (Throwable e) {
-            Timber.e("handleHttpError: %s", e);
+            Timber.e(e, "handleHttpError: %s", e.getMessage());
             Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show();
         }
     }
