@@ -1,5 +1,6 @@
 package com.hana053.micropost.presentation.signup.password;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,7 @@ public class SignupPasswordFragmentTest extends RobolectricBaseTest {
     }
 
     @Test
+    @SuppressLint("SetTextI18n")
     public void shouldInputPasswordWithValidation() {
         assertThat(nextBtn.isEnabled(), is(false));
         assertThat(invalidMsg.getVisibility(), is(View.GONE));
