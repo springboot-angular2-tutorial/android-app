@@ -21,7 +21,7 @@ public class SignupService {
         this.loginService = loginService;
     }
 
-    public Observable<Response<Void>> signup(UserInteractor.SignupRequest request) {
+    public Observable<Response<String>> signup(UserInteractor.SignupRequest request) {
         return userInteractor.create(request)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

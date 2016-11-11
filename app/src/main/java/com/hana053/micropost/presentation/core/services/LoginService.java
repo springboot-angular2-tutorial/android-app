@@ -30,13 +30,13 @@ public class LoginService {
         this.context = context;
     }
 
-    public Observable<Response<Void>> login(String email, String password) {
+    public Observable<Response<String>> login(String email, String password) {
         return loginInteractor
                 .login(new LoginInteractor.LoginRequest(email, password))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(response -> {
-                    final String token = response.headers().get("X-AUTH-TOKEN");
+                    final String token = response.body();
                     authTokenService.setAuthToken(token);
                 });
     }

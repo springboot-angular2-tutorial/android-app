@@ -9,7 +9,7 @@ import rx.Observable;
 public interface LoginInteractor {
 
     @POST("login")
-    Observable<Response<Void>> login(@Body LoginRequest request);
+    Observable<Response<String>> login(@Body LoginRequest request);
 
     @Value
     class LoginRequest {
