@@ -13,6 +13,7 @@ import com.hana053.micropost.interactors.UserMicropostInteractor;
 import com.hana053.micropost.presentation.core.services.AuthTokenService;
 import com.hana053.micropost.presentation.core.services.HttpErrorHandler;
 import com.hana053.micropost.presentation.core.services.LoginService;
+import com.hana053.micropost.presentation.core.services.ServiceModule;
 import com.hana053.micropost.system.SystemServicesModule;
 
 import javax.inject.Named;
@@ -23,7 +24,8 @@ import dagger.Component;
 @Singleton
 @Component(modules = {
         SystemServicesModule.class,
-        InteractorModule.class
+        InteractorModule.class,
+        ServiceModule.class,
 })
 public interface AppComponent {
 
