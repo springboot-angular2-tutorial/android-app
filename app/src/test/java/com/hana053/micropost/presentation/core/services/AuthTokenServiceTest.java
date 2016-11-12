@@ -1,5 +1,6 @@
 package com.hana053.micropost.presentation.core.services;
 
+import com.hana053.micropost.domain.User;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 
 import org.junit.Before;
@@ -29,6 +30,17 @@ public class AuthTokenServiceTest extends RobolectricBaseTest {
         authTokenService.setAuthToken("my token");
         authTokenService.clearAuthToken();
         assertThat(authTokenService.getAuthToken(), nullValue());
+    }
+
+    @Test
+    public void shouldDetermineIsMyself() {
+        authTokenService.setAuthToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNDc5NDUwNDY0fQ.Dy33qbg6EnP1bL2DmItMNGDEunrYP7-rzf586wxb2D-wW8WCsFrKdCeCU_ZHq_A7-kg_LxBykyaoG_26z-k9uA");
+
+        User user1 = new User(1, "", "", "");
+        assertThat(authTokenService.isMyself(user1), is(true));
+
+        User user2 = new User(2, "", "", "");
+        assertThat(authTokenService.isMyself(user2), is(false));
     }
 
 }

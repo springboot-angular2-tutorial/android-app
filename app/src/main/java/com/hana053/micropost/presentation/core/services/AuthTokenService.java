@@ -3,6 +3,11 @@ package com.hana053.micropost.presentation.core.services;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
+import com.hana053.micropost.domain.User;
+import com.nimbusds.jose.JWSObject;
+
+import java.text.ParseException;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -35,4 +40,14 @@ public class AuthTokenService {
                 .apply();
     }
 
+    public boolean isMyself(User user) {
+        if (getAuthToken() == null) return false;
+        try {
+            final JWSObject jwsObject = JWSObject.parse(getAuthToken());
+            final String sub = jwsObject.getPayload().toJSONObject().get("sub").toString();
+            return user.getId() == Long.valueOf(sub);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
