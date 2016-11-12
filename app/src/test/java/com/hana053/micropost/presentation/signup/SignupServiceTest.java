@@ -38,7 +38,7 @@ public class SignupServiceTest extends RobolectricBaseTest {
                 .password("secret123")
                 .name("test user")
                 .build();
-        final Observable<User> signupResponse = Observable.just(new User(1, "test user", "test@test.com"));
+        final Observable<User> signupResponse = Observable.just(new User(1, "test user", "test@test.com", ""));
         when(userInteractor.create(request)).thenReturn(signupResponse);
         when(loginService.login("test@test.com", "secret123")).thenReturn(Observable.empty());
 

@@ -26,7 +26,7 @@ public class InteractorModule {
                     String authToken = authTokenService.getAuthToken();
 
                     Request.Builder builder = original.newBuilder();
-                    if (authToken != null) builder.header("X-AUTH-TOKEN", authToken);
+                    if (authToken != null) builder.header("authorization", "Bearer " + authToken);
                     Request request = builder
                             .method(original.method(), original.body())
                             .build();

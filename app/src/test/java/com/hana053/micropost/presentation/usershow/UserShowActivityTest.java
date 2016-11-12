@@ -29,7 +29,7 @@ public class UserShowActivityTest extends RobolectricBaseTest {
     public void setup() {
         activityController = Robolectric.buildActivity(UserShowActivity.class);
         final Intent intent = new Intent();
-        final User user = new User(1, "", "");
+        final User user = new User(1, "", "", "");
         intent.putExtra(UserShowActivity.KEY_USER, Parcels.wrap(user));
         activity = activityController.withIntent(intent).create().get();
     }

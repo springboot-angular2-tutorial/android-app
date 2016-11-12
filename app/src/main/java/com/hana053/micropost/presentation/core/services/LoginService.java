@@ -35,7 +35,7 @@ public class LoginService {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(response -> authTokenService.setAuthToken(response.getToken()))
-                .flatMap(loginResponse -> Observable.empty());
+                .flatMap(loginResponse -> Observable.just(null));
     }
 
     public void logout() {

@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 public class UserShowPostListFragmentTest extends RobolectricBaseTest {
 
-    private final User user = new User(1, "", "");
+    private final User user = new User(1, "", "", "");
     private UserShowPostListFragment fragment;
 
     private final Observable<List<Micropost>> dummyPosts = Observable

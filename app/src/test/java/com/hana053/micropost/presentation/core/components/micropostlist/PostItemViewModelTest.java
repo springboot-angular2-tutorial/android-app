@@ -15,7 +15,7 @@ public class PostItemViewModelTest {
 
     @Before
     public void setup() {
-        final User user = new User(200, "test user", "test@test.com");
+        final User user = new User(200, "test user", "test@test.com", "");
         final Micropost micropost = new Micropost(100, "content", 0, user);
         viewModel = new PostItemViewModel(micropost);
     }

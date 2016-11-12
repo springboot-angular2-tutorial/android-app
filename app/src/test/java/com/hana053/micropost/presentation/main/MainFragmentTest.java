@@ -74,7 +74,7 @@ public class MainFragmentTest extends RobolectricBaseTest {
     @Test
     public void shouldBeRestoredFromSavedState() {
         final List<Micropost> posts = Observable.range(1, 2)
-                .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com")))
+                .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com", "")))
                 .toList()
                 .toBlocking()
                 .single();
@@ -93,7 +93,7 @@ public class MainFragmentTest extends RobolectricBaseTest {
     private void triggerScroll() {
         // need more than two items to scroll
         final List<Micropost> posts = Observable.range(1, 2)
-                .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com")))
+                .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com", "")))
                 .toList()
                 .toBlocking()
                 .single();

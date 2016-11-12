@@ -51,7 +51,7 @@ public class RelatedUserListBaseActivityTest extends RobolectricBaseTest {
 
     @Test
     public void shouldNavigateToUserShowWhenReceivedEvent() {
-        final User user = new User(1, "", "");
+        final User user = new User(1, "", "", "");
         final AvatarViewModel viewModel = new AvatarViewModel(user);
         final AvatarClickEvent event = new AvatarClickEvent(viewModel);
         activity.onEvent(event);

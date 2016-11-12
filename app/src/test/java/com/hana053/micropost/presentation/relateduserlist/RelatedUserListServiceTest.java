@@ -35,13 +35,13 @@ public class RelatedUserListServiceTest extends RobolectricBaseTest {
     @Test
     public void shouldLoadRelatedUsers() {
         final List<RelatedUser> users = Observable.range(100, 2)
-                .map(relationshipId -> new RelatedUser(1, "test", "test@test.com", relationshipId))
+                .map(relationshipId -> new RelatedUser(1, "test", "test@test.com", "", relationshipId))
                 .toList()
                 .toBlocking()
                 .single();
         userListAdapter.addAll(0, users);
         final Observable<List<RelatedUser>> response = Observable.just(102)
-                .map(relationshipId -> new RelatedUser(1, "test", "test@test.com", relationshipId))
+                .map(relationshipId -> new RelatedUser(1, "test", "test@test.com", "", relationshipId))
                 .toList();
         when(interactor.listRelatedUsers(1, 101L)).thenReturn(response);
 

@@ -36,7 +36,7 @@ public class UserShowFragmentTest {
     @Config(shadows = ShadowFollowBtnServiceFactory.class)
     public static class Common extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2, false);
-        private final User user = new User(1, "test user", "test@test.com", false, userStats);
+        private final User user = new User(1, "test user", "test@test.com", "", false, userStats);
 
         @Before
         public void setup() {
@@ -72,7 +72,7 @@ public class UserShowFragmentTest {
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", false, userStats));
+            setupFragment(new User(1, "test user", "test@test.com", "", false, userStats));
         }
 
         @Test
@@ -87,7 +87,7 @@ public class UserShowFragmentTest {
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", false, userStats));
+            setupFragment(new User(1, "test user", "test@test.com", "", false, userStats));
         }
 
         @Test
@@ -102,7 +102,7 @@ public class UserShowFragmentTest {
 
         @Before
         public void setup() {
-            setupFragment(new User(1, "test user", "test@test.com", true, userStats));
+            setupFragment(new User(1, "test user", "test@test.com", "", true, userStats));
         }
 
         @Test

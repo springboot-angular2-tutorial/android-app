@@ -36,7 +36,7 @@ public class NavigatorTest extends RobolectricBaseTest {
 
     @Test
     public void shouldNavigateToUserShow() {
-        final User user = new User(1, "test", "test@test.com");
+        final User user = new User(1, "test", "test@test.com", "");
         navigator.navigateToUserShow(user);
         final ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         final Intent intent = shadowActivity.getNextStartedActivity();
