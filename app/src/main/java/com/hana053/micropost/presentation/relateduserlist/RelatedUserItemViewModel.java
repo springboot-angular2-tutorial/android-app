@@ -8,5 +8,6 @@ import lombok.Value;
 public class RelatedUserItemViewModel {
 
     public final RelatedUser user;
+    public final boolean isMyself;
 
 }

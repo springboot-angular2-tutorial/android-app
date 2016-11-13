@@ -69,7 +69,7 @@
                 android:enabled="@{followBtnModel.isEnabled}"
                 android:onClick="@{followBtnListener.onClick}"
                 android:text='@{followBtnModel.isFollowedByMe ? "Unfollow" : "Follow"}'
-                android:visibility="@{model.user.isMyself ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{model.isMyself ? View.GONE : View.VISIBLE}" />
         </RelativeLayout>
 
         <LinearLayout

@@ -3,6 +3,7 @@ package com.hana053.micropost.presentation.relateduserlist;
 import android.support.v7.widget.RecyclerView;
 
 import com.hana053.micropost.domain.RelatedUser;
+import com.hana053.micropost.presentation.core.services.AuthTokenService;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 
 import org.junit.Before;
@@ -16,14 +17,16 @@ import rx.Observable;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class RelatedUserListAdapterTest extends RobolectricBaseTest {
 
     private RelatedUserListAdapter userListAdapter;
+    private AuthTokenService authTokenService = mock(AuthTokenService.class);
 
     @Before
     public void setup() {
-        userListAdapter = new RelatedUserListAdapter();
+        userListAdapter = new RelatedUserListAdapter(authTokenService);
     }
 
     @Test

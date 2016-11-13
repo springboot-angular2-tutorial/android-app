@@ -14,6 +14,7 @@ import com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnService;
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewListener;
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewModel;
+import com.hana053.micropost.presentation.core.services.AuthTokenService;
 import com.hana053.micropost.presentation.core.services.Navigator;
 
 import org.parceler.Parcels;
@@ -29,6 +30,9 @@ public class UserShowFragment extends BaseFragment<UserShowViewModel, UserShowBi
 
     @Inject
     FollowBtnService followBtnService;
+
+    @Inject
+    AuthTokenService authTokenService;
 
     public static UserShowFragment newInstance(User user) {
         final UserShowFragment fragment = new UserShowFragment();
@@ -74,7 +78,8 @@ public class UserShowFragment extends BaseFragment<UserShowViewModel, UserShowBi
     @Override
     protected UserShowViewModel initViewModel() {
         final User user = Parcels.unwrap(getArguments().getParcelable(KEY_USER));
-        return new UserShowViewModel(user);
+        final boolean isMyself = authTokenService.isMyself(user);
+        return new UserShowViewModel(user, isMyself);
     }
 
     @Override

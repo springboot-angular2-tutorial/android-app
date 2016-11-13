@@ -11,6 +11,7 @@ import com.hana053.micropost.presentation.core.components.avatar.AvatarViewListe
 import com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel;
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewListener;
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewModel;
+import com.hana053.micropost.presentation.core.services.AuthTokenService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +22,11 @@ import rx.Observable;
 public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserListAdapter.ViewHolder> {
 
     private final List<RelatedUser> users = new ArrayList<>();
+    private final AuthTokenService authTokenService;
+
+    public RelatedUserListAdapter(AuthTokenService authTokenService) {
+        this.authTokenService = authTokenService;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,8 +36,9 @@ public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserList
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final RelatedUser relatedUser = users.get(position);
+        final boolean isMyself = authTokenService.isMyself(relatedUser);
 
-        final RelatedUserItemViewModel viewModel = new RelatedUserItemViewModel(relatedUser);
+        final RelatedUserItemViewModel viewModel = new RelatedUserItemViewModel(relatedUser, isMyself);
         holder.binding.setModel(viewModel);
 
         final FollowBtnViewModel followBtnViewModel = new FollowBtnViewModel(relatedUser.getId(), relatedUser.userStats.followedByMe);

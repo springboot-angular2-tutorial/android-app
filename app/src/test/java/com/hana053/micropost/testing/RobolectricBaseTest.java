@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.hana053.micropost.BuildConfig;
 import com.hana053.micropost.presentation.core.di.AppComponent;
+import com.hana053.micropost.testing.shadows.ShadowAuthTokenServiceFactory;
 import com.hana053.micropost.testing.shadows.ShadowFeedInteractorFactory;
 import com.hana053.micropost.testing.shadows.ShadowLoginInteractorFactory;
 import com.hana053.micropost.testing.shadows.ShadowMicropostInteractorFactory;
@@ -27,6 +28,7 @@ import org.robolectric.annotation.Config;
                 ShadowLoginInteractorFactory.class,
                 ShadowUserInteractorFactory.class,
                 ShadowUserMicropostInteractorFactory.class,
+                ShadowAuthTokenServiceFactory.class,
         }
 )
 public abstract class RobolectricBaseTest {

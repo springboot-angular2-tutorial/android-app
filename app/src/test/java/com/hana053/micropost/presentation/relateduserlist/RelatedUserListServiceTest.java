@@ -2,6 +2,7 @@ package com.hana053.micropost.presentation.relateduserlist;
 
 import com.hana053.micropost.domain.RelatedUser;
 import com.hana053.micropost.interactors.RelatedUserListInteractor;
+import com.hana053.micropost.presentation.core.services.AuthTokenService;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 
 import org.junit.Before;
@@ -22,7 +23,10 @@ public class RelatedUserListServiceTest extends RobolectricBaseTest {
     @Mock
     private RelatedUserListInteractor interactor;
 
-    private final RelatedUserListAdapter userListAdapter = new RelatedUserListAdapter();
+    @Mock
+    private AuthTokenService authTokenService;
+
+    private final RelatedUserListAdapter userListAdapter = new RelatedUserListAdapter(authTokenService);
 
     private RelatedUserListService relatedUserListService;
 
