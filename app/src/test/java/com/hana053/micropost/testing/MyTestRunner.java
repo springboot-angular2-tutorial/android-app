@@ -8,6 +8,7 @@ import com.hana053.micropost.interactors.InteractorModule_ProvideUserMicropostIn
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnService_Factory;
 import com.hana053.micropost.presentation.core.services.LoginService_Factory;
 import com.hana053.micropost.presentation.core.services.Navigator_Factory;
+import com.hana053.micropost.presentation.core.services.ServiceModule_ProvideAuthTokenServiceFactory;
 import com.squareup.picasso.Picasso;
 
 import org.junit.runners.model.InitializationError;
@@ -48,6 +49,7 @@ public class MyTestRunner extends RobolectricTestRunner {
                 .addInstrumentedClass(LoginService_Factory.class.getName())
                 .addInstrumentedClass(Navigator_Factory.class.getName())
                 .addInstrumentedClass(FollowBtnService_Factory.class.getName())
+                .addInstrumentedClass(ServiceModule_ProvideAuthTokenServiceFactory.class.getName())
                 .build();
     }
 

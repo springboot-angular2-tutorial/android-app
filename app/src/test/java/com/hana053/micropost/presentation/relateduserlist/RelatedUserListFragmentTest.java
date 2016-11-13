@@ -71,7 +71,7 @@ public class RelatedUserListFragmentTest extends RobolectricBaseTest {
 
     private void triggerScroll() {
         final List<RelatedUser> users = Observable.range(1, 2)
-                .map(id -> new RelatedUser(id, "test", "test@test.com", "", 1, new UserStats()))
+                .map(id -> new RelatedUser(id, "test", "test@test.com", "", false, 1, new UserStats()))
                 .toList()
                 .toBlocking()
                 .single();

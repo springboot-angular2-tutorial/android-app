@@ -39,17 +39,17 @@ public abstract class BaseFragment<VM, B extends ViewDataBinding> extends Fragme
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState == null)
-            viewModel = initViewModel();
-        else
-            viewModel = Parcels.unwrap(savedInstanceState.getParcelable(KEY_VIEW_MODEL));
-        binding = setupBinding(viewModel);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         inject();
+        if (savedInstanceState == null)
+            viewModel = initViewModel();
+        else
+            viewModel = Parcels.unwrap(savedInstanceState.getParcelable(KEY_VIEW_MODEL));
+        binding = setupBinding(viewModel);
     }
 
     @Override

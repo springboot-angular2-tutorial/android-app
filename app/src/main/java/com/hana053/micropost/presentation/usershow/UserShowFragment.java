@@ -88,7 +88,7 @@ public class UserShowFragment extends BaseFragment<UserShowViewModel, UserShowBi
         binding.setModel(viewModel);
         binding.setListener(this);
 
-        final FollowBtnViewModel followBtnViewModel = new FollowBtnViewModel(viewModel.user.getId(), viewModel.user.getUserStats().isFollowedByMe());
+        final FollowBtnViewModel followBtnViewModel = new FollowBtnViewModel(viewModel.user.getId(), viewModel.user.isFollowedByMe());
         binding.setFollowBtnModel(followBtnViewModel);
         binding.setFollowBtnListener(new FollowBtnViewListener(followBtnViewModel));
 
