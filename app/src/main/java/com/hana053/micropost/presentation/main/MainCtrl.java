@@ -1,6 +1,6 @@
 package com.hana053.micropost.presentation.main;
 
-public interface MainCtrl {
+interface MainCtrl {
 
     void navigateToMicropostNew();
 

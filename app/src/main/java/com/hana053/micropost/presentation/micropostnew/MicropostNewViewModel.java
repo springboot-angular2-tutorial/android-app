@@ -13,12 +13,12 @@ public class MicropostNewViewModel {
 
     public final ObservableField<String> content;
 
-    public MicropostNewViewModel() {
+    MicropostNewViewModel() {
         this("");
     }
 
     @ParcelConstructor
-    public MicropostNewViewModel(String content) {
+    MicropostNewViewModel(String content) {
         this.content = new ObservableField<>(content);
     }
 

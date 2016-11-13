@@ -14,12 +14,12 @@ public class LoginViewModel {
     public final ObservableField<String> email;
     public final ObservableField<String> password;
 
-    public LoginViewModel() {
+    LoginViewModel() {
         this("", "");
     }
 
     @ParcelConstructor
-    public LoginViewModel(String email, String password) {
+    LoginViewModel(String email, String password) {
         this.email = new ObservableField<>(email);
         this.password = new ObservableField<>(password);
     }

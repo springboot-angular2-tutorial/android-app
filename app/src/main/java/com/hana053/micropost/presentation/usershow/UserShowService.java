@@ -14,18 +14,18 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @ActivityScope
-public class UserShowService {
+class UserShowService {
 
     private final UserMicropostInteractor userMicropostInteractor;
     private final PostListAdapter postAdapter;
 
     @Inject
-    public UserShowService(UserMicropostInteractor userMicropostInteractor, PostListAdapter postAdapter) {
+    UserShowService(UserMicropostInteractor userMicropostInteractor, PostListAdapter postAdapter) {
         this.userMicropostInteractor = userMicropostInteractor;
         this.postAdapter = postAdapter;
     }
 
-    public Observable<List<Micropost>> loadPosts(long userId) {
+    Observable<List<Micropost>> loadPosts(long userId) {
         final Long maxId = postAdapter.getLastItemId();
         final int itemCount = postAdapter.getItemCount();
 

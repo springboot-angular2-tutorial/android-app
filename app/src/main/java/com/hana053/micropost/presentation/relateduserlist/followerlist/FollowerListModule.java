@@ -12,17 +12,17 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class FollowerListModule {
+class FollowerListModule {
 
     @Provides
     @ActivityScope
-    public RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
+    RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
         return new RelatedUserListAdapter(authTokenService);
     }
 
     @Provides
     @ActivityScope
-    public RelatedUserListService provideRelatedUserListService(@Named("followers") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
+    RelatedUserListService provideRelatedUserListService(@Named("followers") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
         return new RelatedUserListService(interactor, userListAdapter);
     }
 

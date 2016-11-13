@@ -55,14 +55,14 @@ public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserList
         return users.size();
     }
 
-    public List<RelatedUser> getItems() {
+    List<RelatedUser> getItems() {
         return new ArrayList<>(users);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final UserItemBinding binding;
 
-        public ViewHolder(UserItemBinding binding) {
+        ViewHolder(UserItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -75,7 +75,7 @@ public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserList
     }
 
     @Nullable
-    public Long getLastItemId() {
+    Long getLastItemId() {
         return Observable.from(users)
                 .takeLast(1)
                 .map(RelatedUser::getRelationshipId)

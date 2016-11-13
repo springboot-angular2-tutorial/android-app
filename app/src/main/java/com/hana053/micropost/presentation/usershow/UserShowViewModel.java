@@ -15,7 +15,7 @@ public class UserShowViewModel {
     public final boolean isMyself;
 
     @ParcelConstructor
-    public UserShowViewModel(User user, boolean isMyself) {
+    UserShowViewModel(User user, boolean isMyself) {
         this.user = user;
         this.isMyself = isMyself;
     }

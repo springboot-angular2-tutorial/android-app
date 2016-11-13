@@ -14,7 +14,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @ActivityScope
-public class MainService {
+class MainService {
 
     private final FeedInteractor feedInteractor;
     private final PostListAdapter postListAdapter;
@@ -25,7 +25,7 @@ public class MainService {
         this.postListAdapter = postListAdapter;
     }
 
-    public Observable<List<Micropost>> loadNextFeed() {
+    Observable<List<Micropost>> loadNextFeed() {
         final Long sinceId = postListAdapter.getFirstItemId();
         return feedInteractor.loadNextFeed(sinceId)
                 .subscribeOn(Schedulers.newThread())
@@ -33,7 +33,7 @@ public class MainService {
                 .doOnNext(feed -> postListAdapter.addAll(0, feed));
     }
 
-    public Observable<List<Micropost>> loadPrevFeed() {
+    Observable<List<Micropost>> loadPrevFeed() {
         final Long maxId = postListAdapter.getLastItemId();
         final int itemCount = postListAdapter.getItemCount();
         return feedInteractor.loadPrevFeed(maxId)

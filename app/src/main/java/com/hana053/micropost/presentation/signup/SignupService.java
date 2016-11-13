@@ -15,7 +15,7 @@ public class SignupService {
     private final LoginService loginService;
 
     @Inject
-    public SignupService(UserInteractor userInteractor, LoginService loginService) {
+    SignupService(UserInteractor userInteractor, LoginService loginService) {
         this.userInteractor = userInteractor;
         this.loginService = loginService;
     }

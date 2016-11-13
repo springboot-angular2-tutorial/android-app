@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class NetworkStateManager {
+class NetworkStateManager {
 
     private final ConnectivityManager connectivityManager;
 

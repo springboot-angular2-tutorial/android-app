@@ -19,7 +19,7 @@ public class RelatedUserListService {
         this.userListAdapter = userListAdapter;
     }
 
-    public Observable<List<RelatedUser>> loadRelatedUsers(long userId) {
+    Observable<List<RelatedUser>> loadRelatedUsers(long userId) {
         final Long maxId = userListAdapter.getLastItemId();
         final int itemCount = userListAdapter.getItemCount();
 

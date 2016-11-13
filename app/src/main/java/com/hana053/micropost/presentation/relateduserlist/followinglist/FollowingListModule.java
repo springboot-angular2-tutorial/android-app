@@ -16,13 +16,13 @@ public class FollowingListModule {
 
     @Provides
     @ActivityScope
-    public RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
+    RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
         return new RelatedUserListAdapter(authTokenService);
     }
 
     @Provides
     @ActivityScope
-    public RelatedUserListService provideRelatedUserListService(@Named("followings") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
+    RelatedUserListService provideRelatedUserListService(@Named("followings") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
         return new RelatedUserListService(interactor, userListAdapter);
     }
 
