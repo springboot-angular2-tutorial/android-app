@@ -17,16 +17,16 @@ public class User implements Serializable {
     public final String name;
     public final String email;
     public final String avatarHash;
-    public final boolean followedByMe;
+    public final boolean isFollowedByMe;
     public final UserStats userStats;
 
     @ParcelConstructor
-    public User(long id, String name, String email, String avatarHash, boolean followedByMe, UserStats userStats) {
+    public User(long id, String name, String email, String avatarHash, boolean isFollowedByMe, UserStats userStats) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.avatarHash = avatarHash;
-        this.followedByMe = followedByMe;
+        this.isFollowedByMe = isFollowedByMe;
         this.userStats = userStats;
     }
 

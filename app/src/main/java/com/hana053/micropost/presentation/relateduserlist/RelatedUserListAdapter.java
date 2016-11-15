@@ -41,7 +41,7 @@ public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserList
         final RelatedUserItemViewModel viewModel = new RelatedUserItemViewModel(relatedUser, isMyself);
         holder.binding.setModel(viewModel);
 
-        final FollowBtnViewModel followBtnViewModel = new FollowBtnViewModel(relatedUser.getId(), relatedUser.followedByMe);
+        final FollowBtnViewModel followBtnViewModel = new FollowBtnViewModel(relatedUser.getId(), relatedUser.isFollowedByMe);
         holder.binding.setFollowBtnModel(followBtnViewModel);
         holder.binding.setFollowBtnListener(new FollowBtnViewListener(followBtnViewModel));
 

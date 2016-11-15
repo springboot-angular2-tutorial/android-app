@@ -1,5 +1,6 @@
 package com.hana053.micropost.presentation.login;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@SuppressLint("SetTextI18n")
 @Config(shadows = ShadowLoginServiceFactory.class)
 public class LoginFragmentTest extends RobolectricBaseTest {
 

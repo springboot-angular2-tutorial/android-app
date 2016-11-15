@@ -18,8 +18,8 @@ public final class RelatedUser extends User implements Serializable {
     public final long relationshipId;
 
     @ParcelConstructor
-    public RelatedUser(long id, String name, String email, String avatarHash, boolean followedByMe, long relationshipId, UserStats userStats) {
-        super(id, name, email, avatarHash, followedByMe, userStats);
+    public RelatedUser(long id, String name, String email, String avatarHash, boolean isFollowedByMe, long relationshipId, UserStats userStats) {
+        super(id, name, email, avatarHash, isFollowedByMe, userStats);
         this.relationshipId = relationshipId;
     }
 
