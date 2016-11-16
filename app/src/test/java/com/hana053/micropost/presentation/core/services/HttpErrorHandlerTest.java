@@ -26,7 +26,7 @@ public class HttpErrorHandlerTest extends RobolectricBaseTest {
 
     @Before
     public void setup() {
-        httpErrorHandler = new HttpErrorHandler(getTestApplication(), loginService);
+        httpErrorHandler = new HttpErrorHandlerImpl(getTestApplication(), loginService);
     }
 
     @Test

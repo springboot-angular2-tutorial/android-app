@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class LoginActivityTest extends RobolectricBaseTest {
+public class LoginActivity1Test extends RobolectricBaseTest {
 
     private ActivityController<LoginActivity> activityController;
     private LoginActivity activity;

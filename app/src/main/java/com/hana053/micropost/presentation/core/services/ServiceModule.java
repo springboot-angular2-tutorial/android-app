@@ -1,7 +1,10 @@
 package com.hana053.micropost.presentation.core.services;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.hana053.micropost.interactors.LoginInteractor;
 
 import javax.inject.Singleton;
 
@@ -13,8 +16,22 @@ public class ServiceModule {
 
     @Provides
     @Singleton
-    AuthTokenService provideAuthTokenService(SharedPreferences sharedPreferences) {
+    public AuthTokenService provideAuthTokenService(SharedPreferences sharedPreferences) {
         return new AuthTokenServiceImpl(sharedPreferences);
     }
 
+    @Provides
+    @Singleton
+    public LoginService provideLoginService(LoginInteractor loginInteractor,
+                                            AuthTokenService authTokenService,
+                                            Context context) {
+        return new LoginServiceImpl(loginInteractor, authTokenService, context);
+    }
+
+    @Provides
+    @Singleton
+    public HttpErrorHandler provideHttpErrorHandler(Context context,
+                                                    LoginService loginService) {
+        return new HttpErrorHandlerImpl(context, loginService);
+    }
 }

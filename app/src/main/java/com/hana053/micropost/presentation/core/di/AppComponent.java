@@ -39,8 +39,6 @@ public interface AppComponent {
 
     UserMicropostInteractor userMicropostInteractor();
 
-    AuthTokenService authTokenService();
-
     UserInteractor userInteractor();
 
     RelationshipInteractor relationshipInteractor();
@@ -50,6 +48,8 @@ public interface AppComponent {
 
     @Named("followers")
     RelatedUserListInteractor followersInteractor();
+
+    AuthTokenService authTokenService();
 
     LoginService loginService();
 

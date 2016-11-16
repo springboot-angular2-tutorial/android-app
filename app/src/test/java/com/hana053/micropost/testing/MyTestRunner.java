@@ -6,9 +6,9 @@ import com.hana053.micropost.interactors.InteractorModule_ProvideMicropostIntera
 import com.hana053.micropost.interactors.InteractorModule_ProvideUserInteractorFactory;
 import com.hana053.micropost.interactors.InteractorModule_ProvideUserMicropostInteractorFactory;
 import com.hana053.micropost.presentation.core.components.followbtn.FollowBtnService_Factory;
-import com.hana053.micropost.presentation.core.services.LoginService_Factory;
 import com.hana053.micropost.presentation.core.services.Navigator_Factory;
 import com.hana053.micropost.presentation.core.services.ServiceModule_ProvideAuthTokenServiceFactory;
+import com.hana053.micropost.presentation.core.services.ServiceModule_ProvideLoginServiceFactory;
 import com.squareup.picasso.Picasso;
 
 import org.junit.runners.model.InitializationError;
@@ -46,7 +46,7 @@ public class MyTestRunner extends RobolectricTestRunner {
                 .addInstrumentedClass(InteractorModule_ProvideLoginInteractorFactory.class.getName())
                 .addInstrumentedClass(InteractorModule_ProvideUserInteractorFactory.class.getName())
                 .addInstrumentedClass(InteractorModule_ProvideUserMicropostInteractorFactory.class.getName())
-                .addInstrumentedClass(LoginService_Factory.class.getName())
+                .addInstrumentedClass(ServiceModule_ProvideLoginServiceFactory.class.getName())
                 .addInstrumentedClass(Navigator_Factory.class.getName())
                 .addInstrumentedClass(FollowBtnService_Factory.class.getName())
                 .addInstrumentedClass(ServiceModule_ProvideAuthTokenServiceFactory.class.getName())

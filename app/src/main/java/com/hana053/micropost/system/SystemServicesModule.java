@@ -20,25 +20,25 @@ public class SystemServicesModule {
 
     @Provides
     @Singleton
-    Context provideContext() {
+    public Context provideContext() {
         return application;
     }
 
     @Provides
     @Singleton
-    SharedPreferences providePreferenceManager() {
+    public SharedPreferences providePreferenceManager() {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
     @Singleton
-    ConnectivityManager provideConnectivityManager() {
+    public ConnectivityManager provideConnectivityManager() {
         return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     @Provides
     @Singleton
-    NetworkStateManager provideNetworkStateManager(ConnectivityManager connectivityManagerCompat) {
+    public NetworkStateManager provideNetworkStateManager(ConnectivityManager connectivityManagerCompat) {
         return new NetworkStateManager(connectivityManagerCompat);
     }
 }
