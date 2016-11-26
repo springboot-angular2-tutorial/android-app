@@ -15,11 +15,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 @Module
+@SuppressWarnings("WeakerAccess")
 public class InteractorModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(AuthTokenService authTokenService) {
+    public OkHttpClient provideOkHttpClient(AuthTokenService authTokenService) {
         return new OkHttpClient().newBuilder()
                 .addInterceptor(chain -> {
                     Request original = chain.request();
@@ -37,7 +38,7 @@ public class InteractorModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
@@ -48,44 +49,44 @@ public class InteractorModule {
 
     @Provides
     @Singleton
-    FeedInteractor provideFeedInteractor(Retrofit retrofit) {
+    public FeedInteractor provideFeedInteractor(Retrofit retrofit) {
         return retrofit.create(FeedInteractor.class);
     }
 
     @Provides
     @Singleton
-    MicropostInteractor provideMicropostInteractor(Retrofit retrofit) {
+    public MicropostInteractor provideMicropostInteractor(Retrofit retrofit) {
         return retrofit.create(MicropostInteractor.class);
     }
 
     @Provides
     @Singleton
-    LoginInteractor provideLoginInteractor(Retrofit retrofit) {
+    public LoginInteractor provideLoginInteractor(Retrofit retrofit) {
         return retrofit.create(LoginInteractor.class);
     }
 
     @Provides
     @Singleton
-    UserInteractor provideUserInteractor(Retrofit retrofit) {
+    public UserInteractor provideUserInteractor(Retrofit retrofit) {
         return retrofit.create(UserInteractor.class);
     }
 
     @Provides
     @Singleton
-    UserMicropostInteractor provideUserMicropostInteractor(Retrofit retrofit) {
+    public UserMicropostInteractor provideUserMicropostInteractor(Retrofit retrofit) {
         return retrofit.create(UserMicropostInteractor.class);
     }
 
     @Provides
     @Singleton
-    RelationshipInteractor provideRelationshipInteractor(Retrofit retrofit) {
+    public RelationshipInteractor provideRelationshipInteractor(Retrofit retrofit) {
         return retrofit.create(RelationshipInteractor.class);
     }
 
     @Provides
     @Singleton
     @Named("followings")
-    RelatedUserListInteractor provideFollowingsInteractor(UserInteractor userInteractor) {
+    public RelatedUserListInteractor provideFollowingsInteractor(UserInteractor userInteractor) {
         // retrofit does not allow inheritance of interface. So, I take this way.
         return userInteractor::listFollowings;
     }
@@ -93,7 +94,7 @@ public class InteractorModule {
     @Provides
     @Singleton
     @Named("followers")
-    RelatedUserListInteractor provideFollowersInteractor(UserInteractor userInteractor) {
+    public RelatedUserListInteractor provideFollowersInteractor(UserInteractor userInteractor) {
         // retrofit does not allow inheritance of interface. So, I take this way.
         return userInteractor::listFollowers;
     }

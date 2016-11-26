@@ -10,12 +10,14 @@ import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
 import com.hana053.micropost.presentation.core.services.LoginService;
 import com.hana053.micropost.testing.EmptyResponseBody;
+import com.hana053.micropost.testing.JUnitDaggerMockRule;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowLoginServiceFactory;
 import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
@@ -30,8 +32,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SuppressLint("SetTextI18n")
-@Config(shadows = ShadowLoginServiceFactory.class)
 public class LoginFragmentTest extends RobolectricBaseTest {
+
+    @Rule
+    public final JUnitDaggerMockRule rule = new JUnitDaggerMockRule();
 
     private LoginFragment fragment;
 
@@ -39,10 +43,11 @@ public class LoginFragmentTest extends RobolectricBaseTest {
     private AppCompatEditText passwordEditText;
     private Button loginBtn;
 
+    @Mock
+    private LoginService loginService;
+
     @Before
     public void setup() {
-        final LoginService loginService = getAppComponent().loginService();
-
         final HttpException loginFailure = new HttpException(Response.error(401, new EmptyResponseBody()));
         when(loginService.login("test@test.com", "NG")).thenReturn(Observable.error(loginFailure));
 

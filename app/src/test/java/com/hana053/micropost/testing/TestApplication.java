@@ -31,4 +31,8 @@ public class TestApplication extends BaseApplication {
     public AppComponent getComponent() {
         return component;
     }
+
+    public void setComponent(AppComponent component) {
+        this.component = component;
+    }
 }

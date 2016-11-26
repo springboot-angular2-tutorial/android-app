@@ -79,6 +79,7 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile "org.robolectric:robolectric:$robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$robolectric_version"
+    testCompile 'com.github.fabioCollini:DaggerMock:0.6.2'
 }
 
 buildscript {
