@@ -56,7 +56,7 @@ public class LoginServiceTest extends RobolectricBaseTest {
     public void shouldLogout() {
         loginService.logout();
         verify(authTokenService).clearAuthToken();
-        final ShadowApplication shadow = Shadows.shadowOf(getTestApplication());
+        final ShadowApplication shadow = Shadows.shadowOf(RuntimeEnvironment.application);
         final Intent intent = shadow.getNextStartedActivity();
         assertThat(intent.getFlags(), is(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
         assertThat(TopActivity.class.getName(), is(intent.getComponent().getClassName()));
@@ -65,7 +65,7 @@ public class LoginServiceTest extends RobolectricBaseTest {
     @Test
     public void shouldForceLogoutWhenAuthTokenIsEmpty() {
         assertThat(loginService.ensureAuthenticated(), is(false));
-        final ShadowApplication shadow = Shadows.shadowOf(getTestApplication());
+        final ShadowApplication shadow = Shadows.shadowOf(RuntimeEnvironment.application);
         final Intent intent = shadow.getNextStartedActivity();
         assertThat(TopActivity.class.getName(), is(intent.getComponent().getClassName()));
     }

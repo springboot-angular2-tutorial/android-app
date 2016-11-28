@@ -6,7 +6,6 @@ import com.hana053.micropost.BuildConfig;
 
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -18,10 +17,6 @@ import org.robolectric.annotation.Config;
 public abstract class RobolectricBaseTest {
 
     private TestSchedulerProxy testScheduler = TestSchedulerProxy.get();
-
-    protected TestApplication getTestApplication() {
-        return ((TestApplication) RuntimeEnvironment.application);
-    }
 
     protected void advance() {
         testScheduler.advance();
