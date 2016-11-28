@@ -5,10 +5,11 @@ import android.os.Build;
 import com.hana053.micropost.BuildConfig;
 
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(MyTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class,
         packageName = "com.hana053.micropost",
         application = TestApplication.class,

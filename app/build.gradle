@@ -89,7 +89,7 @@ buildscript {
         dagger_version = '2.7'
         parceler_version = '1.1.5'
         lombok_version = '1.16.10'
-        robolectric_version = '3.0'
+        robolectric_version = '3.1.1'
         butterknife_version = '8.4.0'
     }
     repositories {
