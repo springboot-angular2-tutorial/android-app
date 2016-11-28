@@ -46,7 +46,6 @@ public class SignupActivityTest extends RobolectricBaseTest {
     }
 
     @Test
-    @Ignore // FIXME I'm not sure why it becomes NPE..
     public void shouldNavigateToNewEmail() {
         activity.navigateToNewEmail();
         final List<Fragment> fragments = activity.getSupportFragmentManager().getFragments();
@@ -55,7 +54,6 @@ public class SignupActivityTest extends RobolectricBaseTest {
     }
 
     @Test
-    @Ignore // FIXME I'm not sure why it becomes NPE..
     public void shouldNavigateToNewPassword() {
         activity.navigateToNewPassword();
         final List<Fragment> fragments = activity.getSupportFragmentManager().getFragments();

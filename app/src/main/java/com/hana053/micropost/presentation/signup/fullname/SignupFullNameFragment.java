@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.SignupFullNameBinding;
 import com.hana053.micropost.presentation.signup.SignupBaseFragment;
-import com.hana053.micropost.presentation.signup.SignupComponent;
 import com.hana053.micropost.presentation.signup.SignupViewModel;
 
 import lombok.NoArgsConstructor;
@@ -37,11 +36,6 @@ public class SignupFullNameFragment extends SignupBaseFragment<SignupFullNameBin
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.signup_full_name, container, false);
-    }
-
-    @Override
-    protected void inject() {
-        getComponent(SignupComponent.class).inject(this);
     }
 
     @Override

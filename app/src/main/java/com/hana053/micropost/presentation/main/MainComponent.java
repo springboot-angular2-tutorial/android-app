@@ -1,20 +1,13 @@
 package com.hana053.micropost.presentation.main;
 
-import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.ActivityScope;
-import com.hana053.micropost.presentation.core.di.AppComponent;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
 @ActivityScope
-@Component(
-        dependencies = {AppComponent.class},
-        modules = {
-                ActivityModule.class,
-                MainModule.class
-        }
-)
-interface MainComponent {
+@Subcomponent(modules = MainModule.class)
+@SuppressWarnings("WeakerAccess")
+public interface MainComponent {
 
     void inject(MainActivity activity);
 

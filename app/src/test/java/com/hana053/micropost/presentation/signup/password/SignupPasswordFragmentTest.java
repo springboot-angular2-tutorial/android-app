@@ -6,16 +6,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hana053.micropost.presentation.core.services.Navigator;
+import com.hana053.micropost.presentation.signup.SignupCtrl;
 import com.hana053.micropost.presentation.signup.SignupService;
 import com.hana053.micropost.presentation.signup.SignupTestActivity;
 import com.hana053.micropost.presentation.signup.SignupViewModel;
 import com.hana053.micropost.testing.EmptyResponseBody;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.robolectric.annotation.Config;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import retrofit2.Response;
@@ -25,24 +28,34 @@ import rx.Observable;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@SuppressLint("SetTextI18n")
 public class SignupPasswordFragmentTest extends RobolectricBaseTest {
 
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
     private SignupPasswordFragment fragment;
-    private SignupTestActivity activity;
 
     private AppCompatEditText passwordEditText;
     private TextView invalidMsg;
     private Button nextBtn;
 
+    @Mock
+    private SignupService signupService;
+
+    @Mock
+    private Navigator navigator;
+
+    @Mock
+    private SignupCtrl signupCtrl;
+
     @Before
     public void setup() {
         fragment = (SignupPasswordFragment) SignupPasswordFragment.newInstance(new SignupViewModel());
         SupportFragmentTestUtil.startFragment(fragment, SignupTestActivity.class);
-        activity = (SignupTestActivity) fragment.getActivity();
 
         passwordEditText = fragment.getBinding().password;
         nextBtn = fragment.getBinding().nextBtn;
@@ -52,7 +65,6 @@ public class SignupPasswordFragmentTest extends RobolectricBaseTest {
     }
 
     @Test
-    @SuppressLint("SetTextI18n")
     public void shouldInputPasswordWithValidation() {
         assertThat(nextBtn.isEnabled(), is(false));
         assertThat(invalidMsg.getVisibility(), is(View.GONE));
@@ -71,24 +83,21 @@ public class SignupPasswordFragmentTest extends RobolectricBaseTest {
     }
 
     @Test
-    @Config(shadows = ShadowNavigatorFactory.class)
     public void shouldFinishSignupWhenEmailIsUnique() {
-        fragment.signupService = mock(SignupService.class);
-        when(fragment.signupService.signup(any()))
+        when(signupService.signup(any()))
                 .thenReturn(Observable.just(null));
         nextBtn.performClick();
         applyChanges();
-        verify(fragment.navigator).navigateToMain();
+        verify(navigator).navigateToMain();
     }
 
     @Test
     public void shouldNavigateToNewEmailWhenEmailIsNotUnique() {
-        fragment.signupService = mock(SignupService.class);
-        when(fragment.signupService.signup(any()))
+        when(signupService.signup(any()))
                 .thenReturn(Observable.error(new HttpException(Response.error(400, new EmptyResponseBody()))));
         nextBtn.performClick();
         applyChanges();
-        verify(activity.signupCtrl).navigateToPrev();
+        verify(signupCtrl).navigateToPrev();
     }
 
     private void applyChanges() {

@@ -6,17 +6,23 @@ import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
 
-import static org.mockito.Mockito.mock;
-
-public class SignupTestActivity extends AppCompatActivity implements HasComponent<SignupComponent> {
-    public final SignupCtrl signupCtrl = mock(SignupCtrl.class);
-
+public class SignupTestActivity extends AppCompatActivity implements SignupCtrl, HasComponent<SignupComponent> {
     @Override
     public SignupComponent getComponent() {
-        return DaggerSignupComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .signupModule(new SignupModule(signupCtrl))
-                .build();
+        return BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .signupComponent(new SignupModule(this));
+    }
+
+    @Override
+    public void navigateToNewEmail() {
+    }
+
+    @Override
+    public void navigateToNewPassword() {
+    }
+
+    @Override
+    public void navigateToPrev() {
     }
 }

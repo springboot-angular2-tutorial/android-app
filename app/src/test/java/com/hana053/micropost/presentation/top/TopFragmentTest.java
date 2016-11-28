@@ -6,27 +6,32 @@ import android.widget.TextView;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
+import com.hana053.micropost.presentation.core.services.Navigator;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.robolectric.annotation.Config;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static org.mockito.Mockito.verify;
 
-@Config(shadows = ShadowNavigatorFactory.class)
 public class TopFragmentTest extends RobolectricBaseTest {
 
-    private TopFragment fragment;
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     private TextView loginBtn;
     private TextView signupBtn;
 
+    @Mock
+    Navigator navigator;
+
     @Before
     public void setup() {
-        fragment = new TopFragment();
+        TopFragment fragment = new TopFragment();
         SupportFragmentTestUtil.startFragment(fragment, TestActivity.class);
 
         loginBtn = fragment.getBinding().loginBtn;
@@ -38,22 +43,21 @@ public class TopFragmentTest extends RobolectricBaseTest {
     @Test
     public void shouldMoveToSignupWhenClickedSignupBtn() {
         signupBtn.performClick();
-        verify(fragment.navigator).navigateToSignup();
+        verify(navigator).navigateToSignup();
     }
 
     @Test
     public void shouldMoveToLoginWhenClickedLoginBtn() {
         loginBtn.performClick();
-        verify(fragment.navigator).navigateToLogin();
+        verify(navigator).navigateToLogin();
     }
 
     private static class TestActivity extends FragmentActivity implements HasComponent<TopComponent> {
         @Override
         public TopComponent getComponent() {
-            return DaggerTopComponent.builder()
-                    .appComponent(BaseApplication.component(this))
-                    .activityModule(new ActivityModule(this))
-                    .build();
+            return BaseApplication.component(this)
+                    .activityComponent(new ActivityModule(this))
+                    .topComponent();
         }
     }
 

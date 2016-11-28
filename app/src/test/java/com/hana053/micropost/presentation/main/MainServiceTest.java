@@ -4,9 +4,12 @@ import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.interactors.FeedInteractor;
 import com.hana053.micropost.presentation.core.components.micropostlist.PostListAdapter;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import java.util.List;
 
@@ -14,18 +17,26 @@ import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 public class MainServiceTest extends RobolectricBaseTest {
 
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
+    @Mock
     private FeedInteractor feedInteractor;
+
     private final PostListAdapter postListAdapter = new PostListAdapter();
+
     private MainService mainService;
 
     @Before
     public void setup() {
-        feedInteractor = getAppComponent().feedInteractor();
-        mainService = new MainService(feedInteractor, postListAdapter);
+        when(feedInteractor.loadNextFeed(any())).thenReturn(Observable.empty());
+        when(feedInteractor.loadPrevFeed(any())).thenReturn(Observable.empty());
+        mainService = new MainServiceImpl(feedInteractor, postListAdapter);
     }
 
     @Test

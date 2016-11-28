@@ -25,7 +25,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Subscription;
-import timber.log.Timber;
 
 public class MainFragment extends BaseFragment<List<Micropost>, MainBinding> implements MainViewListener {
 

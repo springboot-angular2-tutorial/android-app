@@ -11,18 +11,19 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 
+@SuppressWarnings("WeakerAccess")
 @Module
 public class FollowingListModule {
 
     @Provides
     @ActivityScope
-    RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
+    public RelatedUserListAdapter provideUserListAdapter(AuthTokenService authTokenService) {
         return new RelatedUserListAdapter(authTokenService);
     }
 
     @Provides
     @ActivityScope
-    RelatedUserListService provideRelatedUserListService(@Named("followings") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
+    public RelatedUserListService provideRelatedUserListService(@Named("followings") RelatedUserListInteractor interactor, RelatedUserListAdapter userListAdapter) {
         return new RelatedUserListService(interactor, userListAdapter);
     }
 

@@ -3,30 +3,40 @@ package com.hana053.micropost.presentation.micropostnew;
 import android.app.Activity;
 
 import com.hana053.micropost.presentation.core.services.LoginService;
-import com.hana053.micropost.testing.shadows.ShadowLoginServiceFactory;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.util.ActivityController;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@Config(shadows = ShadowLoginServiceFactory.class)
 public class MicropostNewActivityTest extends RobolectricBaseTest {
+
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     @SuppressWarnings("FieldCanBeLocal")
     private ActivityController<MicropostNewActivity> activityController;
+
     private MicropostNewActivity activity;
+
+    @Mock
+    private LoginService loginService;
 
     @Before
     public void setup() {
+        when(loginService.ensureAuthenticated()).thenReturn(true);
+
         activityController = Robolectric.buildActivity(MicropostNewActivity.class);
         activity = activityController.setup().get();
     }
@@ -48,7 +58,6 @@ public class MicropostNewActivityTest extends RobolectricBaseTest {
 
     @Test
     public void shouldEnsureAuthenticated() {
-        LoginService loginService = getAppComponent().loginService();
         verify(loginService).ensureAuthenticated();
     }
 

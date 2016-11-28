@@ -7,9 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hana053.micropost.R;
-import com.hana053.micropost.presentation.core.di.HasComponent;
-import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
+import com.hana053.micropost.presentation.core.di.ActivityModule;
+import com.hana053.micropost.presentation.core.di.HasComponent;
 import com.hana053.micropost.presentation.core.services.LoginService;
 
 import javax.inject.Inject;
@@ -34,11 +34,9 @@ public class MicropostNewActivity extends AppCompatActivity implements Micropost
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        component = DaggerMicropostNewComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .micropostNewModule(new MicropostNewModule(this))
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .micropostNewComponent(new MicropostNewModule(this));
         component.inject(this);
         if (!loginService.ensureAuthenticated()) return;
 

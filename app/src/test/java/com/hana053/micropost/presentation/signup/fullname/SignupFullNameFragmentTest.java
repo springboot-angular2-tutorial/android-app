@@ -1,36 +1,46 @@
 package com.hana053.micropost.presentation.signup.fullname;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hana053.micropost.presentation.signup.SignupCtrl;
 import com.hana053.micropost.presentation.signup.SignupTestActivity;
 import com.hana053.micropost.presentation.signup.SignupViewModel;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 
+@SuppressLint("SetTextI18n")
 public class SignupFullNameFragmentTest extends RobolectricBaseTest {
 
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
     private SignupFullNameFragment fragment;
-    private SignupTestActivity activity;
 
     private AppCompatEditText fullNameEditText;
     private Button nextBtn;
     private TextView invalidMsg;
 
+    @Mock
+    private SignupCtrl signupCtrl;
+
     @Before
     public void setup() {
         fragment = (SignupFullNameFragment) SignupFullNameFragment.newInstance(new SignupViewModel());
         SupportFragmentTestUtil.startFragment(fragment, SignupTestActivity.class);
-        activity = (SignupTestActivity) fragment.getActivity();
 
         fullNameEditText = fragment.getBinding().fullName;
         nextBtn = fragment.getBinding().nextBtn;
@@ -62,7 +72,7 @@ public class SignupFullNameFragmentTest extends RobolectricBaseTest {
         fullNameEditText.setText("1234");
         applyChanges();
         nextBtn.performClick();
-        verify(activity.signupCtrl).navigateToNewEmail();
+        verify(signupCtrl).navigateToNewEmail();
     }
 
     private void applyChanges() {

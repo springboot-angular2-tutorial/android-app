@@ -41,11 +41,9 @@ public class UserShowActivity extends AppCompatActivity implements HasComponent<
 
         final User user = Parcels.unwrap(getIntent().getExtras().getParcelable(KEY_USER));
 
-        component = DaggerUserShowComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .userShowModule(new UserShowModule())
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .userShowComponent(new UserShowModule());
         component.inject(this);
         if (!loginService.ensureAuthenticated()) return;
 

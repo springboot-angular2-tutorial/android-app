@@ -1,10 +1,16 @@
 package com.hana053.micropost.presentation.core.services;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.hana053.micropost.domain.User;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.robolectric.RuntimeEnvironment;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -12,11 +18,16 @@ import static org.junit.Assert.assertThat;
 
 public class AuthTokenServiceTest extends RobolectricBaseTest {
 
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
+    private SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application);
+
     private AuthTokenService authTokenService;
 
     @Before
     public void setup() {
-        authTokenService = getAppComponent().authTokenService();
+        authTokenService = new AuthTokenServiceImpl(sharedPreferences);
     }
 
     @Test

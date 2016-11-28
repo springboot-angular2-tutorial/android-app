@@ -31,7 +31,7 @@ public class NavigatorTest extends RobolectricBaseTest {
     @Before
     public void setup() {
         activity = Robolectric.setupActivity(Activity.class);
-        navigator = new Navigator(activity);
+        navigator = new NavigatorImpl(activity);
     }
 
     @Test

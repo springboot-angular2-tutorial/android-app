@@ -13,8 +13,6 @@ import org.parceler.Parcels;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import rx.Observable;
@@ -26,8 +24,8 @@ import rx.subjects.BehaviorSubject;
 
 public abstract class SignupBaseFragment<B extends ViewDataBinding> extends BaseFragment<SignupViewModel, B> {
 
-    @Inject
-    SignupCtrl ctrl;
+    @Getter(AccessLevel.PROTECTED)
+    private SignupUtilityWrapper utilityWrapper = new SignupUtilityWrapper();
 
     @Getter(AccessLevel.PROTECTED)
     private final NextBtnHandler btnHandler = new NextBtnHandler();
@@ -59,12 +57,27 @@ public abstract class SignupBaseFragment<B extends ViewDataBinding> extends Base
 
     protected Func1<Func1<SignupCtrl, Boolean>, View.OnClickListener> nextBtnHandler = f -> v -> {
         saveViewModelState(getViewModel());
-        f.call(ctrl);
+        f.call(utilityWrapper.getSignupCtrl());
     };
 
     @Override
     protected SignupViewModel initViewModel() {
         return Parcels.unwrap(getArguments().getParcelable(KEY_VIEW_MODEL));
+    }
+
+    @Override
+    protected void inject() {
+        getComponent(SignupComponent.class).inject(utilityWrapper);
+    }
+
+    @Override
+    protected void collectSubscription(Subscription s) {
+        utilityWrapper.getSubscriptions().add(s);
+    }
+
+    @Override
+    protected void clearSubscriptions() {
+        utilityWrapper.getSubscriptions().clear();
     }
 
     protected abstract boolean isFormValid();

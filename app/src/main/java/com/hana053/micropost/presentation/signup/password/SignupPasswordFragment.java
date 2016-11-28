@@ -12,32 +12,13 @@ import android.widget.Toast;
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.SignupPasswordBinding;
 import com.hana053.micropost.interactors.UserInteractor;
-import com.hana053.micropost.presentation.core.services.HttpErrorHandler;
-import com.hana053.micropost.presentation.core.services.Navigator;
-import com.hana053.micropost.presentation.core.services.ProgressBarHandler;
 import com.hana053.micropost.presentation.signup.SignupBaseFragment;
-import com.hana053.micropost.presentation.signup.SignupComponent;
-import com.hana053.micropost.presentation.signup.SignupService;
 import com.hana053.micropost.presentation.signup.SignupViewModel;
-
-import javax.inject.Inject;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 
 public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBinding> implements SignupPasswordViewListener {
-
-    @Inject
-    SignupService signupService;
-
-    @Inject
-    ProgressBarHandler progressBarHandler;
-
-    @Inject
-    HttpErrorHandler httpErrorHandler;
-
-    @Inject
-    Navigator navigator;
 
     public static Fragment newInstance(SignupViewModel viewModel) {
         final SignupPasswordFragment fragment = new SignupPasswordFragment();
@@ -48,15 +29,15 @@ public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBin
     @Override
     public View.OnClickListener onClickNextBtn() {
         return nextBtnHandler.call(ctrl -> {
-            final Subscription subscription = signupService.signup(createSignupRequest())
-                    .doOnSubscribe(progressBarHandler::show)
-                    .doAfterTerminate(progressBarHandler::hide)
-                    .subscribe(x -> navigator.navigateToMain(), e -> {
+            final Subscription subscription = getUtilityWrapper().getSignupService().signup(createSignupRequest())
+                    .doOnSubscribe(getUtilityWrapper().getProgressBarHandler()::show)
+                    .doAfterTerminate(getUtilityWrapper().getProgressBarHandler()::hide)
+                    .subscribe(x -> getUtilityWrapper().getNavigator().navigateToMain(), e -> {
                         if (isEmailAlreadyTaken(e)) {
                             Toast.makeText(getContext(), "This email is already taken.", Toast.LENGTH_LONG).show();
                             ctrl.navigateToPrev();
                         } else {
-                            httpErrorHandler.handleError(e);
+                            getUtilityWrapper().getHttpErrorHandler().handleError(e);
                         }
                     });
             collectSubscription(subscription);
@@ -68,11 +49,6 @@ public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBin
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.signup_password, container, false);
-    }
-
-    @Override
-    protected void inject() {
-        getComponent(SignupComponent.class).inject(this);
     }
 
     @Override

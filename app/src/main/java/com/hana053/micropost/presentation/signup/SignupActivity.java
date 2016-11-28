@@ -38,11 +38,9 @@ public class SignupActivity extends AppCompatActivity implements SignupCtrl, Has
             viewModel = Parcels.unwrap(savedInstanceState.getParcelable(KEY_VIEW_MODEL));
         }
 
-        component = DaggerSignupComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .signupModule(new SignupModule(this))
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .signupComponent(new SignupModule(this));
         component.inject(this);
 
         setContentView(R.layout.layout_flat);

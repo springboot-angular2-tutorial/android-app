@@ -27,7 +27,7 @@ public class FollowBtnServiceTest extends RobolectricBaseTest {
     public void setup() {
         final HttpErrorHandler httpErrorHandler = mock(HttpErrorHandler.class);
         final CompositeSubscription subscriptions = new CompositeSubscription();
-        followBtnService = new FollowBtnService(relationshipInteractor, httpErrorHandler, subscriptions);
+        followBtnService = new FollowBtnServiceImpl(relationshipInteractor, httpErrorHandler, subscriptions);
     }
 
     @Test

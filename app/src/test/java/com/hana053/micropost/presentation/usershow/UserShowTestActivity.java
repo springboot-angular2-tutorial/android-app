@@ -9,10 +9,8 @@ import com.hana053.micropost.presentation.core.di.HasComponent;
 public class UserShowTestActivity extends FragmentActivity implements HasComponent<UserShowComponent> {
     @Override
     public UserShowComponent getComponent() {
-        return DaggerUserShowComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .userShowModule(new UserShowModule())
-                .build();
+        return BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .userShowComponent(new UserShowModule());
     }
 }

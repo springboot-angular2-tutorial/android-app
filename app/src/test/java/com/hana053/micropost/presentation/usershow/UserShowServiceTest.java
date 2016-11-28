@@ -5,7 +5,6 @@ import com.hana053.micropost.interactors.UserMicropostInteractor;
 import com.hana053.micropost.presentation.core.components.micropostlist.PostListAdapter;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,19 +13,14 @@ import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class UserShowServiceTest extends RobolectricBaseTest {
 
-    private UserShowService userShowService;
-    private UserMicropostInteractor userMicropostInteractor;
+    private final UserMicropostInteractor userMicropostInteractor = mock(UserMicropostInteractor.class);
     private final PostListAdapter postAdapter = new PostListAdapter();
-
-    @Before
-    public void setup() {
-        userMicropostInteractor = getAppComponent().userMicropostInteractor();
-        userShowService = new UserShowService(userMicropostInteractor, postAdapter);
-    }
+    private final UserShowService userShowService = new UserShowServiceImpl(userMicropostInteractor, postAdapter);
 
     @Test
     public void shouldLoadPosts() {

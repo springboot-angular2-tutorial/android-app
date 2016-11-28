@@ -6,16 +6,16 @@ import android.support.v4.app.Fragment;
 import com.hana053.micropost.presentation.core.services.LoginService;
 import com.hana053.micropost.presentation.micropostnew.MicropostNewActivity;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowLoginServiceFactory;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.util.ActivityController;
 
@@ -23,12 +23,18 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@Config(shadows = ShadowLoginServiceFactory.class)
 public class MainActivityTest extends RobolectricBaseTest {
+
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     @SuppressWarnings("FieldCanBeLocal")
     private ActivityController<MainActivity> activityController;
+
+    @Mock
+    private LoginService loginService;
 
     @Mock
     private MainFragment mainFragment;
@@ -38,6 +44,8 @@ public class MainActivityTest extends RobolectricBaseTest {
 
     @Before
     public void setup() {
+        when(loginService.ensureAuthenticated()).thenReturn(true);
+
         activityController = Robolectric.buildActivity(MainActivity.class);
         activity = activityController.setup().get();
     }
@@ -72,7 +80,6 @@ public class MainActivityTest extends RobolectricBaseTest {
 
     @Test
     public void shouldEnsureAuthenticated() {
-        LoginService loginService = getAppComponent().loginService();
         verify(loginService).ensureAuthenticated();
     }
 

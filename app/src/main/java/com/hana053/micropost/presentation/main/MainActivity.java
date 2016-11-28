@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity implements MainCtrl, HasComp
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        component = DaggerMainComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .mainModule(new MainModule(this))
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .mainComponent(new MainModule(this));
         component.inject(this);
         if (!loginService.ensureAuthenticated()) return;
 

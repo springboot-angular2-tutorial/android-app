@@ -2,9 +2,13 @@ package com.hana053.micropost.presentation.core.services;
 
 import com.hana053.micropost.testing.EmptyResponseBody;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowToast;
 
 import java.net.ConnectException;
@@ -15,18 +19,21 @@ import retrofit2.adapter.rxjava.HttpException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class HttpErrorHandlerTest extends RobolectricBaseTest {
 
-    private final LoginService loginService = mock(LoginService.class);
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
+    @Mock
+    private LoginService loginService;
 
     private HttpErrorHandler httpErrorHandler;
 
     @Before
     public void setup() {
-        httpErrorHandler = new HttpErrorHandlerImpl(getTestApplication(), loginService);
+        httpErrorHandler = new HttpErrorHandlerImpl(RuntimeEnvironment.application, loginService);
     }
 
     @Test

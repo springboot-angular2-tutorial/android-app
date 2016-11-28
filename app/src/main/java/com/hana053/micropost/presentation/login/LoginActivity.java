@@ -35,10 +35,9 @@ public class LoginActivity extends AppCompatActivity implements HasComponent<Log
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        component = DaggerLoginComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .loginComponent();
         component.inject(this);
 
         setContentView(R.layout.layout_flat);

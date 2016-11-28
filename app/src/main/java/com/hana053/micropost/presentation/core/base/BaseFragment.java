@@ -62,12 +62,16 @@ public abstract class BaseFragment<VM, B extends ViewDataBinding> extends Fragme
     @Override
     public void onDestroyView() {
         binding.unbind();
-        subscriptions.clear();
+        clearSubscriptions();
         super.onDestroyView();
     }
 
     protected void collectSubscription(Subscription s) {
         subscriptions.add(s);
+    }
+
+    protected void clearSubscriptions() {
+        subscriptions.clear();
     }
 
     @SuppressWarnings("unchecked")

@@ -23,7 +23,7 @@ public class ProgressBarHandlerTest extends RobolectricBaseTest {
     @Before
     public void setup() {
         Activity activity = Robolectric.setupActivity(Activity.class);
-        progressBarHandler = new ProgressBarHandler(activity);
+        progressBarHandler = new ProgressBarHandlerImpl(activity);
 
         final ViewGroup rootView = (ViewGroup) activity.findViewById(android.R.id.content).getRootView();
         final RelativeLayout relativeLayout = (RelativeLayout) rootView.getChildAt(1);

@@ -1,20 +1,12 @@
 package com.hana053.micropost.presentation.relateduserlist.followerlist;
 
-import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.ActivityScope;
-import com.hana053.micropost.presentation.core.di.AppComponent;
 import com.hana053.micropost.presentation.relateduserlist.RelatedUserListFragment;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
 @ActivityScope
-@Component(
-        dependencies = {AppComponent.class},
-        modules = {
-                ActivityModule.class,
-                FollowerListModule.class,
-        }
-)
+@Subcomponent(modules = FollowerListModule.class)
 public interface FollowerListComponent {
 
     void inject(FollowerListActivity activity);

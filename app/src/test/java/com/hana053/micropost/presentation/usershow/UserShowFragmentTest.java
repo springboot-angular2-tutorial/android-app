@@ -6,16 +6,16 @@ import com.hana053.micropost.databinding.UserShowBinding;
 import com.hana053.micropost.domain.User;
 import com.hana053.micropost.domain.UserStats;
 import com.hana053.micropost.presentation.core.services.AuthTokenService;
+import com.hana053.micropost.presentation.core.services.Navigator;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowAuthTokenServiceFactory;
-import com.hana053.micropost.testing.shadows.ShadowFollowBtnServiceFactory;
-import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static org.hamcrest.Matchers.is;
@@ -27,6 +27,9 @@ import static org.mockito.Mockito.when;
 public class UserShowFragmentTest {
 
     public static abstract class Base extends RobolectricBaseTest {
+        @Rule
+        public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
         protected UserShowFragment fragment;
 
         void setupFragment(User u) {
@@ -36,12 +39,12 @@ public class UserShowFragmentTest {
         }
     }
 
-    @Config(shadows = {
-            ShadowFollowBtnServiceFactory.class,
-    })
     public static class Common extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2);
         private final User user = new User(1, "test user", "test@test.com", "", false, userStats);
+
+        @Mock
+        private Navigator navigator;
 
         @Before
         public void setup() {
@@ -49,17 +52,15 @@ public class UserShowFragmentTest {
         }
 
         @Test
-        @Config(shadows = ShadowNavigatorFactory.class)
         public void shouldNavigateToFollowingsWhenClickedFollowings() {
             fragment.getBinding().followings.performClick();
-            verify(fragment.navigator).navigateToFollowings(user.getId());
+            verify(navigator).navigateToFollowings(user.getId());
         }
 
         @Test
-        @Config(shadows = ShadowNavigatorFactory.class)
         public void shouldNavigateToFollowersWhenClickedFollowers() {
             fragment.getBinding().followers.performClick();
-            verify(fragment.navigator).navigateToFollowers(user.getId());
+            verify(navigator).navigateToFollowers(user.getId());
         }
 
         @Test
@@ -71,9 +72,6 @@ public class UserShowFragmentTest {
         }
     }
 
-    @Config(shadows = {
-            ShadowFollowBtnServiceFactory.class,
-    })
     public static class WhenUserIsNotFollowed extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2);
 
@@ -88,9 +86,6 @@ public class UserShowFragmentTest {
         }
     }
 
-    @Config(shadows = {
-            ShadowFollowBtnServiceFactory.class,
-    })
     public static class WhenUserIsFollowed extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2);
 
@@ -105,16 +100,14 @@ public class UserShowFragmentTest {
         }
     }
 
-    @Config(shadows = {
-            ShadowFollowBtnServiceFactory.class,
-            ShadowAuthTokenServiceFactory.class,
-    })
     public static class WhenUserIsMyself extends Base {
         private final UserStats userStats = new UserStats(0, 1, 2);
 
+        @Mock
+        private AuthTokenService authTokenService;
+
         @Before
         public void setup() {
-            final AuthTokenService authTokenService = getAppComponent().authTokenService();
             final User user = new User(1, "test user", "test@test.com", "", false, userStats);
             when(authTokenService.isMyself(user)).thenReturn(true);
             setupFragment(user);

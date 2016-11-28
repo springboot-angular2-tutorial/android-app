@@ -1,19 +1,12 @@
 package com.hana053.micropost.presentation.login;
 
-import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.ActivityScope;
-import com.hana053.micropost.presentation.core.di.AppComponent;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
 @ActivityScope
-@Component(
-        dependencies = {AppComponent.class},
-        modules = {
-                ActivityModule.class,
-        }
-)
-interface LoginComponent {
+@Subcomponent
+public interface LoginComponent {
 
     void inject(LoginActivity loginActivity);
 

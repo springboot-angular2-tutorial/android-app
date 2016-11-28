@@ -1,5 +1,6 @@
 package com.hana053.micropost.presentation.micropostnew;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,30 +9,43 @@ import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
+
+import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@SuppressLint("SetTextI18n")
 public class MicropostNewFragmentTest extends RobolectricBaseTest {
 
-    private TestActivity activity;
-    private MicropostNewFragment fragment;
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     private Button postBtn;
     private EditText postEditText;
 
+    @Mock
+    private MicropostNewService micropostNewService;
+
+    @Mock
+    private MicropostNewCtrl micropostNewCtrl;
+
     @Before
     public void setup() {
-        fragment = new MicropostNewFragment();
+        when(micropostNewService.createPost(anyString())).thenReturn(Observable.empty());
+
+        MicropostNewFragment fragment = new MicropostNewFragment();
         SupportFragmentTestUtil.startFragment(fragment, TestActivity.class);
-        activity = (TestActivity) fragment.getActivity();
 
         postBtn = fragment.getBinding().postBtn;
         postEditText = fragment.getBinding().postEditText;
@@ -48,10 +62,9 @@ public class MicropostNewFragmentTest extends RobolectricBaseTest {
 
     @Test
     public void shouldPostContentWhenClickedPostBtn() {
-        fragment.micropostNewService = spy(fragment.micropostNewService);
         postEditText.setText("test");
         postBtn.performClick();
-        verify(fragment.micropostNewService).createPost("test");
+        verify(micropostNewService).createPost("test");
     }
 
     @Test
@@ -59,19 +72,19 @@ public class MicropostNewFragmentTest extends RobolectricBaseTest {
         postEditText.setText("test");
         postBtn.performClick();
         advance();
-        verify(activity.micropostNewCtrl).finishWithPost();
+        verify(micropostNewCtrl).finishWithPost();
     }
 
-    private static class TestActivity extends FragmentActivity implements HasComponent<MicropostNewComponent> {
-        private final MicropostNewCtrl micropostNewCtrl = mock(MicropostNewCtrl.class);
-
+    private static class TestActivity extends FragmentActivity implements MicropostNewCtrl, HasComponent<MicropostNewComponent> {
         @Override
         public MicropostNewComponent getComponent() {
-            return DaggerMicropostNewComponent.builder()
-                    .appComponent(BaseApplication.component(this))
-                    .activityModule(new ActivityModule(this))
-                    .micropostNewModule(new MicropostNewModule(micropostNewCtrl))
-                    .build();
+            return BaseApplication.component(this)
+                    .activityComponent(new ActivityModule(this))
+                    .micropostNewComponent(new MicropostNewModule(this));
+        }
+
+        @Override
+        public void finishWithPost() {
         }
     }
 

@@ -1,20 +1,12 @@
 package com.hana053.micropost.presentation.usershow;
 
-import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.ActivityScope;
-import com.hana053.micropost.presentation.core.di.AppComponent;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
 @ActivityScope
-@Component(
-        dependencies = AppComponent.class,
-        modules = {
-                ActivityModule.class,
-                UserShowModule.class,
-        }
-)
-interface UserShowComponent {
+@Subcomponent(modules = UserShowModule.class)
+public interface UserShowComponent {
 
     void inject(UserShowActivity activity);
 

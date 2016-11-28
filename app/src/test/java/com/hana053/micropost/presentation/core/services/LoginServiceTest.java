@@ -5,59 +5,65 @@ import android.content.Intent;
 import com.hana053.micropost.interactors.LoginInteractor;
 import com.hana053.micropost.presentation.top.TopActivity;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowApplication;
 
-import okhttp3.HttpUrl;
-import okhttp3.Protocol;
-import retrofit2.Response;
 import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class LoginServiceTest extends RobolectricBaseTest {
 
-    private LoginService loginService;
-    private AuthTokenService authTokenService;
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
+
+    @Mock
     private LoginInteractor loginInteractor;
+
+    @Mock
+    private AuthTokenService authTokenService;
+
+    private LoginService loginService;
 
     @Before
     public void setup() {
-        authTokenService = getAppComponent().authTokenService();
-        loginService = getAppComponent().loginService();
-        loginInteractor = getAppComponent().loginInteractor();
+        loginService = new LoginServiceImpl(loginInteractor, authTokenService, RuntimeEnvironment.application);
     }
 
     @Test
     public void shouldLogin() {
+        final Observable<LoginInteractor.LoginResponse> dummyResponse
+                = Observable.just(new LoginInteractor.LoginResponse("my token"));
         when(loginInteractor.login(any(LoginInteractor.LoginRequest.class)))
-                .thenReturn(dummyResponse());
+                .thenReturn(dummyResponse);
         loginService.login("test@test.com", "secret").subscribe();
         advance();
-        assertThat(authTokenService.getAuthToken(), is("my token"));
+        verify(authTokenService).setAuthToken("my token");
     }
 
     @Test
     public void shouldLogout() {
-        authTokenService.setAuthToken("tmp");
         loginService.logout();
+        verify(authTokenService).clearAuthToken();
         final ShadowApplication shadow = Shadows.shadowOf(getTestApplication());
         final Intent intent = shadow.getNextStartedActivity();
         assertThat(intent.getFlags(), is(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
         assertThat(TopActivity.class.getName(), is(intent.getComponent().getClassName()));
-        assertThat(authTokenService.getAuthToken(), nullValue());
     }
 
     @Test
     public void shouldForceLogoutWhenAuthTokenIsEmpty() {
-        assert authTokenService.getAuthToken() == null;
         assertThat(loginService.ensureAuthenticated(), is(false));
         final ShadowApplication shadow = Shadows.shadowOf(getTestApplication());
         final Intent intent = shadow.getNextStartedActivity();
@@ -66,12 +72,8 @@ public class LoginServiceTest extends RobolectricBaseTest {
 
     @Test
     public void shouldJustReturnTrueWhenAuthenticated() {
-        authTokenService.setAuthToken("dummy");
+        when(authTokenService.getAuthToken()).thenReturn("test token");
         assertThat(loginService.ensureAuthenticated(), is(true));
-    }
-
-    private Observable<LoginInteractor.LoginResponse> dummyResponse() {
-        return Observable.just(new LoginInteractor.LoginResponse("my token"));
     }
 
 }

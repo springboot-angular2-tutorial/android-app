@@ -2,27 +2,28 @@ package com.hana053.micropost.presentation.usershow;
 
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.domain.User;
-import com.hana053.micropost.interactors.UserMicropostInteractor;
-import com.hana053.micropost.presentation.usershow.UserShowPostListFragment;
-import com.hana053.micropost.presentation.usershow.UserShowTestActivity;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 import com.hana053.micropost.testing.TestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import java.util.List;
 
 import rx.Observable;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class UserShowPostListFragmentTest extends RobolectricBaseTest {
+
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     private final User user = new User(1, "", "", "");
     private UserShowPostListFragment fragment;
@@ -31,10 +32,12 @@ public class UserShowPostListFragmentTest extends RobolectricBaseTest {
             .just(new Micropost(1, "content", 0, null))
             .toList();
 
+    @Mock
+    private UserShowService userShowService;
+
     @Before
     public void setup() {
-        final UserMicropostInteractor interactor = getAppComponent().userMicropostInteractor();
-        when(interactor.loadPrevPosts(user.getId(), null)).thenReturn(dummyPosts);
+        when(userShowService.loadPosts(user.getId())).thenReturn(dummyPosts);
 
         fragment = UserShowPostListFragment.newInstance(user.getId());
         SupportFragmentTestUtil.startFragment(fragment, UserShowTestActivity.class);
@@ -42,15 +45,13 @@ public class UserShowPostListFragmentTest extends RobolectricBaseTest {
 
     @Test
     public void shouldLoadPrevPostsOnScrolledToBottom() {
-        fragment.userShowService = spy(fragment.userShowService);
         triggerScroll();
-        verify(fragment.userShowService).loadPosts(user.getId());
+        verify(userShowService, times(2)).loadPosts(user.getId());
     }
 
     @Test
     public void shouldLoadPostsWhenActivityCreated() {
-        advance();
-        assertThat(fragment.postListAdapter.getItemCount(), is(1));
+        verify(userShowService).loadPosts(user.getId());
     }
 
     private void triggerScroll() {

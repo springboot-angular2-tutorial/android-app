@@ -2,8 +2,8 @@ package com.hana053.micropost.testing;
 
 import android.os.StrictMode;
 
-import com.hana053.micropost.presentation.core.di.AppComponent;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
+import com.hana053.micropost.presentation.core.di.AppComponent;
 import com.hana053.micropost.presentation.core.di.DaggerAppComponent;
 import com.hana053.micropost.system.SystemServicesModule;
 
@@ -35,4 +35,5 @@ public class TestApplication extends BaseApplication {
     public void setComponent(AppComponent component) {
         this.component = component;
     }
+
 }

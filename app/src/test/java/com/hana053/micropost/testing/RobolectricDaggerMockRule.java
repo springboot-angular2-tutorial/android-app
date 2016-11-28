@@ -10,16 +10,16 @@ import org.robolectric.RuntimeEnvironment;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 
-public class JUnitDaggerMockRule extends DaggerMockRule<AppComponent> {
+public class RobolectricDaggerMockRule extends DaggerMockRule<AppComponent> {
 
-    public JUnitDaggerMockRule() {
+    public RobolectricDaggerMockRule() {
         super(AppComponent.class,
                 new SystemServicesModule(RuntimeEnvironment.application),
                 new InteractorModule(),
                 new ServiceModule()
         );
-        set(component -> (
-                (TestApplication) RuntimeEnvironment.application).setComponent(component)
+        set(component ->
+                ((TestApplication) RuntimeEnvironment.application).setComponent(component)
         );
     }
 

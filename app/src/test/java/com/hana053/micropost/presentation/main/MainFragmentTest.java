@@ -11,10 +11,13 @@ import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
 import com.hana053.micropost.testing.RobolectricBaseTest;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 import com.hana053.micropost.testing.TestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
@@ -26,11 +29,14 @@ import rx.Observable;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MainFragmentTest extends RobolectricBaseTest {
+
+    @Rule
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     private MainFragment fragment;
     private TestActivity activity;
@@ -38,8 +44,17 @@ public class MainFragmentTest extends RobolectricBaseTest {
     private FrameLayout newMicropostBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    @Mock
+    MainCtrl mainCtrl;
+
+    @Mock
+    MainService mainService;
+
     @Before
     public void setup() {
+        when(mainService.loadPrevFeed()).thenReturn(Observable.empty());
+        when(mainService.loadNextFeed()).thenReturn(Observable.empty());
+
         fragment = new MainFragment();
         SupportFragmentTestUtil.startFragment(fragment, TestActivity.class);
         activity = (TestActivity) fragment.getActivity();
@@ -53,22 +68,20 @@ public class MainFragmentTest extends RobolectricBaseTest {
     @Test
     public void shouldMoveToMicropostNewWhenClickedButton() {
         newMicropostBtn.performClick();
-        verify(activity.mainCtrl).navigateToMicropostNew();
+        verify(mainCtrl).navigateToMicropostNew();
     }
 
     @Test
     public void shouldLoadNextFeedOnSwipeRefresh() {
-        fragment.mainService = spy(fragment.mainService);
         fragment.onSwipeRefresh().onRefresh();
-        verify(fragment.mainService).loadNextFeed();
+        verify(mainService, times(2)).loadNextFeed();
         assertThat(swipeRefreshLayout.isRefreshing(), is(false));
     }
 
     @Test
     public void shouldLoadPrevFeedOnScrolledToBottom() {
-        fragment.mainService = spy(fragment.mainService);
         triggerScroll();
-        verify(fragment.mainService).loadPrevFeed();
+        verify(mainService).loadPrevFeed();
     }
 
     @Test
@@ -101,16 +114,16 @@ public class MainFragmentTest extends RobolectricBaseTest {
         TestUtils.populateItems(fragment.getBinding().postRecyclerView);
     }
 
-    private static class TestActivity extends FragmentActivity implements HasComponent<MainComponent> {
-        private final MainCtrl mainCtrl = mock(MainCtrl.class);
-
+    private static class TestActivity extends FragmentActivity implements MainCtrl, HasComponent<MainComponent> {
         @Override
         public MainComponent getComponent() {
-            return DaggerMainComponent.builder()
-                    .appComponent(BaseApplication.component(this))
-                    .activityModule(new ActivityModule(this))
-                    .mainModule(new MainModule(mainCtrl))
-                    .build();
+            return BaseApplication.component(this)
+                    .activityComponent(new ActivityModule(this))
+                    .mainComponent(new MainModule(this));
+        }
+
+        @Override
+        public void navigateToMicropostNew() {
         }
     }
 

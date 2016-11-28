@@ -4,33 +4,23 @@ import com.hana053.micropost.domain.User;
 import com.hana053.micropost.interactors.UserInteractor;
 import com.hana053.micropost.presentation.core.services.LoginService;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowLoginServiceFactory;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.robolectric.annotation.Config;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class SignupServiceTest extends RobolectricBaseTest {
 
-    private SignupService signupService;
-    private UserInteractor userInteractor;
-    private LoginService loginService;
-
-    @Before
-    public void setup() {
-        loginService = getAppComponent().loginService();
-        userInteractor = getAppComponent().userInteractor();
-        signupService = new SignupService(userInteractor, loginService);
-    }
+    private final UserInteractor userInteractor = mock(UserInteractor.class);
+    private final LoginService loginService = mock(LoginService.class);
+    private final SignupService signupService = new SignupServiceImpl(userInteractor, loginService);
 
     @Test
-    @Config(shadows = ShadowLoginServiceFactory.class)
     public void shouldSignup() {
         final TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
         final UserInteractor.SignupRequest request = UserInteractor.SignupRequest.builder()

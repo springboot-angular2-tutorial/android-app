@@ -14,11 +14,9 @@ public class FollowingListActivity extends RelatedUserListBaseActivity implement
 
     @Override
     protected void prepareComponent() {
-        component = DaggerFollowingListComponent.builder()
-                .appComponent(BaseApplication.component(this))
-                .activityModule(new ActivityModule(this))
-                .followingListModule(new FollowingListModule())
-                .build();
+        component = BaseApplication.component(this)
+                .activityComponent(new ActivityModule(this))
+                .followingListComponent(new FollowingListModule());
         component.inject(this);
     }
 

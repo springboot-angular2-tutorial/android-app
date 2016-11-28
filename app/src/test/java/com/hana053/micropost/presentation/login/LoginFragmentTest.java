@@ -9,16 +9,15 @@ import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.ActivityModule;
 import com.hana053.micropost.presentation.core.di.HasComponent;
 import com.hana053.micropost.presentation.core.services.LoginService;
+import com.hana053.micropost.presentation.core.services.Navigator;
 import com.hana053.micropost.testing.EmptyResponseBody;
-import com.hana053.micropost.testing.JUnitDaggerMockRule;
 import com.hana053.micropost.testing.RobolectricBaseTest;
-import com.hana053.micropost.testing.shadows.ShadowNavigatorFactory;
+import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
@@ -35,9 +34,7 @@ import static org.mockito.Mockito.when;
 public class LoginFragmentTest extends RobolectricBaseTest {
 
     @Rule
-    public final JUnitDaggerMockRule rule = new JUnitDaggerMockRule();
-
-    private LoginFragment fragment;
+    public final RobolectricDaggerMockRule rule = new RobolectricDaggerMockRule();
 
     private AppCompatEditText emailEditText;
     private AppCompatEditText passwordEditText;
@@ -46,6 +43,9 @@ public class LoginFragmentTest extends RobolectricBaseTest {
     @Mock
     private LoginService loginService;
 
+    @Mock
+    private Navigator navigator;
+
     @Before
     public void setup() {
         final HttpException loginFailure = new HttpException(Response.error(401, new EmptyResponseBody()));
@@ -53,7 +53,7 @@ public class LoginFragmentTest extends RobolectricBaseTest {
 
         when(loginService.login("test@test.com", "OK")).thenReturn(Observable.just(null));
 
-        fragment = new LoginFragment();
+        LoginFragment fragment = new LoginFragment();
         SupportFragmentTestUtil.startFragment(fragment, TestActivity.class);
 
         emailEditText = fragment.getBinding().emailEditText;
@@ -80,21 +80,20 @@ public class LoginFragmentTest extends RobolectricBaseTest {
     }
 
     @Test
-    @Config(shadows = ShadowNavigatorFactory.class)
     public void shouldNavigateToMainWhenLoginSuccess() {
         emailEditText.setText("test@test.com");
         passwordEditText.setText("OK");
         loginBtn.performClick();
-        verify(fragment.navigator).navigateToMain();
+//        verify(fragment.navigator).navigateToMain();
+        verify(navigator).navigateToMain();
     }
 
     private static class TestActivity extends FragmentActivity implements HasComponent<LoginComponent> {
         @Override
         public LoginComponent getComponent() {
-            return DaggerLoginComponent.builder()
-                    .appComponent(BaseApplication.component(this))
-                    .activityModule(new ActivityModule(this))
-                    .build();
+            return BaseApplication.component(this)
+                    .activityComponent(new ActivityModule(this))
+                    .loginComponent();
         }
     }
 
