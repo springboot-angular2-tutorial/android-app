@@ -11,7 +11,7 @@ import rx.schedulers.TestScheduler;
  * paste from https://gist.github.com/pakerfeldt/db297764918e7d464884#file-testschedulerproxy-java
  * http://alexismas.com/blog/2015/05/20/unit-testing-rxjava/#comment-2260797067
  */
-public class TestSchedulerProxy {
+class TestSchedulerProxy {
 
     private static final TestScheduler SCHEDULER = new TestScheduler();
     private static final TestSchedulerProxy INSTANCE = new TestSchedulerProxy();

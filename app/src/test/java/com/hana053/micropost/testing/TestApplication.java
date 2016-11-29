@@ -2,9 +2,11 @@ package com.hana053.micropost.testing;
 
 import android.os.StrictMode;
 
+import com.hana053.micropost.interactors.InteractorModule;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
 import com.hana053.micropost.presentation.core.di.AppComponent;
 import com.hana053.micropost.presentation.core.di.DaggerAppComponent;
+import com.hana053.micropost.presentation.core.services.ServiceModule;
 import com.hana053.micropost.system.SystemServicesModule;
 
 import timber.log.Timber;
@@ -25,6 +27,8 @@ public class TestApplication extends BaseApplication {
     protected AppComponent createComponent() {
         return DaggerAppComponent.builder()
                 .systemServicesModule(new SystemServicesModule(this))
+                .interactorModule(new InteractorModule())
+                .serviceModule(new ServiceModule())
                 .build();
     }
 
