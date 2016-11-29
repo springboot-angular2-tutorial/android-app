@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.MicropostNewBinding;
-import com.hana053.micropost.BaseFragment;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.ui.listeners.SimpleTextWatcher;
 import com.hana053.micropost.services.HttpErrorHandler;
 

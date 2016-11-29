@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.hana053.micropost.BaseFragment;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.ui.listeners.SimpleTextWatcher;
 
 import org.parceler.Parcels;

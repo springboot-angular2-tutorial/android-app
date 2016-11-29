@@ -1,4 +1,4 @@
-package com.hana053.micropost;
+package com.hana053.micropost.ui;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;

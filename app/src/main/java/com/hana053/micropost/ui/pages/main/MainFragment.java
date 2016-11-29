@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.MainBinding;
 import com.hana053.micropost.domain.Micropost;
-import com.hana053.micropost.BaseFragment;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.ui.components.micropostlist.PostListAdapter;
 import com.hana053.micropost.ui.listeners.BottomedViewSyncScroller;
 import com.hana053.micropost.ui.listeners.OnVerticalScrollListener;

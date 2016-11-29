@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hana053.micropost.BaseFragment;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.RelatedUserListBinding;
 import com.hana053.micropost.di.ExplicitHasComponent;
