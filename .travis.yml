@@ -12,7 +12,7 @@ before_script:
   - cp gradle.properties.example gradle.properties
 
 script:
-  - ./gradlew testDebugUnitTestCoverage
+  - ./gradlew testDebugUnitTestCoverage -PdisablePreDex
 
 after_success:
   - ./gradlew coveralls

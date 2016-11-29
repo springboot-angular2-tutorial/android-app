@@ -2,7 +2,8 @@
 
 This repository is an example Android application, which is based on Rails tutorial app.
 
-[![Build Status][travis-image]][travis-url]
+[![Build Status](https://travis-ci.org/springboot-angular2-tutorial/android-app.svg?branch=master)](https://travis-ci.org/springboot-angular2-tutorial/android-app)
+[![Coverage Status](https://coveralls.io/repos/github/springboot-angular2-tutorial/android-app/badge.svg?branch=master)](https://coveralls.io/github/springboot-angular2-tutorial/android-app?branch=master)
 
 Key components.
 
@@ -58,6 +59,3 @@ Under construction...
 ## License
 
 [MIT](/LICENSE)
-
-[travis-url]: https://travis-ci.org/springboot-angular2-tutorial/android-app
-[travis-image]: https://travis-ci.org/springboot-angular2-tutorial/android-app.svg
