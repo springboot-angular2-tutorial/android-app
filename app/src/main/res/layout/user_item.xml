@@ -8,23 +8,23 @@
 
         <variable
             name="model"
-            type="com.hana053.micropost.presentation.relateduserlist.RelatedUserItemViewModel" />
+            type="com.hana053.micropost.ui.pages.relateduserlist.RelatedUserItemViewModel" />
 
         <variable
             name="followBtnModel"
-            type="com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewModel" />
+            type="com.hana053.micropost.ui.components.followbtn.FollowBtnViewModel" />
 
         <variable
             name="followBtnListener"
-            type="com.hana053.micropost.presentation.core.components.followbtn.FollowBtnViewListener" />
+            type="com.hana053.micropost.ui.components.followbtn.FollowBtnViewListener" />
 
         <variable
             name="avatarModel"
-            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel" />
+            type="com.hana053.micropost.ui.components.avatar.AvatarViewModel" />
 
         <variable
             name="avatarListener"
-            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewListener" />
+            type="com.hana053.micropost.ui.components.avatar.AvatarViewListener" />
     </data>
 
     <LinearLayout

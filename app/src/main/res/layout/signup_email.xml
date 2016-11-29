@@ -6,15 +6,15 @@
 
         <variable
             name="viewModel"
-            type="com.hana053.micropost.presentation.signup.SignupViewModel" />
+            type="com.hana053.micropost.ui.pages.signup.SignupViewModel" />
 
         <variable
             name="listener"
-            type="com.hana053.micropost.presentation.signup.email.SignupEmailViewListener" />
+            type="com.hana053.micropost.ui.pages.signup.email.SignupEmailViewListener" />
 
         <variable
             name="btnHandler"
-            type="com.hana053.micropost.presentation.signup.NextBtnHandler" />
+            type="com.hana053.micropost.ui.pages.signup.NextBtnHandler" />
     </data>
 
     <RelativeLayout

@@ -1,8 +1,5 @@
 package com.hana053.micropost;
 
-import com.hana053.micropost.presentation.core.base.BaseApplication;
-import com.hana053.micropost.presentation.core.di.AppComponent;
-import com.hana053.micropost.presentation.core.di.DaggerAppComponent;
 import com.hana053.micropost.system.SystemServicesModule;
 
 import timber.log.Timber;

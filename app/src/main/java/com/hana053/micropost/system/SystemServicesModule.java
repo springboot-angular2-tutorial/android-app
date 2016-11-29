@@ -12,6 +12,7 @@ import dagger.Module;
 import dagger.Provides;
 import lombok.AllArgsConstructor;
 
+@SuppressWarnings("WeakerAccess")
 @Module
 @AllArgsConstructor
 public class SystemServicesModule {

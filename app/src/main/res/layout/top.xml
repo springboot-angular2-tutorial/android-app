@@ -5,7 +5,7 @@
 
         <variable
             name="listener"
-            type="com.hana053.micropost.presentation.top.TopViewListener" />
+            type="com.hana053.micropost.ui.pages.top.TopViewListener" />
     </data>
 
     <RelativeLayout

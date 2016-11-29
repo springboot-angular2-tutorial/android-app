@@ -1,7 +1,7 @@
 package com.hana053.micropost.interactors;
 
 import com.hana053.micropost.BuildConfig;
-import com.hana053.micropost.presentation.core.services.AuthTokenService;
+import com.hana053.micropost.services.AuthTokenService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

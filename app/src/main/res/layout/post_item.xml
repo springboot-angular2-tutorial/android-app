@@ -7,15 +7,15 @@
 
         <variable
             name="model"
-            type="com.hana053.micropost.presentation.core.components.micropostlist.PostItemViewModel" />
+            type="com.hana053.micropost.ui.components.micropostlist.PostItemViewModel" />
 
         <variable
             name="avatarModel"
-            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel" />
+            type="com.hana053.micropost.ui.components.avatar.AvatarViewModel" />
 
         <variable
             name="avatarListener"
-            type="com.hana053.micropost.presentation.core.components.avatar.AvatarViewListener" />
+            type="com.hana053.micropost.ui.components.avatar.AvatarViewListener" />
     </data>
 
     <LinearLayout

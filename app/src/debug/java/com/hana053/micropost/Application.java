@@ -2,9 +2,6 @@ package com.hana053.micropost;
 
 import android.os.StrictMode;
 
-import com.hana053.micropost.presentation.core.di.AppComponent;
-import com.hana053.micropost.presentation.core.base.BaseApplication;
-import com.hana053.micropost.presentation.core.di.DaggerAppComponent;
 import com.hana053.micropost.system.SystemServicesModule;
 import com.squareup.leakcanary.LeakCanary;
 

@@ -2,8 +2,8 @@ package com.hana053.micropost.testing;
 
 
 import com.hana053.micropost.interactors.InteractorModule;
-import com.hana053.micropost.presentation.core.di.AppComponent;
-import com.hana053.micropost.presentation.core.services.ServiceModule;
+import com.hana053.micropost.AppComponent;
+import com.hana053.micropost.services.ServiceModule;
 import com.hana053.micropost.system.SystemServicesModule;
 
 import org.robolectric.RuntimeEnvironment;

@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.hana053.micropost.presentation.micropostnew.MicropostNewViewModel" />
+            type="com.hana053.micropost.ui.pages.micropostnew.MicropostNewViewModel" />
 
         <variable
             name="listener"
-            type="com.hana053.micropost.presentation.micropostnew.MicropostNewViewListener" />
+            type="com.hana053.micropost.ui.pages.micropostnew.MicropostNewViewListener" />
     </data>
 
     <RelativeLayout
