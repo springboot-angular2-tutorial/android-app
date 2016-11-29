@@ -5,10 +5,7 @@ import android.databinding.ObservableField;
 import org.parceler.Parcel;
 import org.parceler.ParcelConstructor;
 
-import lombok.Value;
-
 @Parcel
-@Value
 public class SignupViewModel {
 
     public final ObservableField<String> fullName;
@@ -16,14 +13,19 @@ public class SignupViewModel {
     public final ObservableField<String> password;
 
     public SignupViewModel() {
-        this("", "", "");
+        this(new ObservableField<>(""),
+                new ObservableField<>(""),
+                new ObservableField<>("")
+        );
     }
 
     @ParcelConstructor
-    public SignupViewModel(String fullName, String email, String password) {
-        this.fullName = new ObservableField<>(fullName);
-        this.email = new ObservableField<>(email);
-        this.password = new ObservableField<>(password);
+    SignupViewModel(ObservableField<String> fullName,
+                    ObservableField<String> email,
+                    ObservableField<String> password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
     }
 
 }

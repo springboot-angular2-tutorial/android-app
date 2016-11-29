@@ -5,23 +5,20 @@ import android.databinding.ObservableField;
 import org.parceler.Parcel;
 import org.parceler.ParcelConstructor;
 
-import lombok.Value;
-
 @Parcel
-@Value
 public class LoginViewModel {
 
     public final ObservableField<String> email;
     public final ObservableField<String> password;
 
     LoginViewModel() {
-        this("", "");
+        this(new ObservableField<>(""), new ObservableField<>(""));
     }
 
     @ParcelConstructor
-    LoginViewModel(String email, String password) {
-        this.email = new ObservableField<>(email);
-        this.password = new ObservableField<>(password);
+    LoginViewModel(ObservableField<String> email, ObservableField<String> password) {
+        this.email = email;
+        this.password = password;
     }
 
 }
