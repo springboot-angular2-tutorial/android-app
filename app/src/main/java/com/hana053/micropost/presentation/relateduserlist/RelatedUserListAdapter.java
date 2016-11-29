@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.annimon.stream.Stream;
 import com.hana053.micropost.databinding.UserItemBinding;
 import com.hana053.micropost.domain.RelatedUser;
 import com.hana053.micropost.presentation.core.components.avatar.AvatarViewListener;
@@ -76,11 +77,11 @@ public class RelatedUserListAdapter extends RecyclerView.Adapter<RelatedUserList
 
     @Nullable
     Long getLastItemId() {
-        return Observable.from(users)
-                .takeLast(1)
+        return Stream.of(users)
+                .sortBy(u -> -users.indexOf(u))
+                .findFirst()
                 .map(RelatedUser::getRelationshipId)
-                .toBlocking()
-                .singleOrDefault(null);
+                .orElse(null);
     }
 
     public boolean addAll(int location, Collection<RelatedUser> users) {

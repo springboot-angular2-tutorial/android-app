@@ -1,5 +1,7 @@
 package com.hana053.micropost.presentation.usershow;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.domain.User;
 import com.hana053.micropost.testing.RobolectricBaseTest;
@@ -55,11 +57,9 @@ public class UserShowPostListFragmentTest extends RobolectricBaseTest {
     }
 
     private void triggerScroll() {
-        final List<Micropost> posts = Observable.range(1, 2)
+        final List<Micropost> posts = Stream.of(1, 2)
                 .map(id -> new Micropost(id, "content", 0, user))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         fragment.postListAdapter.addAll(0, posts);
         TestUtils.populateItems(fragment.getBinding().postRecyclerView);
     }

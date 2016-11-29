@@ -57,6 +57,7 @@ dependencies {
     compile "com.android.support:design:$android_support_version"
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.3'
+    compile 'com.annimon:stream:1.1.4'
     compile "com.google.dagger:dagger:$dagger_version"
     compile 'com.jakewharton.timber:timber:4.1.2'
     compile "com.jakewharton:butterknife:$butterknife_version"

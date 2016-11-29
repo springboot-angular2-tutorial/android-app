@@ -2,6 +2,8 @@ package com.hana053.micropost.presentation.relateduserlist;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.hana053.micropost.domain.RelatedUser;
 import com.hana053.micropost.presentation.core.services.AuthTokenService;
 import com.hana053.micropost.testing.RobolectricBaseTest;
@@ -11,8 +13,6 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.List;
-
-import rx.Observable;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -32,11 +32,9 @@ public class RelatedUserListAdapterTest extends RobolectricBaseTest {
     @Test
     public void shouldGetLastItemId() {
         assertThat(userListAdapter.getLastItemId(), nullValue());
-        final List<RelatedUser> relatedUsers = Observable.range(100, 2)
+        final List<RelatedUser> relatedUsers = Stream.of(100, 101)
                 .map(relationshipId -> new RelatedUser(1, "", "", "", relationshipId))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         userListAdapter.addAll(0, relatedUsers);
         assertThat(userListAdapter.getLastItemId(), is(101L));
     }
@@ -50,11 +48,9 @@ public class RelatedUserListAdapterTest extends RobolectricBaseTest {
                 assertThat(itemCount, is(1));
             }
         });
-        final List<RelatedUser> relatedUsers = Observable.just(100)
+        final List<RelatedUser> relatedUsers = Stream.of(100)
                 .map(relationshipId -> new RelatedUser(1, "", "", "", relationshipId))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         final boolean notified = userListAdapter.addAll(0, relatedUsers);
         assertThat(notified, is(true));
         assertThat(userListAdapter.getItemCount(), is(1));

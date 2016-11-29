@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.FrameLayout;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.domain.User;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
@@ -86,11 +88,9 @@ public class MainFragmentTest extends RobolectricBaseTest {
 
     @Test
     public void shouldBeRestoredFromSavedState() {
-        final List<Micropost> posts = Observable.range(1, 2)
+        final List<Micropost> posts = Stream.of(1, 2)
                 .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com", "")))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         fragment.postListAdapter.addAll(0, posts);
 
         final ShadowActivity shadowActivity = Shadows.shadowOf(activity);
@@ -105,11 +105,9 @@ public class MainFragmentTest extends RobolectricBaseTest {
 
     private void triggerScroll() {
         // need more than two items to scroll
-        final List<Micropost> posts = Observable.range(1, 2)
+        final List<Micropost> posts = Stream.of(1, 2)
                 .map(id -> new Micropost(id, "", 0, new User(1, "test", "test@test.com", "")))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         fragment.postListAdapter.addAll(0, posts);
         TestUtils.populateItems(fragment.getBinding().postRecyclerView);
     }

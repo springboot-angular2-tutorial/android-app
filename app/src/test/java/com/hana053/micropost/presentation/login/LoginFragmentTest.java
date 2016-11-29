@@ -84,7 +84,6 @@ public class LoginFragmentTest extends RobolectricBaseTest {
         emailEditText.setText("test@test.com");
         passwordEditText.setText("OK");
         loginBtn.performClick();
-//        verify(fragment.navigator).navigateToMain();
         verify(navigator).navigateToMain();
     }
 

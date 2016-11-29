@@ -1,5 +1,7 @@
 package com.hana053.micropost.presentation.main;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.interactors.FeedInteractor;
 import com.hana053.micropost.presentation.core.components.micropostlist.PostListAdapter;
@@ -41,12 +43,10 @@ public class MainServiceTest extends RobolectricBaseTest {
 
     @Test
     public void shouldLoadNextFeed() {
-        final List<Micropost> microposts = Observable.range(100, 2)
+        final List<Micropost> posts = Stream.of(100, 101)
                 .map(id -> new Micropost(id, "", 0, null))
-                .toList()
-                .toBlocking()
-                .single();
-        postListAdapter.addAll(0, microposts);
+                .collect(Collectors.toList());
+        postListAdapter.addAll(0, posts);
         final Observable<List<Micropost>> response = Observable.just(99)
                 .map(id -> new Micropost(id, "", 0, null))
                 .toList();
@@ -60,12 +60,10 @@ public class MainServiceTest extends RobolectricBaseTest {
 
     @Test
     public void shouldLoadPrevFeed() {
-        final List<Micropost> microposts = Observable.range(100, 2)
+        final List<Micropost> posts = Stream.of(100, 101)
                 .map(id -> new Micropost(id, "", 0, null))
-                .toList()
-                .toBlocking()
-                .single();
-        postListAdapter.addAll(0, microposts);
+                .collect(Collectors.toList());
+        postListAdapter.addAll(0, posts);
         final Observable<List<Micropost>> response = Observable.just(102)
                 .map(id -> new Micropost(id, "", 0, null))
                 .toList();

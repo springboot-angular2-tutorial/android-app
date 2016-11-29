@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.annimon.stream.Stream;
 import com.hana053.micropost.databinding.PostItemBinding;
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.presentation.core.components.avatar.AvatarViewListener;
@@ -13,8 +14,6 @@ import com.hana053.micropost.presentation.core.components.avatar.AvatarViewModel
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import rx.Observable;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHolder> {
 
@@ -61,20 +60,19 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.ViewHo
 
     @Nullable
     public Long getFirstItemId() {
-        return Observable.from(posts)
-                .take(1)
+        return Stream.of(posts)
+                .findFirst()
                 .map(Micropost::getId)
-                .toBlocking()
-                .singleOrDefault(null);
+                .orElse(null);
     }
 
     @Nullable
     public Long getLastItemId() {
-        return Observable.from(posts)
-                .takeLast(1)
+        return Stream.of(posts)
+                .sortBy(p -> -posts.indexOf(p))
+                .findFirst()
                 .map(Micropost::getId)
-                .toBlocking()
-                .singleOrDefault(null);
+                .orElse(null);
     }
 
     public boolean addAll(int location, Collection<Micropost> posts) {

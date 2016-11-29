@@ -2,6 +2,8 @@ package com.hana053.micropost.presentation.relateduserlist;
 
 import android.support.v4.app.FragmentActivity;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.hana053.micropost.domain.RelatedUser;
 import com.hana053.micropost.domain.UserStats;
 import com.hana053.micropost.presentation.core.base.BaseApplication;
@@ -73,11 +75,9 @@ public class RelatedUserListFragmentTest extends RobolectricBaseTest {
     }
 
     private void triggerScroll() {
-        final List<RelatedUser> users = Observable.range(1, 1)
+        final List<RelatedUser> users = Stream.of(1, 2)
                 .map(id -> new RelatedUser(id, "test", "test@test.com", "", false, 1, new UserStats()))
-                .toList()
-                .toBlocking()
-                .single();
+                .collect(Collectors.toList());
         fragment.userListAdapter.addAll(0, users);
         TestUtils.populateItems(fragment.getBinding().userRecyclerView);
     }
