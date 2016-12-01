@@ -12,12 +12,11 @@ import android.view.ViewGroup;
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.MainBinding;
 import com.hana053.micropost.domain.Micropost;
-import com.hana053.micropost.ui.BaseFragment;
-import com.hana053.micropost.ui.components.micropostlist.PostListAdapter;
-import com.hana053.micropost.ui.listeners.BottomedViewSyncScroller;
-import com.hana053.micropost.ui.listeners.OnVerticalScrollListener;
 import com.hana053.micropost.services.HttpErrorHandler;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.ui.ProgressBarHandler;
+import com.hana053.micropost.ui.components.micropostlist.PostListAdapter;
+import com.hana053.micropost.ui.listeners.OnVerticalScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +86,6 @@ public class MainFragment extends BaseFragment<List<Micropost>, MainBinding> imp
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postRecyclerView.setAdapter(postListAdapter);
         postRecyclerView.addOnScrollListener(prevFeedLoader);
-        postRecyclerView.addOnScrollListener(new BottomedViewSyncScroller(getBinding().newMicropostBtn));
 
         if (savedInstanceState != null) {
             getBinding().postRecyclerView.getLayoutManager()

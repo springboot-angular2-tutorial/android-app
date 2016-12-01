@@ -27,23 +27,19 @@
                 android:overScrollMode="never" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <FrameLayout
-            android:id="@+id/newMicropostBtn"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/white"
-            android:onClick="@{listener.onClickNewMicropostBtn}">
+            android:layout_alignParentBottom="true">
 
-            <TextView
-                android:layout_width="match_parent"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/newMicropostBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_medium"
-                android:layout_marginRight="@dimen/margin_medium"
-                android:background="@drawable/border_bottom1"
-                android:paddingBottom="@dimen/margin_medium"
-                android:paddingTop="@dimen/margin_medium"
-                android:text="@string/whats_happening" />
-        </FrameLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/margin_medium"
+                android:onClick="@{listener.onClickNewMicropostBtn}"
+                android:src="@drawable/ic_create_white_36dp" />
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

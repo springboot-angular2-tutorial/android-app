@@ -3,18 +3,18 @@ package com.hana053.micropost.ui.pages.main;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.widget.FrameLayout;
+import android.view.View;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.hana053.micropost.BaseApplication;
+import com.hana053.micropost.di.HasComponent;
 import com.hana053.micropost.domain.Micropost;
 import com.hana053.micropost.domain.User;
-import com.hana053.micropost.BaseApplication;
-import com.hana053.micropost.ui.ActivityModule;
-import com.hana053.micropost.di.HasComponent;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 import com.hana053.micropost.testing.TestUtils;
+import com.hana053.micropost.ui.ActivityModule;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,7 +43,7 @@ public class MainFragmentTest extends RobolectricBaseTest {
     private MainFragment fragment;
     private TestActivity activity;
 
-    private FrameLayout newMicropostBtn;
+    private View newMicropostBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Mock
