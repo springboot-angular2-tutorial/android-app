@@ -66,11 +66,6 @@ public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBin
     }
 
     @Override
-    protected void saveViewModelState(SignupViewModel viewModel) {
-        viewModel.password.set(getPassword());
-    }
-
-    @Override
     protected void showOrHideErrorMsg(boolean isValid) {
         if (isValid || getPassword().length() == 0)
             getBinding().passwordInvalid.setVisibility(View.GONE);
@@ -80,7 +75,7 @@ public class SignupPasswordFragment extends SignupBaseFragment<SignupPasswordBin
 
     @NonNull
     private String getPassword() {
-        return getBinding().password.getText().toString();
+        return getViewModel().password.get();
     }
 
     private boolean isEmailAlreadyTaken(Throwable e) {

@@ -74,6 +74,9 @@ public abstract class BaseFragment<VM, B extends ViewDataBinding> extends Fragme
         subscriptions.clear();
     }
 
+    protected void saveViewModelState(VM viewModel) {
+    }
+
     @SuppressWarnings("unchecked")
     protected <C> C getComponent(Class<C> componentType) {
         return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
@@ -85,6 +88,5 @@ public abstract class BaseFragment<VM, B extends ViewDataBinding> extends Fragme
 
     protected abstract B setupBinding(VM viewModel);
 
-    protected abstract void saveViewModelState(VM viewModel);
 
 }

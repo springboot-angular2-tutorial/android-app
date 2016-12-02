@@ -54,11 +54,6 @@ public class SignupEmailFragment extends SignupBaseFragment<SignupEmailBinding> 
     }
 
     @Override
-    protected void saveViewModelState(SignupViewModel viewModel) {
-        viewModel.email.set(getEmail());
-    }
-
-    @Override
     protected void showOrHideErrorMsg(boolean isValid) {
         if (isValid || getEmail().length() == 0)
             getBinding().emailInvalid.setVisibility(View.GONE);
@@ -68,7 +63,7 @@ public class SignupEmailFragment extends SignupBaseFragment<SignupEmailBinding> 
 
     @NonNull
     private String getEmail() {
-        return getBinding().email.getText().toString();
+        return getViewModel().email.get();
     }
 
 }

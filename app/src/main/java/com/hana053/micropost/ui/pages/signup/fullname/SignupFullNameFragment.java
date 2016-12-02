@@ -53,11 +53,6 @@ public class SignupFullNameFragment extends SignupBaseFragment<SignupFullNameBin
     }
 
     @Override
-    protected void saveViewModelState(SignupViewModel viewModel) {
-        viewModel.fullName.set(getFullName());
-    }
-
-    @Override
     protected void showOrHideErrorMsg(boolean isValid) {
         if (isValid || getFullName().length() == 0)
             getBinding().fullNameInvalid.setVisibility(View.GONE);
@@ -67,7 +62,7 @@ public class SignupFullNameFragment extends SignupBaseFragment<SignupFullNameBin
 
     @NonNull
     private String getFullName() {
-        return getBinding().fullName.getText().toString();
+        return getViewModel().fullName.get();
     }
 
 }

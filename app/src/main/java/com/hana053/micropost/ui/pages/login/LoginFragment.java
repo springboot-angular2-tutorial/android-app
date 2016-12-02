@@ -89,11 +89,6 @@ public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> im
         return binding;
     }
 
-    @Override
-    protected void saveViewModelState(LoginViewModel viewModel) {
-    }
-
-
     private boolean isFormValid() {
         return getEmail().length() > 0 && getPassword().length() > 0;
     }

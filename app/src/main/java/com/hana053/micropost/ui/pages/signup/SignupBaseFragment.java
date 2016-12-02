@@ -3,6 +3,7 @@ package com.hana053.micropost.ui.pages.signup;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -42,7 +43,7 @@ public abstract class SignupBaseFragment<B extends ViewDataBinding> extends Base
     @Getter
     public TextWatcher formWatcher = new SimpleTextWatcher() {
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        public void afterTextChanged(Editable s) {
             btnHandler.setEnabled(isFormValid());
             formSubject.onNext(isFormValid());
         }
@@ -56,7 +57,6 @@ public abstract class SignupBaseFragment<B extends ViewDataBinding> extends Base
     }
 
     protected Func1<Func1<SignupCtrl, Boolean>, View.OnClickListener> nextBtnHandler = f -> v -> {
-        saveViewModelState(getViewModel());
         f.call(utilityWrapper.getSignupCtrl());
     };
 
