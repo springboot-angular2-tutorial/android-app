@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:inputType="text"
-                    android:text="@{viewModel.email}"
+                    android:text="@={viewModel.email}"
                     app:addTextChangedListener="@{listener.formWatcher}" />
             </android.support.design.widget.TextInputLayout>
 
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:text="@{viewModel.password}"
+                    android:text="@={viewModel.password}"
                     app:addTextChangedListener="@{listener.formWatcher}" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>

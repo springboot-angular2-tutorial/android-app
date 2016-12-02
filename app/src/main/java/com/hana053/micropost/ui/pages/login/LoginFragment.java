@@ -2,6 +2,7 @@ package com.hana053.micropost.ui.pages.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,12 @@ import android.widget.Toast;
 
 import com.hana053.micropost.R;
 import com.hana053.micropost.databinding.LoginBinding;
-import com.hana053.micropost.ui.BaseFragment;
-import com.hana053.micropost.ui.listeners.SimpleTextWatcher;
 import com.hana053.micropost.services.HttpErrorHandler;
 import com.hana053.micropost.services.LoginService;
+import com.hana053.micropost.ui.BaseFragment;
 import com.hana053.micropost.ui.Navigator;
 import com.hana053.micropost.ui.ProgressBarHandler;
+import com.hana053.micropost.ui.listeners.SimpleTextWatcher;
 
 import javax.inject.Inject;
 
@@ -59,7 +60,7 @@ public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> im
     @Getter
     private final TextWatcher formWatcher = new SimpleTextWatcher() {
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        public void afterTextChanged(Editable s) {
             getBinding().loginBtn.setEnabled(isFormValid());
         }
     };
@@ -90,20 +91,19 @@ public class LoginFragment extends BaseFragment<LoginViewModel, LoginBinding> im
 
     @Override
     protected void saveViewModelState(LoginViewModel viewModel) {
-        viewModel.email.set(getEmail());
-        viewModel.password.set(getPassword());
     }
+
 
     private boolean isFormValid() {
         return getEmail().length() > 0 && getPassword().length() > 0;
     }
 
     private String getEmail() {
-        return getBinding().emailEditText.getText().toString();
+        return getViewModel().email.get();
     }
 
     private String getPassword() {
-        return getBinding().passwordEditText.getText().toString();
+        return getViewModel().password.get();
     }
 
 }
