@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply from: 'jacoco.gradle'
-apply plugin: 'com.github.kt3k.coveralls'
+//apply from: 'jacoco.gradle'
+//apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.hana053.micropost"
@@ -87,6 +87,6 @@ dependencies {
     testCompile 'com.github.fabioCollini:DaggerMock:0.6.2'
 }
 
-coveralls {
-    jacocoReportPath = "${buildDir}/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml"
-}
+//coveralls {
+//    jacocoReportPath = "${buildDir}/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml"
+//}
