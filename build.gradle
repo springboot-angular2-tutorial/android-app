@@ -22,10 +22,10 @@ task clean(type: Delete) {
 }
 
 ext {
-    android_support_version = '25.0.1'
+    android_support_version = '25.1.1'
     retrofit_version = '2.1.0'
     dagger_version = '2.7'
-    parceler_version = '1.1.6'
+//    parceler_version = '1.1.6'
     lombok_version = '1.16.10'
     robolectric_version = '3.1.4'
     butterknife_version = '8.4.0'

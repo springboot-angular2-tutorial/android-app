@@ -1,8 +1,8 @@
 package com.hana053.micropost.services;
 
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
-import com.android.annotations.Nullable;
 
 class AuthTokenServiceImpl implements AuthTokenService {
     private static final String AUTH_TOKEN = "AUTH_TOKEN";
