@@ -1,6 +1,6 @@
 package com.hana053.micropost.ui.pages.top;
 
-import com.hana053.micropost.services.AuthTokenService;
+import com.hana053.micropost.services.HttpErrorHandler;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
@@ -25,7 +25,7 @@ public class TopActivityTest extends RobolectricBaseTest {
     private TopActivity activity;
 
     @Mock
-    AuthTokenService authTokenService;
+    HttpErrorHandler httpErrorHandler;
 
     @Before
     public void setup() {
@@ -35,7 +35,7 @@ public class TopActivityTest extends RobolectricBaseTest {
 
     @Test
     public void shouldBeCreated() {
-        assertThat(activity.authTokenService, is(authTokenService));
+        assertThat(activity.httpErrorHandler, is(httpErrorHandler));
         assertThat(activity, instanceOf(TopActivity.class));
     }
 

@@ -12,11 +12,9 @@ import timber.log.Timber;
 class HttpErrorHandlerImpl implements HttpErrorHandler {
 
     private final Context context;
-    private final LoginService loginService;
 
-    HttpErrorHandlerImpl(Context context, LoginService loginService) {
+    HttpErrorHandlerImpl(Context context) {
         this.context = context;
-        this.loginService = loginService;
     }
 
     public void handleError(Throwable throwable) {
@@ -29,7 +27,7 @@ class HttpErrorHandlerImpl implements HttpErrorHandler {
         } catch (HttpException e) {
             if (e.code() == 401) {
                 Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show();
-                loginService.logout();
+//                loginService.logout();
             } else if (e.code() >= 500) {
                 Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show();
             }

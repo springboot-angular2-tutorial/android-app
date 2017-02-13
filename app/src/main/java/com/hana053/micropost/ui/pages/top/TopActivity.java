@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hana053.micropost.BaseApplication;
 import com.hana053.micropost.R;
-import com.hana053.micropost.services.AuthTokenService;
+import com.hana053.micropost.services.HttpErrorHandler;
 import com.hana053.micropost.ui.ActivityModule;
 
 import javax.inject.Inject;
@@ -13,8 +13,7 @@ import javax.inject.Inject;
 public class TopActivity extends AppCompatActivity {
 
     @Inject
-    AuthTokenService authTokenService;
-
+    HttpErrorHandler httpErrorHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
