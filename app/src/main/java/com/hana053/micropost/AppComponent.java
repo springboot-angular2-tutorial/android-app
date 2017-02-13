@@ -1,6 +1,7 @@
 package com.hana053.micropost;
 
 import com.hana053.micropost.interactors.InteractorModule;
+import com.hana053.micropost.services.AuthTokenService;
 import com.hana053.micropost.ui.ActivityComponent;
 import com.hana053.micropost.ui.ActivityModule;
 import com.hana053.micropost.services.ServiceModule;
@@ -19,5 +20,7 @@ import dagger.Component;
 public interface AppComponent {
 
     ActivityComponent activityComponent(ActivityModule activityModule);
+
+    AuthTokenService authTokenService();
 
 }
