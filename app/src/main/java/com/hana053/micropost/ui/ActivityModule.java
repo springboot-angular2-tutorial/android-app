@@ -4,15 +4,17 @@ import android.app.Activity;
 
 import dagger.Module;
 import dagger.Provides;
-import lombok.AllArgsConstructor;
 import rx.subscriptions.CompositeSubscription;
 
 @Module
-@AllArgsConstructor
 @SuppressWarnings("WeakerAccess")
 public class ActivityModule {
 
     private final Activity activity;
+
+    public ActivityModule(Activity activity) {
+        this.activity = activity;
+    }
 
     @Provides
     @ActivityScope

@@ -10,14 +10,16 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import lombok.AllArgsConstructor;
 
 @SuppressWarnings("WeakerAccess")
 @Module
-@AllArgsConstructor
 public class SystemServicesModule {
 
     private final Application application;
+
+    public SystemServicesModule(Application application) {
+        this.application = application;
+    }
 
     @Provides
     @Singleton

@@ -12,6 +12,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.util.ActivityController;
 
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class TopActivityTest extends RobolectricBaseTest {
@@ -34,6 +35,7 @@ public class TopActivityTest extends RobolectricBaseTest {
 
     @Test
     public void shouldBeCreated() {
+        assertThat(activity.authTokenService, is(authTokenService));
         assertThat(activity, instanceOf(TopActivity.class));
     }
 
