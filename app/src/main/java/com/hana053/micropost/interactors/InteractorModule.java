@@ -3,7 +3,6 @@ package com.hana053.micropost.interactors;
 import com.hana053.micropost.BuildConfig;
 import com.hana053.micropost.services.AuthTokenService;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -49,54 +48,8 @@ public class InteractorModule {
 
     @Provides
     @Singleton
-    public FeedInteractor provideFeedInteractor(Retrofit retrofit) {
-        return retrofit.create(FeedInteractor.class);
-    }
-
-    @Provides
-    @Singleton
-    public MicropostInteractor provideMicropostInteractor(Retrofit retrofit) {
-        return retrofit.create(MicropostInteractor.class);
-    }
-
-    @Provides
-    @Singleton
     public LoginInteractor provideLoginInteractor(Retrofit retrofit) {
         return retrofit.create(LoginInteractor.class);
-    }
-
-    @Provides
-    @Singleton
-    public UserInteractor provideUserInteractor(Retrofit retrofit) {
-        return retrofit.create(UserInteractor.class);
-    }
-
-    @Provides
-    @Singleton
-    public UserMicropostInteractor provideUserMicropostInteractor(Retrofit retrofit) {
-        return retrofit.create(UserMicropostInteractor.class);
-    }
-
-    @Provides
-    @Singleton
-    public RelationshipInteractor provideRelationshipInteractor(Retrofit retrofit) {
-        return retrofit.create(RelationshipInteractor.class);
-    }
-
-    @Provides
-    @Singleton
-    @Named("followings")
-    public RelatedUserListInteractor provideFollowingsInteractor(UserInteractor userInteractor) {
-        // retrofit does not allow inheritance of interface. So, I take this way.
-        return userInteractor::listFollowings;
-    }
-
-    @Provides
-    @Singleton
-    @Named("followers")
-    public RelatedUserListInteractor provideFollowersInteractor(UserInteractor userInteractor) {
-        // retrofit does not allow inheritance of interface. So, I take this way.
-        return userInteractor::listFollowers;
     }
 
 }

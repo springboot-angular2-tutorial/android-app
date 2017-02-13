@@ -18,20 +18,18 @@ public class User implements Serializable {
     public final String email;
     public final String avatarHash;
     public final boolean isFollowedByMe;
-    public final UserStats userStats;
 
     @ParcelConstructor
-    public User(long id, String name, String email, String avatarHash, boolean isFollowedByMe, UserStats userStats) {
+    public User(long id, String name, String email, String avatarHash, boolean isFollowedByMe) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.avatarHash = avatarHash;
         this.isFollowedByMe = isFollowedByMe;
-        this.userStats = userStats;
     }
 
     public User(long id, String name, String email, String avatarHash) {
-        this(id, name, email, avatarHash, false, new UserStats());
+        this(id, name, email, avatarHash, false);
     }
 
 }

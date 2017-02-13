@@ -18,16 +18,6 @@ public class TopFragment extends BaseFragment<Void, TopBinding> implements TopVi
     @Inject
     Navigator navigator;
 
-    @Override
-    public View.OnClickListener onClickSignupBtn() {
-        return v -> navigator.navigateToSignup();
-    }
-
-    @Override
-    public View.OnClickListener onClickLoginBtn() {
-        return v -> navigator.navigateToLogin();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
