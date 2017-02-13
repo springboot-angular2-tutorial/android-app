@@ -14,8 +14,7 @@ public class TopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         TopComponent component = BaseApplication.component(this)
-                .activityComponent(new ActivityModule(this))
-                .topComponent();
+                .topComponent(new ActivityModule(this));
         component.inject(this);
         setContentView(R.layout.layout_top);
     }

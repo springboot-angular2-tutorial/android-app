@@ -1,11 +1,13 @@
 package com.hana053.micropost.ui.pages.top;
 
+import com.hana053.micropost.services.AuthTokenService;
 import com.hana053.micropost.testing.RobolectricBaseTest;
 import com.hana053.micropost.testing.RobolectricDaggerMockRule;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.robolectric.Robolectric;
 import org.robolectric.util.ActivityController;
 
@@ -20,6 +22,9 @@ public class TopActivityTest extends RobolectricBaseTest {
     @SuppressWarnings("FieldCanBeLocal")
     private ActivityController<TopActivity> activityController;
     private TopActivity activity;
+
+    @Mock
+    AuthTokenService authTokenService;
 
     @Before
     public void setup() {
