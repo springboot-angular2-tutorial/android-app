@@ -27,8 +27,6 @@ public class TestApplication extends BaseApplication {
     protected AppComponent createComponent() {
         return DaggerAppComponent.builder()
                 .systemServicesModule(new SystemServicesModule(this))
-                .interactorModule(new InteractorModule())
-                .serviceModule(new ServiceModule())
                 .build();
     }
 
