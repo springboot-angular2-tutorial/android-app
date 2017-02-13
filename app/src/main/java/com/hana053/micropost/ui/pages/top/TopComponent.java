@@ -10,5 +10,4 @@ public interface TopComponent {
 
     void inject(TopActivity activity);
 
-    void inject(TopFragment fragment);
 }
