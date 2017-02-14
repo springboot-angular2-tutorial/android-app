@@ -20,15 +20,6 @@ class TopActivity : KodeinAppCompatActivity() {
 
     private var subscription: CompositeSubscription? = null
 
-    override fun provideOverridingModule() = Kodein.Module {
-        bind<Navigator>() with autoScopedSingleton(androidActivityScope) {
-            NavigatorImpl(instance())
-        }
-        bind<TopPresenter>() with autoScopedSingleton(androidActivityScope) {
-            TopPresenter(instance())
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top)
@@ -40,6 +31,15 @@ class TopActivity : KodeinAppCompatActivity() {
     override fun onDestroy() {
         subscription?.unsubscribe()
         super.onDestroy()
+    }
+
+    override fun provideOverridingModule() = Kodein.Module {
+        bind<Navigator>() with autoScopedSingleton(androidActivityScope) {
+            NavigatorImpl(instance())
+        }
+        bind<TopPresenter>() with autoScopedSingleton(androidActivityScope) {
+            TopPresenter(instance())
+        }
     }
 
 }
