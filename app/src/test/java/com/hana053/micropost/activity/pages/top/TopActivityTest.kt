@@ -1,5 +1,6 @@
-package com.hana053.micropost.ui.pages.top
+package com.hana053.micropost.activity.pages.top
 
+import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.testing.RobolectricBaseTest
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertThat
