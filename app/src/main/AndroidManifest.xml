@@ -22,7 +22,12 @@
             <!--android:windowSoftInputMode="adjustResize" />-->
         <activity
             android:name=".ui.pages.top.TopActivity"
-            android:theme="@style/AppTheme.Top" />
+            android:theme="@style/AppTheme.Top" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--<activity-->
             <!--android:name=".ui.pages.login.LoginActivity"-->
             <!--android:theme="@style/AppTheme.Flat" />-->

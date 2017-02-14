@@ -56,7 +56,7 @@ dependencies {
 //    provided "org.projectlombok:lombok:$rootProject.ext.lombok_version"
 
 //    apt "org.projectlombok:lombok:$rootProject.ext.lombok_version"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
+//    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
 //    apt "org.parceler:parceler:$rootProject.ext.parceler_version"
 //    apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife_version"
 
@@ -65,7 +65,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.3'
     compile 'com.annimon:stream:1.1.4'
-    compile "com.google.dagger:dagger:$rootProject.ext.dagger_version"
+//    compile "com.google.dagger:dagger:$rootProject.ext.dagger_version"
     compile 'com.jakewharton.timber:timber:4.3.1'
 //    compile "com.jakewharton:butterknife:$rootProject.ext.butterknife_version"
     compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit_version"
@@ -88,15 +88,18 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.7.5'
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$rootProject.ext.robolectric_version"
-    testCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+//    testCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'com.github.salomonbrys.kodein:kodein:3.2.0'
+    compile 'com.github.salomonbrys.kodein:kodein-android:3.2.0'
 }
 repositories {
     mavenCentral()
 }
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 
 //coveralls {
 //    jacocoReportPath = "${buildDir}/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml"
