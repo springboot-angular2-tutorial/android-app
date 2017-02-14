@@ -11,12 +11,16 @@ import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.activity.NavigatorImpl
 import com.hana053.micropost.content
+import com.hana053.micropost.services.HttpErrorHandler
 import rx.subscriptions.CompositeSubscription
 
 
 class TopActivity : KodeinAppCompatActivity() {
 
     private val presenter: TopPresenter by instance()
+
+    // TODO remove
+    val httpErrorHandler: HttpErrorHandler by instance()
 
     private var subscription: CompositeSubscription? = null
 
@@ -43,3 +47,4 @@ class TopActivity : KodeinAppCompatActivity() {
     }
 
 }
+
