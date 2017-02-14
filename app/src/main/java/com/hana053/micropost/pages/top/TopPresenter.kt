@@ -11,8 +11,8 @@ class TopPresenter(
     fun bind(view: TopView): CompositeSubscription {
         val subscriptions = CompositeSubscription()
 
-//        view.loginClicks
-//            .subscribe { navigator.navigateToLogin() }
+        view.loginClicks
+            .subscribe { navigator.navigateToLogin() }
 
 //        view.signupClicks
 //            .subscribe { navigator.navigateToSignup() }

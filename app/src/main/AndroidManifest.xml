@@ -28,9 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name=".ui.pages.login.LoginActivity"-->
-            <!--android:theme="@style/AppTheme.Flat" />-->
+        <activity android:name=".pages.login.LoginActivity"/>
         <!--<activity-->
             <!--android:name=".ui.pages.signup.SignupActivity"-->
             <!--android:theme="@style/AppTheme.Flat" />-->
