@@ -1,6 +1,8 @@
 package com.hana053.micropost.pages.signup
 
 import android.support.v4.app.FragmentActivity
+import com.hana053.micropost.R
+import com.hana053.micropost.pages.signup.email.SignupEmailFragment
 
 
 class SignupNavigator(
@@ -8,11 +10,11 @@ class SignupNavigator(
 ) {
 
     fun navigateToEmail() {
-//        activity.supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.container, SignupEmailFragment())
-//            .addToBackStack(null)
-//            .commit()
+        activity.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, SignupEmailFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     fun navigateToPassword() {
