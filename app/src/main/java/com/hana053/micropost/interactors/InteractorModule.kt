@@ -15,11 +15,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 fun interactorModule() = Kodein.Module {
 
     bind<OkHttpClient>() with singleton {
+        val authTokenService = instance<AuthTokenService>()
+
         OkHttpClient().newBuilder()
             .addInterceptor { chain ->
+                val authToken = authTokenService.getAuthToken()
                 val original = chain.request()
-                val authToken = instance<AuthTokenService>().getAuthToken()
-
                 val builder = original.newBuilder()
                 if (authToken != null)
                     builder.header("authorization", "Bearer " + authToken)

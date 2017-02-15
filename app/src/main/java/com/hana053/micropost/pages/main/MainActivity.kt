@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         subscription?.unsubscribe()
         destroyInjector()
-        super.onDestroy()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

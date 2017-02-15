@@ -1,16 +1,20 @@
 package com.hana053.micropost.pages.login
 
 import android.os.Bundle
-import com.github.salomonbrys.kodein.android.KodeinAppCompatActivity
+import android.support.v7.app.AppCompatActivity
+import com.github.salomonbrys.kodein.KodeinInjector
+import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.content
 import com.hana053.micropost.getOverridingModule
 import rx.subscriptions.CompositeSubscription
 
-class LoginActivity : KodeinAppCompatActivity() {
+class LoginActivity : AppCompatActivity(), AppCompatActivityInjector {
+
+    override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: LoginPresenter by instance()
+    private val view: LoginView by instance()
 
     private var subscription: CompositeSubscription? = null
 
@@ -18,13 +22,15 @@ class LoginActivity : KodeinAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val view = LoginView(content())
+        initializeInjector()
+
         subscription = presenter.bind(view)
     }
 
     override fun onDestroy() {
-        subscription?.unsubscribe()
         super.onDestroy()
+        subscription?.unsubscribe()
+        destroyInjector()
     }
 
     override fun provideOverridingModule()
