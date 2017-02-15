@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.hana053.micropost.pages.login.LoginActivity
 import com.hana053.micropost.pages.main.MainActivity
+import com.hana053.micropost.pages.signup.SignupActivity
 
 class NavigatorImpl(private val activity: Activity) : Navigator {
 
@@ -19,8 +20,8 @@ class NavigatorImpl(private val activity: Activity) : Navigator {
     }
 
     override fun navigateToSignup() {
-//        val intent = Intent(activity, SignupActivity::class.java)
-//        activity.startActivity(intent)
+        val intent = Intent(activity, SignupActivity::class.java)
+        activity.startActivity(intent)
     }
 
     override fun navigateToUserShow(userId: Long) {

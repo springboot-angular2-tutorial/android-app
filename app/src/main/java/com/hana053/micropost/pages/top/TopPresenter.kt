@@ -14,8 +14,8 @@ class TopPresenter(
         view.loginClicks
             .subscribe { navigator.navigateToLogin() }
 
-//        view.signupClicks
-//            .subscribe { navigator.navigateToSignup() }
+        view.signupClicks
+            .subscribe { navigator.navigateToSignup() }
 
         return subscriptions
     }

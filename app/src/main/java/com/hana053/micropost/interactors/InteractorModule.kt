@@ -53,5 +53,10 @@ fun interactorModule() = Kodein.Module {
         retrofit.create(FeedInteractor::class.java)
     }
 
+    bind<UserInteractor>() with singleton {
+        val retrofit = instance<Retrofit>()
+        retrofit.create(UserInteractor::class.java)
+    }
+
 }
 
