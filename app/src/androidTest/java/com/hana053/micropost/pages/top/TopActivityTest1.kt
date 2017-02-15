@@ -25,11 +25,11 @@ class TopActivityTest1 {
         onView(withText(R.string.welcome_to_micropost)).check(matches(isDisplayed()))
     }
 
-//    @Test
-//    fun shouldNavigateToSignup() {
-//        onView(withId(R.id.signupBtn)).perform(click())
-//        onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
-//    }
+    @Test
+    fun shouldNavigateToSignup() {
+        onView(withId(R.id.signupBtn)).perform(click())
+        onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
+    }
 
     @Test
     fun shouldNavigateToLogin() {

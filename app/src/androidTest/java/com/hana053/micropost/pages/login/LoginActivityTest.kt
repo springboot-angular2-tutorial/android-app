@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.view.View
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
@@ -17,6 +18,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import org.hamcrest.CoreMatchers.not
+import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,6 +32,10 @@ class LoginActivityTest : InjectableTest {
     @Rule @JvmField
     val activityRule = ActivityTestRule(LoginActivity::class.java, false, false)
 
+    val loginBtn: Matcher<View> = withId(R.id.loginBtn)
+    val emailEditText: Matcher<View> = withId(R.id.emailEditText)
+    val passwordEditText: Matcher<View> = withId(R.id.passwordEditText)
+
     @Test
     fun shouldBeOpened() {
         activityRule.launchActivity(null)
@@ -39,10 +45,6 @@ class LoginActivityTest : InjectableTest {
     @Test
     fun shouldDisableOrEnableBtn() {
         activityRule.launchActivity(null)
-
-        val loginBtn = withId(R.id.loginBtn)
-        val emailEditText = withId(R.id.emailEditText)
-        val passwordEditText = withId(R.id.passwordEditText)
 
         onView(loginBtn).check(ViewAssertions.matches(not(isEnabled())))
 
@@ -67,10 +69,6 @@ class LoginActivityTest : InjectableTest {
         }
 
         activityRule.launchActivity(null)
-
-        val loginBtn = withId(R.id.loginBtn)
-        val emailEditText = withId(R.id.emailEditText)
-        val passwordEditText = withId(R.id.passwordEditText)
 
         onView(emailEditText).perform(typeText("test@test.com"))
         onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
