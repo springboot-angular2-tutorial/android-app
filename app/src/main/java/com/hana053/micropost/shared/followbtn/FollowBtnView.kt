@@ -1,9 +1,13 @@
 package com.hana053.micropost.shared.followbtn
 
 import android.widget.Button
+import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.domain.User
+import com.hana053.micropost.services.AuthTokenService
 import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.enabled
+import com.jakewharton.rxbinding.view.visibility
 import rx.Observable
 
 
@@ -19,11 +23,10 @@ class FollowBtnView(
     val enabled = button.enabled()
 
     init {
-//        val component = BaseApplication.component(button.context)
-//        val authTokenService = component.authTokenService()
-//
-//        button.visibility().call(!authTokenService.isMyself(user))
-//        if (user.isFollowedByMe) toUnfollow() else toFollow()
+        val authTokenService = button.context.appKodein().instance<AuthTokenService>()
+
+        button.visibility().call(!authTokenService.isMyself(user))
+        if (user.isFollowedByMe) toUnfollow() else toFollow()
     }
 
     fun clicks(): Observable<FollowBtnView> {
