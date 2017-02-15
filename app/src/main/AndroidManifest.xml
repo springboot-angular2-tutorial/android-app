@@ -27,7 +27,7 @@
             android:theme="@style/AppTheme.Top"/>
         <activity android:name=".pages.login.LoginActivity"/>
         <activity android:name=".pages.signup.SignupActivity"/>
-        <!--<activity android:name=".ui.pages.usershow.UserShowActivity" />-->
+        <activity android:name=".pages.usershow.UserShowActivity"/>
         <!--<activity-->
         <!--android:name=".ui.pages.relateduserlist.followinglist.FollowingListActivity"-->
         <!--android:label="@string/Followings" />-->

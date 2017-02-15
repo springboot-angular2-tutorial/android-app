@@ -5,6 +5,7 @@ import android.content.Intent
 import com.hana053.micropost.pages.login.LoginActivity
 import com.hana053.micropost.pages.main.MainActivity
 import com.hana053.micropost.pages.signup.SignupActivity
+import com.hana053.micropost.pages.usershow.UserShowActivity
 
 class NavigatorImpl(private val activity: Activity) : Navigator {
 
@@ -25,9 +26,9 @@ class NavigatorImpl(private val activity: Activity) : Navigator {
     }
 
     override fun navigateToUserShow(userId: Long) {
-//        val intent = Intent(activity, UserShowActivity::class.java)
-//        intent.putExtra(UserShowActivity.KEY_USER_ID, userId)
-//        activity.startActivity(intent)
+        val intent = Intent(activity, UserShowActivity::class.java)
+        intent.putExtra(UserShowActivity.KEY_USER_ID, userId)
+        activity.startActivity(intent)
     }
 
     override fun navigateToFollowerList(userId: Long) {

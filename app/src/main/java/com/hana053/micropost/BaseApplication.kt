@@ -15,6 +15,8 @@ import com.hana053.micropost.pages.signup.SignupActivity
 import com.hana053.micropost.pages.signup.signupModule
 import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.pages.top.topModule
+import com.hana053.micropost.pages.usershow.UserShowActivity
+import com.hana053.micropost.pages.usershow.userShowModule
 import com.hana053.micropost.services.serviceModule
 import com.hana053.micropost.system.systemServiceModule
 
@@ -55,7 +57,8 @@ abstract class BaseApplication : Application(), KodeinAware {
         Pair(TopActivity::class.java, topModule()),
         Pair(LoginActivity::class.java, loginModule()),
         Pair(MainActivity::class.java, mainModule()),
-        Pair(SignupActivity::class.java, signupModule())
+        Pair(SignupActivity::class.java, signupModule()),
+        Pair(UserShowActivity::class.java, userShowModule())
     )
 
     fun getOverridingModule(clazz: Class<*>): Kodein.Module {
