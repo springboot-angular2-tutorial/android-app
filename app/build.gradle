@@ -70,6 +70,7 @@ dependencies {
     androidTestCompile "com.android.support:support-annotations:$android_support_version"
     androidTestCompile "org.mockito:mockito-core:$mockito_version"
     androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+    androidTestCompile "com.nhaarman:mockito-kotlin:1.2.0"
 }
 repositories {
     mavenCentral()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hana053.micropost">
+          package="com.hana053.micropost">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.hana053.micropost.Application"
@@ -11,29 +11,31 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.main.MainActivity">
+        <activity
+            android:name=".pages.main.MainActivity"
+            android:label="@string/home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <!--<activity-->
-            <!--android:name=".ui.pages.micropostnew.MicropostNewActivity"-->
-            <!--android:windowSoftInputMode="adjustResize" />-->
+        <!--android:name=".ui.pages.micropostnew.MicropostNewActivity"-->
+        <!--android:windowSoftInputMode="adjustResize" />-->
         <activity
             android:name=".pages.top.TopActivity"
             android:theme="@style/AppTheme.Top"/>
         <activity android:name=".pages.login.LoginActivity"/>
         <!--<activity-->
-            <!--android:name=".ui.pages.signup.SignupActivity"-->
-            <!--android:theme="@style/AppTheme.Flat" />-->
+        <!--android:name=".ui.pages.signup.SignupActivity"-->
+        <!--android:theme="@style/AppTheme.Flat" />-->
         <!--<activity android:name=".ui.pages.usershow.UserShowActivity" />-->
         <!--<activity-->
-            <!--android:name=".ui.pages.relateduserlist.followinglist.FollowingListActivity"-->
-            <!--android:label="@string/Followings" />-->
+        <!--android:name=".ui.pages.relateduserlist.followinglist.FollowingListActivity"-->
+        <!--android:label="@string/Followings" />-->
         <!--<activity-->
-            <!--android:name=".ui.pages.relateduserlist.followerlist.FollowerListActivity"-->
-            <!--android:label="@string/Followers" />-->
+        <!--android:name=".ui.pages.relateduserlist.followerlist.FollowerListActivity"-->
+        <!--android:label="@string/Followers" />-->
     </application>
 
 </manifest>

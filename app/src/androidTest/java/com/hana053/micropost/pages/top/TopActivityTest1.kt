@@ -17,7 +17,6 @@ import org.junit.runner.RunWith
 @LargeTest
 class TopActivityTest1 {
 
-
     @Rule @JvmField
     val activityRule = ActivityTestRule(TopActivity::class.java)
 
