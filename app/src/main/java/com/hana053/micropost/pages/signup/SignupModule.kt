@@ -7,6 +7,7 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.pages.signup.email.signupEmailModule
 import com.hana053.micropost.pages.signup.fullname.signupFullNameModule
+import com.hana053.micropost.pages.signup.password.signupPasswordModule
 
 fun signupModule() = Kodein.Module {
 
@@ -18,8 +19,13 @@ fun signupModule() = Kodein.Module {
         SignupNavigator(instance())
     }
 
+    bind<SignupService>() with autoScopedSingleton(androidActivityScope) {
+        SignupService(instance(), instance())
+    }
+
     import(signupFullNameModule())
     import(signupEmailModule())
+    import(signupPasswordModule())
 
 }
 
