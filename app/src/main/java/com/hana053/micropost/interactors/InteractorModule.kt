@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import com.hana053.micropost.BuildConfig
 import com.hana053.micropost.services.AuthTokenService
+import com.hana053.myapp.interactors.FeedInteractor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -44,6 +45,11 @@ fun interactorModule() = Kodein.Module {
     bind<LoginInteractor>() with singleton {
         val retrofit = instance<Retrofit>()
         retrofit.create(LoginInteractor::class.java)
+    }
+
+    bind<FeedInteractor>() with singleton {
+        val retrofit = instance<Retrofit>()
+        retrofit.create(FeedInteractor::class.java)
     }
 
 }

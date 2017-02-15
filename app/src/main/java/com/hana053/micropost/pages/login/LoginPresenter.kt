@@ -48,7 +48,7 @@ class LoginPresenter(
                     .withProgressDialog(view.content)
             }
             .subscribe({
-                //                navigator.navigateToMain()
+                navigator.navigateToMain()
             }, { e ->
                 if (e is HttpException && e.code() == 401) {
                     Toast.makeText(context, "Email or Password is wrong.", Toast.LENGTH_LONG).show()

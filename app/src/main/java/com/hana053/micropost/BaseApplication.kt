@@ -9,6 +9,8 @@ import com.hana053.micropost.activity.activityModule
 import com.hana053.micropost.interactors.interactorModule
 import com.hana053.micropost.pages.login.LoginActivity
 import com.hana053.micropost.pages.login.loginModule
+import com.hana053.micropost.pages.main.MainActivity
+import com.hana053.micropost.pages.main.mainModule
 import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.pages.top.topModule
 import com.hana053.micropost.services.serviceModule
@@ -49,7 +51,8 @@ abstract class BaseApplication : Application(), KodeinAware {
 
     private val overridingModules = mutableMapOf<Class<*>, Kodein.Module>(
         Pair(TopActivity::class.java, topModule()),
-        Pair(LoginActivity::class.java, loginModule())
+        Pair(LoginActivity::class.java, loginModule()),
+        Pair(MainActivity::class.java, mainModule())
     )
 
     fun getOverridingModule(clazz: Class<*>): Kodein.Module {

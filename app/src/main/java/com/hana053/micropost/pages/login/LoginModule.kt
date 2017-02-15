@@ -7,9 +7,11 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 
 fun loginModule() = Kodein.Module {
+
     bind<LoginPresenter>() with autoScopedSingleton(androidActivityScope) {
         LoginPresenter(instance(), instance(), instance(), instance())
     }
+
 }
 
 
