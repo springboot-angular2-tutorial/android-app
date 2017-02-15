@@ -1,15 +1,11 @@
 package com.hana053.micropost.pages.top
 
 import android.os.Bundle
-import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.android.KodeinAppCompatActivity
-import com.github.salomonbrys.kodein.android.androidActivityScope
-import com.github.salomonbrys.kodein.autoScopedSingleton
-import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.content
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.getOverridingModule
 import rx.subscriptions.CompositeSubscription
 
 
@@ -18,7 +14,7 @@ class TopActivity : KodeinAppCompatActivity() {
     private val presenter: TopPresenter by instance()
 
     // TODO remove
-    val httpErrorHandler: HttpErrorHandler by instance()
+//    val httpErrorHandler: HttpErrorHandler by instance()
 
     private var subscription: CompositeSubscription? = null
 
@@ -35,11 +31,8 @@ class TopActivity : KodeinAppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun provideOverridingModule() = Kodein.Module {
-        bind<TopPresenter>() with autoScopedSingleton(androidActivityScope) {
-            TopPresenter(instance())
-        }
-    }
+    override fun provideOverridingModule()
+        = getOverridingModule(TopActivity::class.java)
 
 }
 

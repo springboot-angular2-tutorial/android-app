@@ -6,12 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import com.github.salomonbrys.kodein.Kodein
 import rx.Observable
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
 fun Activity.content(): ViewGroup {
     return findViewById(android.R.id.content) as ViewGroup
+}
+
+fun Activity.getOverridingModule(clazz: Class<*>): Kodein.Module {
+    return (application as BaseApplication).getOverridingModule(clazz)
 }
 
 fun <T> Observable<T>.withProgressDialog(container: ViewGroup): Observable<T> {
