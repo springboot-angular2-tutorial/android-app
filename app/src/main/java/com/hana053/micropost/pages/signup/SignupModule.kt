@@ -20,7 +20,7 @@ fun signupModule() = Kodein.Module {
     }
 
     bind<SignupService>() with autoScopedSingleton(androidActivityScope) {
-        SignupService(instance(), instance())
+        SignupServiceImpl(instance(), instance())
     }
 
     import(signupFullNameModule())

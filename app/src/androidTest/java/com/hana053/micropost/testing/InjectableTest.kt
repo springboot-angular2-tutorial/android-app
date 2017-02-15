@@ -23,8 +23,8 @@ interface InjectableTest {
             // override existing module
             val currentModule = app.getOverridingModule(clazz)
             app.putOverridingModule(clazz, Kodein.Module {
-                import(currentModule)
-                import(module)
+                import(currentModule, allowOverride = true)
+                import(module, allowOverride = true)
             })
         } else {
             // just replacing module

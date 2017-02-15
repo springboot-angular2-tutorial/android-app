@@ -67,7 +67,6 @@ class LoginActivityTest : InjectableTest {
                 on { login(any(), any()) } doReturn Observable.just<Void>(null)
             })
         }
-
         activityRule.launchActivity(null)
 
         onView(emailEditText).perform(typeText("test@test.com"))
