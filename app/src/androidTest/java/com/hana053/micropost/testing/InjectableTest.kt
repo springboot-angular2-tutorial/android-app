@@ -4,21 +4,18 @@ import android.support.test.InstrumentationRegistry
 import com.github.salomonbrys.kodein.Kodein
 import com.hana053.micropost.Application
 
+abstract class InjectableTest {
 
-interface InjectableTest {
+    val app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as Application
 
     fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {
-        val app = app()
-        val kodein = Kodein {
-            extend(app.kodein)
+        app.setKodein(Kodein {
+            app.init(this)
             init()
-        }
-        app.setKodein(kodein)
+        })
     }
 
     fun putOverridingModule(clazz: Class<*>, module: Kodein.Module, overrides: Boolean = true) {
-        val app = app()
-
         if (overrides) {
             // override existing module
             val currentModule = app.getOverridingModule(clazz)
@@ -32,7 +29,4 @@ interface InjectableTest {
         }
     }
 
-    private fun app(): Application {
-        return InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as Application
-    }
 }

@@ -12,7 +12,6 @@ import com.hana053.micropost.pages.login.loginModule
 import com.hana053.micropost.pages.main.MainActivity
 import com.hana053.micropost.pages.main.mainModule
 import com.hana053.micropost.pages.micropostnew.MicropostNewActivity
-import com.hana053.micropost.pages.micropostnew.micropostNewModule
 import com.hana053.micropost.pages.signup.SignupActivity
 import com.hana053.micropost.pages.signup.signupModule
 import com.hana053.micropost.pages.top.TopActivity
@@ -29,22 +28,15 @@ abstract class BaseApplication : Application(), KodeinAware {
         registerActivityLifecycleCallbacks(androidActivityScope.lifecycleManager)
     }
 
-    //    override val kodein: Kodein by Kodein.lazy {
-//        import(systemServiceModule())
-//        import(serviceModule())
-//        import(interactorModule())
-//
-//        bind<Navigator>() with autoScopedSingleton(androidActivityScope) {
-//            NavigatorImpl(instance())
-//        }
-//    }
-
-    private var _kodein = Kodein {
+    @VisibleForTesting
+    val init: Kodein.Builder.() -> Unit = {
         import(systemServiceModule())
         import(serviceModule())
         import(interactorModule())
         import(activityModule())
     }
+
+    private var _kodein = Kodein { init() }
 
     override val kodein: Kodein
         get() = _kodein
@@ -52,7 +44,6 @@ abstract class BaseApplication : Application(), KodeinAware {
     @VisibleForTesting
     fun setKodein(kodein: Kodein) {
         _kodein = kodein
-        mutableMapOf(Pair(TopActivity::class, Kodein.Module {}))
     }
 
     private val overridingModules = mutableMapOf<Class<*>, Kodein.Module>(
@@ -61,7 +52,7 @@ abstract class BaseApplication : Application(), KodeinAware {
         Pair(MainActivity::class.java, mainModule()),
         Pair(SignupActivity::class.java, signupModule()),
         Pair(UserShowActivity::class.java, userShowModule()),
-        Pair(MicropostNewActivity::class.java, micropostNewModule())
+        Pair(MicropostNewActivity::class.java, userShowModule())
     )
 
     fun getOverridingModule(clazz: Class<*>): Kodein.Module {

@@ -22,7 +22,6 @@ class LoginServiceImpl(
         this.context = context.applicationContext
     }
 
-
     override fun login(email: String, password: String): Observable<Void> {
         return loginInteractor
             .login(LoginInteractor.LoginRequest(email, password))
@@ -31,7 +30,6 @@ class LoginServiceImpl(
             .doOnNext { authTokenService.setAuthToken(it.token) }
             .map { null }
     }
-
 
     override fun logout() {
         authTokenService.clearAuthToken()
