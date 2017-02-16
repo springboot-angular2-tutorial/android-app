@@ -7,7 +7,13 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import com.github.salomonbrys.kodein.bind
+import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
+import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.testing.InjectableTest
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,26 +21,42 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class TopActivityTest {
+class TopActivityTest : InjectableTest() {
 
     @Rule @JvmField
-    val activityRule = ActivityTestRule(TopActivity::class.java)
+    val activityRule = ActivityTestRule(TopActivity::class.java, false, false)
 
     @Test
     fun shouldBeOpened() {
+        activityRule.launchActivity(null)
+
         onView(withText(R.string.welcome_to_micropost)).check(matches(isDisplayed()))
     }
 
     @Test
     fun shouldNavigateToSignup() {
+        val navigator = mock<Navigator>()
+        overrideAppBindings {
+            bind<Navigator>(overrides = true) with instance(navigator)
+        }
+
+        activityRule.launchActivity(null)
         onView(withId(R.id.signupBtn)).perform(click())
-        onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
+
+        verify(navigator).navigateToSignup()
     }
 
     @Test
     fun shouldNavigateToLogin() {
+        val navigator = mock<Navigator>()
+        overrideAppBindings {
+            bind<Navigator>(overrides = true) with instance(navigator)
+        }
+
+        activityRule.launchActivity(null)
         onView(withId(R.id.loginBtn)).perform(click())
-        onView(withText(R.string.log_in_to_micropost)).check(matches(isDisplayed()))
+
+        verify(navigator).navigateToLogin()
     }
 
 }

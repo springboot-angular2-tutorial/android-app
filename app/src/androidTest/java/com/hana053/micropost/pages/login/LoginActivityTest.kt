@@ -12,11 +12,13 @@ import android.view.View
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
+import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.InjectableTest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.junit.Rule
@@ -62,10 +64,12 @@ class LoginActivityTest : InjectableTest() {
 
     @Test
     fun shouldNavigateToMainWhenEmailAndPasswordIsValid() {
+        val navigator = mock<Navigator>()
         overrideAppBindings {
             bind<LoginService>(overrides = true) with instance(mock<LoginService> {
                 on { login(any(), any()) } doReturn Observable.just<Void>(null)
             })
+            bind<Navigator>(overrides = true) with instance(navigator)
         }
         activityRule.launchActivity(null)
 
@@ -73,6 +77,6 @@ class LoginActivityTest : InjectableTest() {
         onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
         onView(loginBtn).perform(click())
 
-        onView(withText(R.string.home)).check(matches(isDisplayed()))
+        verify(navigator).navigateToMain()
     }
 }

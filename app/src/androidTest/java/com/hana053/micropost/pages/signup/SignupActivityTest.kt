@@ -11,14 +11,18 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.content
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.myapp.testing.EmptyResponseBody
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
+import kotlinx.android.synthetic.main.signup_email.view.*
+import kotlinx.android.synthetic.main.signup_full_name.view.*
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -82,17 +86,16 @@ class SignupActivityTest : InjectableTest() {
 
     @Test
     fun shouldInputPasswordAndNavigateToMain() {
+        val navigator = mock<Navigator>()
+        overrideAppBindings {
+            bind<Navigator>(overrides = true) with instance(navigator)
+        }
         putOverridingModule(SignupActivity::class.java, Kodein.Module {
             bind<SignupService>(overrides = true) with instance(mock<SignupService> {
                 on { signup(any()) } doReturn Observable.just<Void>(null)
             })
         })
-        overrideAppBindings {
-            // required after launching MainActivity
-            bind<LoginService>(overrides = true) with instance(mock<LoginService> {
-                on { auth() } doReturn true
-            })
-        }
+
         activityRule.launchActivity(null)
         moveToEmailWithName("John Doe")
         moveToPasswordWithEmail("test@test.com")
@@ -109,7 +112,8 @@ class SignupActivityTest : InjectableTest() {
         onView(withId(R.id.passwordInvalid)).check(matches(not(isDisplayed())))
 
         onView(withId(R.id.passwordNextBtn)).perform(closeSoftKeyboard(), click())
-        onView(withText(R.string.home)).check(matches(isDisplayed()))
+
+        verify(navigator).navigateToMain()
     }
 
     @Test
@@ -130,14 +134,20 @@ class SignupActivityTest : InjectableTest() {
     }
 
     @Test
-    @Ignore
     fun shouldNavigateToPreviousScreen() {
         activityRule.launchActivity(null)
         moveToEmailWithName("John Doe")
         moveToPasswordWithEmail("test@test.com")
-        // FIXME pressBack ignores onBackPressed. https://github.com/prt2121/android-test-kit/issues/163
-        pressBack()
+
+        val content = activityRule.activity.content()
+
+        onView(withId(android.R.id.content)).perform(pressBack())
         onView(withText(R.string.what_s_your_email)).check(matches(isDisplayed()))
+        assertThat(content.email.text.toString(), `is`("test@test.com"))
+
+        onView(withId(android.R.id.content)).perform(pressBack())
+        onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
+        assertThat(content.fullName.text.toString(), `is`("John Doe"))
     }
 
     private fun moveToEmailWithName(name: String) {
