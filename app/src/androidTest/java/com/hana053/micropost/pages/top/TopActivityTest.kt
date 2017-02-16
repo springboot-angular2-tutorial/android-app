@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class TopActivityTest : InjectableTest() {
+class TopActivityTest : InjectableTest {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(TopActivity::class.java, false, false)

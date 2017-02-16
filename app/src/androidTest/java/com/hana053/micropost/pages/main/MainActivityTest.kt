@@ -30,7 +30,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class MainActivityTest : InjectableTest() {
+class MainActivityTest : InjectableTest {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(MainActivity::class.java, false, false)

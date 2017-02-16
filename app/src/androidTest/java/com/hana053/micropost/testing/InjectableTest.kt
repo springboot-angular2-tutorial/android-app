@@ -2,7 +2,7 @@ package com.hana053.micropost.testing
 
 import com.github.salomonbrys.kodein.Kodein
 
-abstract class InjectableTest {
+interface InjectableTest {
 
     fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {
         app.setKodein(Kodein {
