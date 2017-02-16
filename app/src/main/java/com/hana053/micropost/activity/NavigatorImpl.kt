@@ -8,9 +8,16 @@ import com.hana053.micropost.pages.main.MainActivity
 import com.hana053.micropost.pages.main.MainActivity.Companion.REQUEST_POST
 import com.hana053.micropost.pages.micropostnew.MicropostNewActivity
 import com.hana053.micropost.pages.signup.SignupActivity
+import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.pages.usershow.UserShowActivity
 
 class NavigatorImpl(private val activity: Activity) : Navigator {
+
+    override fun navigateToTop() {
+        val intent = Intent(activity, TopActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        activity.startActivity(intent)
+    }
 
     override fun navigateToMain() {
         val intent = Intent(activity, MainActivity::class.java)

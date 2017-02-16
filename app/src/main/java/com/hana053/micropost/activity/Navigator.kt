@@ -2,6 +2,7 @@ package com.hana053.micropost.activity
 
 interface Navigator {
 
+    fun navigateToTop()
     fun navigateToMain()
     fun navigateToLogin()
     fun navigateToSignup()

@@ -1,9 +1,8 @@
 package com.hana053.micropost.services
 
 import android.content.Context
-import android.content.Intent
+import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.LoginInteractor
-import com.hana053.micropost.pages.top.TopActivity
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -12,6 +11,7 @@ import rx.schedulers.Schedulers
 class LoginServiceImpl(
     private val loginInteractor: LoginInteractor,
     private val authTokenService: AuthTokenService,
+    private val navigator: Navigator,
     context: Context
 ) : LoginService {
 
@@ -33,9 +33,7 @@ class LoginServiceImpl(
 
     override fun logout() {
         authTokenService.clearAuthToken()
-        val intent = Intent(context, TopActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(intent)
+        navigator.navigateToTop()
     }
 
     override fun auth(): Boolean {
