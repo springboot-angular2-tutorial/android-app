@@ -16,6 +16,7 @@ import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.services.AuthTokenService
 import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.TestMicropost
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn
