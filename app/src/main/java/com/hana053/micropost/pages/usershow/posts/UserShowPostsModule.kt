@@ -8,6 +8,7 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.content
 import com.hana053.micropost.shared.posts.PostListAdapter
+import kotlinx.android.synthetic.main.user_posts.view.*
 
 fun userShowPostsModule() = Kodein.Module {
 
@@ -20,7 +21,7 @@ fun userShowPostsModule() = Kodein.Module {
     }
 
     bind<UserShowPostsView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().content().userPosts
         UserShowPostsView(content, instance())
     }
 

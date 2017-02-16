@@ -33,7 +33,7 @@ class PostListAdapter(
         holder.content.text = item.content
         holder.container.tag = item
 
-        AvatarView(holder.avatar, item.user)
+        AvatarView(holder.avatar).render(item.user)
         holder.avatar.setOnClickListener {
             avatarClicksSubject.onNext(item.user)
         }

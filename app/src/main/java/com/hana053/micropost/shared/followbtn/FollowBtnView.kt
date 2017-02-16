@@ -12,8 +12,7 @@ import rx.Observable
 
 
 class FollowBtnView(
-    private val button: Button,
-    val user: User
+    private val button: Button
 ) {
 
     private val FOLLOW = "FOLLOW"
@@ -21,12 +20,17 @@ class FollowBtnView(
 
     // Props
     val enabled = button.enabled()
+    val user: User
+        get() = _user
 
-    init {
+    private lateinit var _user: User
+
+    fun render(user: User) {
         val authTokenService = button.context.appKodein().instance<AuthTokenService>()
 
         button.visibility().call(!authTokenService.isMyself(user))
         if (user.isFollowedByMe) toUnfollow() else toFollow()
+        this._user = user
     }
 
     fun clicks(): Observable<FollowBtnView> {
@@ -44,4 +48,5 @@ class FollowBtnView(
     fun isFollowState(): Boolean {
         return button.text == FOLLOW
     }
+
 }

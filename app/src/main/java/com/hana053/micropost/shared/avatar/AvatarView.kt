@@ -6,11 +6,10 @@ import com.squareup.picasso.Picasso
 
 
 class AvatarView(
-    content: ImageView,
-    user: User
+    private val content: ImageView
 ) {
 
-    init {
+    fun render(user: User) {
         Picasso.with(content.context)
             .load(user.avatarUrl(96))
             .into(content)

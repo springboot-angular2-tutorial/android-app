@@ -20,6 +20,9 @@ class UserShowDetailPresenter(
     fun bind(view: UserShowDetailView, userId: Long): CompositeSubscription {
         val subscriptions = CompositeSubscription()
 
+        subscriptions += getUser(userId, view)
+            .subscribe({}, { httpErrorHandler.handleError(it) })
+
         subscriptions += view.followClicks
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
             .flatMap { getUser(userId, view) }
@@ -37,7 +40,7 @@ class UserShowDetailPresenter(
     private fun getUser(userId: Long, view: UserShowDetailView): Observable<User> {
         return detailService.getUser(userId)
             .withProgressDialog(view.content)
-            .doOnNext { view.renderUser(it) }
+            .doOnNext { view.render(it) }
     }
 
 }

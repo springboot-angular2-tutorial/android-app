@@ -9,8 +9,7 @@ import com.jakewharton.rxbinding.view.clicks
 import kotlinx.android.synthetic.main.user_detail.view.*
 
 class UserShowDetailView(
-    val content: ViewGroup,
-    user: User
+    val content: ViewGroup
 ) {
 
     private val userName = content.userName
@@ -20,20 +19,18 @@ class UserShowDetailView(
     private val followings = content.followings
 
     // Sub View
-    val followBtnView = FollowBtnView(content.followBtn, user)
+    private val followBtnView = FollowBtnView(content.followBtn)
+    private val avatarView = AvatarView(content.avatar)
 
     // Events
     val followersClicks = followers.clicks()
     val followingsClicks = followings.clicks()
     val followClicks = followBtnView.clicks()
 
-    init {
-        AvatarView(content.avatar, user)
-        renderUser(user)
-    }
-
     @SuppressLint("SetTextI18n")
-    fun renderUser(user: User) {
+    fun render(user: User) {
+        followBtnView.render(user)
+        avatarView.render(user)
         userName.text = user.name
         followingCnt.text = "${user.userStats.followingCnt} "
         followerCnt.text = "${user.userStats.followerCnt} "
