@@ -1,8 +1,7 @@
 package com.hana053.micropost.pages.main
 
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.swipeDown
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
@@ -12,15 +11,13 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.interactors.MicropostInteractor
 import com.hana053.micropost.services.AuthTokenService
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestMicropost
 import com.hana053.micropost.testing.fakeAuth
 import com.hana053.myapp.interactors.FeedInteractor
-import com.nhaarman.mockito_kotlin.anyOrNull
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -157,6 +154,30 @@ class MainActivityTest : InjectableTest {
         onView(withId(R.id.newMicropostBtn)).perform(click())
 
         verify(navigator).navigateToMicropostNew()
+    }
+
+    @Test
+    fun shouldLoadNextFeedWhenBackedFromPosting() {
+        val feedInteractor: FeedInteractor = mock {
+            on { loadNextFeed(anyOrNull()) } doReturn Observable.just(emptyList())
+            on { loadPrevFeed(anyOrNull()) } doReturn Observable.empty()
+        }
+        overrideAppBindings {
+            fakeAuth()
+            bind<FeedInteractor>(overrides = true) with instance(feedInteractor)
+            bind<MicropostInteractor>(overrides = true) with instance(mock<MicropostInteractor> {
+                on { create(any()) } doReturn Observable.just(TestMicropost)
+            })
+        }
+
+        activityRule.launchActivity(null)
+        verify(feedInteractor, times(1)).loadNextFeed(null)
+
+        onView(withId(R.id.newMicropostBtn)).perform(click())
+        onView(withId(R.id.postEditText)).perform(typeText("hello"))
+        onView(withId(R.id.postBtn)).perform(closeSoftKeyboard(), click())
+
+        verify(feedInteractor, times(2)).loadNextFeed(null)
     }
 
 
