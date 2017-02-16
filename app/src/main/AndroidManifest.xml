@@ -19,15 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--<activity-->
-        <!--android:name=".ui.pages.micropostnew.MicropostNewActivity"-->
-        <!--android:windowSoftInputMode="adjustResize" />-->
         <activity
             android:name=".pages.top.TopActivity"
             android:theme="@style/AppTheme.Top"/>
         <activity android:name=".pages.login.LoginActivity"/>
         <activity android:name=".pages.signup.SignupActivity"/>
         <activity android:name=".pages.usershow.UserShowActivity"/>
+        <activity android:name=".pages.micropostnew.MicropostNewActivity"/>
         <!--<activity-->
         <!--android:name=".ui.pages.relateduserlist.followinglist.FollowingListActivity"-->
         <!--android:label="@string/Followings" />-->

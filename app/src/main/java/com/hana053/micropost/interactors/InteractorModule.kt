@@ -68,5 +68,10 @@ fun interactorModule() = Kodein.Module {
         retrofit.create(UserMicropostInteractor::class.java)
     }
 
+    bind<MicropostInteractor>() with singleton {
+        val retrofit = instance<Retrofit>()
+        retrofit.create(MicropostInteractor::class.java)
+    }
+
 }
 

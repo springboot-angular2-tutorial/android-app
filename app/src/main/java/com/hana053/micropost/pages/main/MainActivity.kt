@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initializeInjector()
 
         if (!loginService.auth()) return

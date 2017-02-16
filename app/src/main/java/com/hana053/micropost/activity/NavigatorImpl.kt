@@ -2,8 +2,11 @@ package com.hana053.micropost.activity
 
 import android.app.Activity
 import android.content.Intent
+import com.hana053.micropost.R
 import com.hana053.micropost.pages.login.LoginActivity
 import com.hana053.micropost.pages.main.MainActivity
+import com.hana053.micropost.pages.main.MainActivity.Companion.REQUEST_POST
+import com.hana053.micropost.pages.micropostnew.MicropostNewActivity
 import com.hana053.micropost.pages.signup.SignupActivity
 import com.hana053.micropost.pages.usershow.UserShowActivity
 
@@ -46,8 +49,8 @@ class NavigatorImpl(private val activity: Activity) : Navigator {
     }
 
     override fun navigateToMicropostNew() {
-//        val intent = Intent(activity, MicropostNewActivity::class.java)
-//        activity.startActivityForResult(intent, REQUEST_POST)
-//        activity.overridePendingTransition(R.anim.slide_in_up, 0)
+        val intent = Intent(activity, MicropostNewActivity::class.java)
+        activity.startActivityForResult(intent, REQUEST_POST)
+        activity.overridePendingTransition(R.anim.slide_in_up, 0)
     }
 }
