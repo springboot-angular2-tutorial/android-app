@@ -8,15 +8,14 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.services.AuthTokenService
-import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestMicropost
+import com.hana053.micropost.testing.fakeAuth
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn
@@ -42,9 +41,7 @@ class MainActivityTest : InjectableTest {
                 on { getAuthToken() } doReturn "token123"
             })
         }
-
         activityRule.launchActivity(null)
-
         onView(withText(R.string.home)).check(matches(isDisplayed()))
     }
 
@@ -57,9 +54,7 @@ class MainActivityTest : InjectableTest {
             })
             bind<Navigator>(overrides = true) with instance(navigator)
         }
-
         activityRule.launchActivity(null)
-
         verify(navigator).navigateToTop()
     }
 
@@ -162,12 +157,6 @@ class MainActivityTest : InjectableTest {
         onView(withId(R.id.newMicropostBtn)).perform(click())
 
         verify(navigator).navigateToMicropostNew()
-    }
-
-    private fun Kodein.Builder.fakeAuth() {
-        bind<LoginService>(overrides = true) with instance(mock<LoginService> {
-            on { auth() } doReturn true
-        })
     }
 
 
