@@ -3,7 +3,7 @@ package com.hana053.micropost.pages.usershow.posts
 import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
 import com.hana053.micropost.shared.posts.PostListAdapter
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.user_posts.view.*
 
 
 class UserShowPostsView(

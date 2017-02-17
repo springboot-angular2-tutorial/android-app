@@ -16,6 +16,7 @@ class UserShowPostsPresenter(
         service.loadPosts(userId)
             .withProgressDialog(view.content)
             .subscribe({}, { httpErrorHandler.handleError(it) })
+
         return subscriptions
     }
 

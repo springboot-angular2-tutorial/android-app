@@ -14,10 +14,8 @@ import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.RelationshipInteractor
 import com.hana053.micropost.interactors.UserInteractor
-import com.hana053.micropost.testing.InjectableTest
-import com.hana053.micropost.testing.TestUser
-import com.hana053.micropost.testing.fakeAuthToken
-import com.hana053.micropost.testing.fakeAuthTokenAndBind
+import com.hana053.micropost.interactors.UserMicropostInteractor
+import com.hana053.micropost.testing.*
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -53,6 +51,8 @@ class UserShowActivityTest : InjectableTest {
         launchActivityWithUserId(1)
         verify(navigator).navigateToTop()
     }
+
+    // ----------- Detail View part -----------
 
     @Test
     fun shouldShowUser() {
@@ -97,7 +97,7 @@ class UserShowActivityTest : InjectableTest {
 
     @Test
     fun shouldNavigateToFollowers() {
-        val navigator : Navigator = mock()
+        val navigator: Navigator = mock()
         overrideAppBindings {
             fakeAuthToken("secret")
             bind<Navigator>(overrides = true) with instance(navigator)
@@ -111,7 +111,7 @@ class UserShowActivityTest : InjectableTest {
 
     @Test
     fun shouldNavigateToFollowings() {
-        val navigator : Navigator = mock()
+        val navigator: Navigator = mock()
         overrideAppBindings {
             fakeAuthToken("secret")
             bind<Navigator>(overrides = true) with instance(navigator)
@@ -121,6 +121,25 @@ class UserShowActivityTest : InjectableTest {
         onView(withId(R.id.followings)).perform(click())
 
         verify(navigator).navigateToFollowingList(1)
+    }
+
+    // ----------- Posts View part -----------
+
+    @Test
+    fun shouldShowPosts() {
+        overrideAppBindings {
+            fakeAuthToken("secret")
+            bind<UserMicropostInteractor>(overrides = true) with instance(mock<UserMicropostInteractor> {
+                on { loadPrevPosts(1, null) } doReturn Observable.just(listOf(
+                    TestMicropost.copy(content = "my test content")
+                ))
+            })
+        }
+
+        launchActivityWithUserId(1)
+
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
     }
 
     private fun launchActivityWithUserId(userId: Long) {
