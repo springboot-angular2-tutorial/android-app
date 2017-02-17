@@ -28,6 +28,13 @@ class RelatedUserListPresenter(
             .withProgressDialog(view.content)
             .subscribe({}, { httpErrorHandler.handleError(it) })
 
+        subscriptions += view.scrolledToBottom
+            .flatMap {
+                relatedUserListService.listUsers(userId)
+                    .withProgressDialog(view.content)
+            }
+            .subscribe({}, { httpErrorHandler.handleError(it) })
+
         subscriptions += relatedUserListAdapter.followBtnClicksSubject
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
             .subscribe({}, { httpErrorHandler.handleError(it) })

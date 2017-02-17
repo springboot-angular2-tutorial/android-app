@@ -41,11 +41,11 @@ class MainPresenter(
             }
             .subscribe({}, { httpErrorHandler.handleError(it) })
 
-        subscriptions += postListAdapter.avatarClicksSubject
-            .subscribe { navigator.navigateToUserShow(it.id) }
-
         subscriptions += view.newMicropostClicks
             .subscribe { navigator.navigateToMicropostNew() }
+
+        subscriptions += postListAdapter.avatarClicksSubject
+            .subscribe { navigator.navigateToUserShow(it.id) }
 
         subscriptions += newPostSubmittedSubject
             .flatMap {

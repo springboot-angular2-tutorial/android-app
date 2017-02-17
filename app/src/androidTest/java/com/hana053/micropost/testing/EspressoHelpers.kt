@@ -24,4 +24,3 @@ fun atPositionOnView(
     }
 }
 
-
