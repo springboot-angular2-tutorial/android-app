@@ -23,5 +23,6 @@
     <string name="Followers">Followers</string>
     <string name="home">Home</string>
     <string name="post">Post</string>
-    <string name="follow">Follow</string>
+    <string name="Follow">Follow</string>
+    <string name="Unfollow">Unfollow</string>
 </resources>

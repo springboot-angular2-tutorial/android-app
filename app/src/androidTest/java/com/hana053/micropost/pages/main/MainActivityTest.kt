@@ -12,10 +12,9 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.MicropostInteractor
-import com.hana053.micropost.services.AuthTokenService
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestMicropost
-import com.hana053.micropost.testing.fakeAuth
+import com.hana053.micropost.testing.fakeAuthToken
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Rule
@@ -33,11 +32,7 @@ class MainActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings {
-            bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
-                on { getAuthToken() } doReturn "token123"
-            })
-        }
+        overrideAppBindings { fakeAuthToken("secret") }
         activityRule.launchActivity(null)
         onView(withText(R.string.home)).check(matches(isDisplayed()))
     }
@@ -46,9 +41,6 @@ class MainActivityTest : InjectableTest {
     fun shouldNotBeOpenedWhenNotAuthenticated() {
         val navigator = mock<Navigator>()
         overrideAppBindings {
-            bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
-                on { getAuthToken() } doReturn ""
-            })
             bind<Navigator>(overrides = true) with instance(navigator)
         }
         activityRule.launchActivity(null)
@@ -58,7 +50,7 @@ class MainActivityTest : InjectableTest {
     @Test
     fun shouldShowFeed() {
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
                 on { loadNextFeed(null) } doReturn Observable.just(listOf(
                     TestMicropost.copy(content = "my test content")
@@ -76,7 +68,7 @@ class MainActivityTest : InjectableTest {
     @Test
     fun shouldLoadNextFeedWhenSwipeRefreshed() {
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
                 on { loadNextFeed(null) } doReturn Observable.just(listOf(
                     TestMicropost.copy(id = 1, content = "my test content")
@@ -98,7 +90,7 @@ class MainActivityTest : InjectableTest {
     @Test
     fun shouldLoadPreviousFeedWhenReachedToBottom() {
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
                 on { loadNextFeed(null) } doReturn Observable.just(listOf(
                     TestMicropost.copy(id = 1, content = "my test content")
@@ -120,7 +112,7 @@ class MainActivityTest : InjectableTest {
     fun shouldNavigateToUserShowWhenAvatarClicked() {
         val navigator = mock<Navigator>()
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<Navigator>(overrides = true) with instance(navigator)
             bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
                 on { loadNextFeed(null) } doReturn Observable.just(listOf(
@@ -141,7 +133,7 @@ class MainActivityTest : InjectableTest {
     fun shouldNavigateToMicropostNewWhenNewMicropostBtnClicked() {
         val navigator = mock<Navigator>()
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<Navigator>(overrides = true) with instance(navigator)
             bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
                 // just avoid exception
@@ -163,7 +155,7 @@ class MainActivityTest : InjectableTest {
             on { loadPrevFeed(anyOrNull()) } doReturn Observable.empty()
         }
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<FeedInteractor>(overrides = true) with instance(feedInteractor)
             bind<MicropostInteractor>(overrides = true) with instance(mock<MicropostInteractor> {
                 on { create(any()) } doReturn Observable.just(TestMicropost)

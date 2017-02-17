@@ -12,10 +12,9 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.MicropostInteractor
-import com.hana053.micropost.services.AuthTokenService
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestMicropost
-import com.hana053.micropost.testing.fakeAuth
+import com.hana053.micropost.testing.fakeAuthToken
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -37,11 +36,7 @@ class MicropostNewActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings {
-            bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
-                on { getAuthToken() } doReturn "token123"
-            })
-        }
+        overrideAppBindings { fakeAuthToken("secret") }
         activityRule.launchActivity(null)
         onView(withText(R.string.post)).check(matches(isDisplayed()))
     }
@@ -50,9 +45,6 @@ class MicropostNewActivityTest : InjectableTest {
     fun shouldNotBeOpenedWhenNotAuthenticated() {
         val navigator = mock<Navigator>()
         overrideAppBindings {
-            bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
-                on { getAuthToken() } doReturn ""
-            })
             bind<Navigator>(overrides = true) with instance(navigator)
         }
         activityRule.launchActivity(null)
@@ -61,7 +53,7 @@ class MicropostNewActivityTest : InjectableTest {
 
     @Test
     fun shouldDisableOrEnableBtn() {
-        overrideAppBindings { fakeAuth() }
+        overrideAppBindings { fakeAuthToken("secret") }
         activityRule.launchActivity(null)
 
         onView(withId(R.id.postBtn)).check(matches(not(isEnabled())))
@@ -76,7 +68,7 @@ class MicropostNewActivityTest : InjectableTest {
             on { create(any()) } doReturn Observable.just(TestMicropost)
         }
         overrideAppBindings {
-            fakeAuth()
+            fakeAuthToken("secret")
             bind<MicropostInteractor>(overrides = true) with instance(micropostInteractor)
         }
         activityRule.launchActivity(null)

@@ -8,7 +8,8 @@ import com.hana053.micropost.Application
 import com.hana053.micropost.domain.Micropost
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.domain.UserStats
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.services.AuthTokenService
+import com.nhaarman.mockito_kotlin.KStubbing
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 
@@ -18,8 +19,14 @@ val TestUserStats = UserStats(1, 2, 3)
 val TestUser = User(1, "John Doe", "test@test.com", "hash", false, TestUserStats)
 val TestMicropost = Micropost(1, "content", 0, TestUser)
 
-fun Kodein.Builder.fakeAuth() {
-    bind<LoginService>(overrides = true) with instance(mock<LoginService> {
-        on { auth() } doReturn true
+fun Kodein.Builder.fakeAuthTokenAndBind(token: String = "", init: KStubbing<AuthTokenService>.() -> Unit) {
+    bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
+        on { getAuthToken() } doReturn token
+        init()
     })
 }
+
+fun Kodein.Builder.fakeAuthToken(token: String = "") {
+    fakeAuthTokenAndBind(token) { }
+}
+

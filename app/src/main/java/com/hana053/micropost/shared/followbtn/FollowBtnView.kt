@@ -3,6 +3,7 @@ package com.hana053.micropost.shared.followbtn
 import android.widget.Button
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
+import com.hana053.micropost.R
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.services.AuthTokenService
 import com.jakewharton.rxbinding.view.clicks
@@ -15,8 +16,8 @@ class FollowBtnView(
     private val button: Button
 ) {
 
-    private val FOLLOW = "FOLLOW"
-    private val UNFOLLOW = "UNFOLLOW"
+    private val FOLLOW = button.context.getString(R.string.Follow)
+    private val UNFOLLOW = button.context.getString(R.string.Unfollow)
 
     // Props
     val enabled = button.enabled()
