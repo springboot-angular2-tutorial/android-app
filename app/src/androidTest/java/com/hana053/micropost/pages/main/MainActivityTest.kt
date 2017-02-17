@@ -14,6 +14,7 @@ import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.MicropostInteractor
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestMicropost
+import com.hana053.micropost.testing.atPositionOnView
 import com.hana053.micropost.testing.fakeAuthToken
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.*
@@ -62,7 +63,8 @@ class MainActivityTest : InjectableTest {
 
         activityRule.launchActivity(null)
 
-        onView(withText("my test content")).check(matches(isDisplayed()))
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
     }
 
     @Test
@@ -171,6 +173,5 @@ class MainActivityTest : InjectableTest {
 
         verify(feedInteractor, times(2)).loadNextFeed(null)
     }
-
 
 }
