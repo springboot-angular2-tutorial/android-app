@@ -2,7 +2,7 @@ package com.hana053.micropost.pages.usershow.posts
 
 import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.withProgressDialog
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class UserShowPostsPresenter(
@@ -10,14 +10,11 @@ class UserShowPostsPresenter(
     private val httpErrorHandler: HttpErrorHandler
 ) {
 
-    fun bind(view: UserShowPostsView, userId: Long): CompositeSubscription {
-        val subscriptions = CompositeSubscription()
-
+    fun bind(view: UserShowPostsView, userId: Long) {
         service.loadPosts(userId)
+            .bindToLifecycle(view.content)
             .withProgressDialog(view.content)
             .subscribe({}, { httpErrorHandler.handleError(it) })
-
-        return subscriptions
     }
 
 }

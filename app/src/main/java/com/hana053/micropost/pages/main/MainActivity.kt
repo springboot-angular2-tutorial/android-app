@@ -3,7 +3,6 @@ package com.hana053.micropost.pages.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
@@ -12,18 +11,16 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
 import com.hana053.micropost.services.LoginService
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 
-class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
+class MainActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
     private val loginService: LoginService by instance()
     private val presenter: MainPresenter by instance()
     private val view: MainView by instance()
-
-    private var subscription: CompositeSubscription? = null
 
     companion object {
         val REQUEST_POST = 1
@@ -36,12 +33,11 @@ class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
 
         if (!loginService.auth()) return
 
-        subscription = presenter.bind(view)
+        presenter.bind(view)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        subscription?.unsubscribe()
         destroyInjector()
     }
 

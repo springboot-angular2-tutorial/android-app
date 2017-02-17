@@ -6,11 +6,10 @@ import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.pages.signup.SignupNavigator
 import com.hana053.micropost.pages.signup.SignupService
 import com.hana053.micropost.pages.signup.SignupState
-import com.hana053.micropost.plusAssign
 import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.withProgressDialog
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import retrofit2.adapter.rxjava.HttpException
-import rx.subscriptions.CompositeSubscription
 
 
 class SignupPasswordPresenter(
@@ -22,25 +21,26 @@ class SignupPasswordPresenter(
     private val context: Context
 ) {
 
-    fun bind(view: SignupPasswordView): CompositeSubscription {
-        val subscriptions = CompositeSubscription()
-
+    fun bind(view: SignupPasswordView) {
         val passwordChanges = view.passwordChanges.share()
         val nextBtnClicks = view.nextBtnClicks.share()
 
-        subscriptions += passwordChanges
+        passwordChanges
+            .bindToLifecycle(view.content)
             .map { isFormValid(it) }
             .subscribe {
                 view.nextBtnEnabled.call(it)
             }
 
-        subscriptions += passwordChanges
+        passwordChanges
+            .bindToLifecycle(view.content)
             .map { !isFormValid(it) && it.isNotBlank() }
             .subscribe {
                 view.passwordInvalidVisibility.call(it)
             }
 
-        subscriptions += nextBtnClicks
+        nextBtnClicks
+            .bindToLifecycle(view.content)
             .withLatestFrom(passwordChanges, { click, password -> password })
             .map {
                 signupState.password = it.toString()
@@ -60,8 +60,6 @@ class SignupPasswordPresenter(
                     httpErrorHandler.handleError(e)
                 }
             })
-
-        return subscriptions
     }
 
     private fun isFormValid(password: CharSequence): Boolean {

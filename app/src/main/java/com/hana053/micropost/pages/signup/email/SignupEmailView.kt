@@ -8,7 +8,7 @@ import com.jakewharton.rxbinding.widget.textChanges
 import kotlinx.android.synthetic.main.signup_email.view.*
 
 
-class SignupEmailView(content: ViewGroup) {
+class SignupEmailView(val content: ViewGroup) {
 
     // Events
     val emailChanges = content.email.textChanges()

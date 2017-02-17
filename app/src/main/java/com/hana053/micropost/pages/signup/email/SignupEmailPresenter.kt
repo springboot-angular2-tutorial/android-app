@@ -2,8 +2,7 @@ package com.hana053.micropost.pages.signup.email
 
 import com.hana053.micropost.pages.signup.SignupNavigator
 import com.hana053.micropost.pages.signup.SignupState
-import com.hana053.micropost.plusAssign
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class SignupEmailPresenter(
@@ -11,31 +10,30 @@ class SignupEmailPresenter(
     private val signupNavigator: SignupNavigator
 ) {
 
-    fun bind(view: SignupEmailView): CompositeSubscription {
-        val subscriptions = CompositeSubscription()
-
+    fun bind(view: SignupEmailView) {
         val emailChanges = view.emailChanges.share()
 
-        subscriptions += emailChanges
+        emailChanges
+            .bindToLifecycle(view.content)
             .map { isFormValid(it) }
             .subscribe {
                 view.nextBtnEnabled.call(it)
             }
 
-        subscriptions += emailChanges
+        emailChanges
+            .bindToLifecycle(view.content)
             .map { !isFormValid(it) && it.isNotBlank() }
             .subscribe {
                 view.emailInvalidVisibility.call(it)
             }
 
-        subscriptions += view.nextBtnClicks
+        view.nextBtnClicks
+            .bindToLifecycle(view.content)
             .withLatestFrom(emailChanges, { click, email -> email })
             .subscribe {
                 signupState.email = it.toString()
                 signupNavigator.navigateToPassword()
             }
-
-        return subscriptions
     }
 
     private fun isFormValid(email: CharSequence): Boolean {

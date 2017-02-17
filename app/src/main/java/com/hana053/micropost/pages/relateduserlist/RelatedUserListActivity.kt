@@ -1,7 +1,6 @@
 package com.hana053.micropost.pages.relateduserlist
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
@@ -9,10 +8,10 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
 import com.hana053.micropost.services.LoginService
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 
-class RelatedUserListActivity : AppCompatActivity(), AppCompatActivityInjector {
+class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
@@ -21,8 +20,6 @@ class RelatedUserListActivity : AppCompatActivity(), AppCompatActivityInjector {
     private val presenter: RelatedUserListPresenter by lazy {
         injector.instance<RelatedUserListPresenter>(listType()).value
     }
-
-    private var subscription: CompositeSubscription? = null
 
     enum class ListType {
         FOLLOWER, FOLLOWING
@@ -41,13 +38,12 @@ class RelatedUserListActivity : AppCompatActivity(), AppCompatActivityInjector {
         if (!loginService.auth()) return
 
         val userId = intent.extras.getLong(KEY_USER_ID)
-        subscription = presenter.bind(view, userId)
+        presenter.bind(view, userId)
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        subscription?.unsubscribe()
         destroyInjector()
     }
 

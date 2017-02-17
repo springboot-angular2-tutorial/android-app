@@ -1,13 +1,12 @@
 package com.hana053.micropost.pages.usershow.detail
 
-import com.hana053.micropost.domain.User
 import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.domain.User
 import com.hana053.micropost.services.HttpErrorHandler
-import com.hana053.micropost.plusAssign
 import com.hana053.micropost.shared.followbtn.FollowBtnService
 import com.hana053.micropost.withProgressDialog
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.Observable
-import rx.subscriptions.CompositeSubscription
 
 
 class UserShowDetailPresenter(
@@ -17,24 +16,24 @@ class UserShowDetailPresenter(
     private val httpErrorHandler: HttpErrorHandler
 ) {
 
-    fun bind(view: UserShowDetailView, userId: Long): CompositeSubscription {
-        val subscriptions = CompositeSubscription()
-
-        subscriptions += getUser(userId, view)
+    fun bind(view: UserShowDetailView, userId: Long) {
+        getUser(userId, view)
+            .bindToLifecycle(view.content)
             .subscribe({}, { httpErrorHandler.handleError(it) })
 
-        subscriptions += view.followClicks
+        view.followClicks
+            .bindToLifecycle(view.content)
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
             .flatMap { getUser(userId, view) }
             .subscribe({}, { httpErrorHandler.handleError(it) })
 
-        subscriptions += view.followersClicks
+        view.followersClicks
+            .bindToLifecycle(view.content)
             .subscribe { navigator.navigateToFollowerList(userId) }
 
-        subscriptions += view.followingsClicks
+        view.followingsClicks
+            .bindToLifecycle(view.content)
             .subscribe { navigator.navigateToFollowingList(userId) }
-
-        return subscriptions
     }
 
     private fun getUser(userId: Long, view: UserShowDetailView): Observable<User> {

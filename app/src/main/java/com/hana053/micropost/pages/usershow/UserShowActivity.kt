@@ -1,7 +1,6 @@
 package com.hana053.micropost.pages.usershow
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
@@ -13,9 +12,9 @@ import com.hana053.micropost.pages.usershow.detail.UserShowDetailView
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsPresenter
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsView
 import com.hana053.micropost.services.LoginService
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
-class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
+class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
@@ -26,9 +25,6 @@ class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
 
     private val postsView: UserShowPostsView by instance()
     private val postsPresenter: UserShowPostsPresenter by instance()
-
-    private var detailSubscription: CompositeSubscription? = null
-    private var postsSubscription: CompositeSubscription? = null
 
     companion object {
         val KEY_USER_ID = "KEY_USER_ID"
@@ -43,8 +39,8 @@ class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
 
         val userId = intent.extras.getLong(KEY_USER_ID)
 
-        detailSubscription = detailPresenter.bind(detailView, userId)
-        postsSubscription = postsPresenter.bind(postsView, userId)
+        detailPresenter.bind(detailView, userId)
+        postsPresenter.bind(postsView, userId)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -52,8 +48,6 @@ class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
 
     override fun onDestroy() {
         super.onDestroy()
-        detailSubscription?.unsubscribe()
-        postsSubscription?.unsubscribe()
         destroyInjector()
     }
 

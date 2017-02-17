@@ -42,4 +42,3 @@ fun <T> Observable<T>.withProgressDialog(container: ViewGroup): Observable<T> {
     })
 }
 
-operator fun CompositeSubscription.plusAssign(subscription: Subscription) = add(subscription)

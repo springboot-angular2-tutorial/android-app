@@ -1,9 +1,8 @@
 package com.hana053.micropost.pages.micropostnew
 
-import com.hana053.micropost.plusAssign
 import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.withProgressDialog
-import rx.subscriptions.CompositeSubscription
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class MicropostNewPresenter(
@@ -12,16 +11,16 @@ class MicropostNewPresenter(
     private val httpErrorHandler: HttpErrorHandler
 ) {
 
-    fun bind(view: MicropostNewView): CompositeSubscription {
-        val subscriptions = CompositeSubscription()
-
+    fun bind(view: MicropostNewView) {
         val postTextChanges = view.postTextChanges.share()
 
-        subscriptions += postTextChanges
+        postTextChanges
+            .bindToLifecycle(view.content)
             .map { it.isNotBlank() }
             .subscribe { view.postBtnEnabled.call(it) }
 
-        subscriptions += view.postBtnClicks
+        view.postBtnClicks
+            .bindToLifecycle(view.content)
             .withLatestFrom(postTextChanges, { click, text -> text })
             .flatMap {
                 micropostNewService.createPost(it.toString())
@@ -32,8 +31,6 @@ class MicropostNewPresenter(
             }, {
                 httpErrorHandler.handleError(it)
             })
-
-        return subscriptions
     }
 
 }

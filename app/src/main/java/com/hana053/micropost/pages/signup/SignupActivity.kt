@@ -1,16 +1,16 @@
 package com.hana053.micropost.pages.signup
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
 import com.hana053.micropost.pages.signup.fullname.SignupFullNameFragment
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 
-class SignupActivity : AppCompatActivity(), AppCompatActivityInjector {
+class SignupActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 

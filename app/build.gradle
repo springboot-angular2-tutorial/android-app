@@ -35,6 +35,9 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
 }
 
 dependencies {
@@ -47,6 +50,10 @@ dependencies {
     compile "com.jakewharton.rxbinding:rxbinding-kotlin:$rxbinding_version"
     compile "com.jakewharton.rxbinding:rxbinding-support-v4-kotlin:$rxbinding_version"
     compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7-kotlin:$rxbinding_version"
+    compile "com.trello:rxlifecycle:${rxlifecycle_version}"
+    compile "com.trello:rxlifecycle-android:${rxlifecycle_version}"
+    compile "com.trello:rxlifecycle-components:${rxlifecycle_version}"
+    compile "com.trello:rxlifecycle-kotlin:${rxlifecycle_version}"
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
@@ -64,10 +71,10 @@ dependencies {
     testCompile "org.robolectric:robolectric:$robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$robolectric_version"
 
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile "com.android.support.test:runner:${android_support_test_version}"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${espresso_version}", {
         exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    }
     androidTestCompile "com.android.support:support-annotations:$android_support_version"
     androidTestCompile "org.mockito:mockito-core:$mockito_version"
     androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'

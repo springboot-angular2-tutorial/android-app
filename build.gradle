@@ -4,8 +4,11 @@ buildscript {
         kotlin_version = '1.0.6'
         kodein_version = '3.2.0'
         rxbinding_version = '1.0.0'
+        rxlifecycle_version = '1.0'
         retrofit_version = '2.1.0'
         robolectric_version = '3.2.2'
+        android_support_test_version = '0.5'
+        espresso_version = '2.2.2'
         hamcrest_version = '1.3'
         mockito_version = '2.7.5'
     }
