@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
-import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
@@ -30,6 +29,10 @@ class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
 
     private var detailSubscription: CompositeSubscription? = null
     private var postsSubscription: CompositeSubscription? = null
+
+    companion object {
+        val KEY_USER_ID = "KEY_USER_ID"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,9 +69,5 @@ class UserShowActivity : AppCompatActivity(), AppCompatActivityInjector {
 
     override fun provideOverridingModule()
         = getOverridingModule(UserShowActivity::class.java)
-
-    companion object {
-        val KEY_USER_ID = "KEY_USER_ID"
-    }
 
 }
