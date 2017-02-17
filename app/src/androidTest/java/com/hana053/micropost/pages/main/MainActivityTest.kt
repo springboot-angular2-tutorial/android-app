@@ -86,7 +86,10 @@ class MainActivityTest : InjectableTest {
         activityRule.launchActivity(null)
         onView(withId(R.id.swipeRefreshLayout)).perform(swipeDown())
 
-        onView(withText("my new content")).check(matches(isDisplayed()))
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(0, withText("my new content"), R.id.content)))
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(1, withText("my test content"), R.id.content)))
     }
 
     @Test
@@ -107,7 +110,10 @@ class MainActivityTest : InjectableTest {
 
         activityRule.launchActivity(null)
 
-        onView(withText("my old content")).check(matches(isDisplayed()))
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
+        onView(withId(R.id.postRecyclerView))
+            .check(matches(atPositionOnView(1, withText("my old content"), R.id.content)))
     }
 
     @Test
