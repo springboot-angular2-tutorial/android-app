@@ -2,6 +2,7 @@ package com.hana053.micropost.testing
 
 import android.preference.PreferenceManager
 import com.github.salomonbrys.kodein.Kodein
+import com.hana053.micropost.appModule
 import org.junit.Before
 
 
@@ -17,7 +18,7 @@ interface InjectableTest {
 
     fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {
         app.setKodein(Kodein {
-            app.init(this)
+            import(appModule(), allowOverride = true)
             init()
         })
     }

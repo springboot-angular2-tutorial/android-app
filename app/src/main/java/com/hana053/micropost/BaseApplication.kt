@@ -31,15 +31,9 @@ abstract class BaseApplication : Application(), KodeinAware {
         registerActivityLifecycleCallbacks(androidActivityScope.lifecycleManager)
     }
 
-    @VisibleForTesting
-    val init: Kodein.Builder.() -> Unit = {
-        import(systemServiceModule())
-        import(serviceModule())
-        import(interactorModule())
-        import(activityModule())
+    private var _kodein = Kodein {
+        import(appModule())
     }
-
-    private var _kodein = Kodein { init() }
 
     override val kodein: Kodein
         get() = _kodein

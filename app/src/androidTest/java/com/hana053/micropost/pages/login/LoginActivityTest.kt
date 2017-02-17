@@ -74,8 +74,8 @@ class LoginActivityTest : InjectableTest {
         activityRule.launchActivity(null)
 
         onView(emailEditText).perform(typeText("test@test.com"))
-        onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
-        onView(loginBtn).perform(click())
+        onView(passwordEditText).perform(typeText("secret123"))
+        onView(loginBtn).perform(closeSoftKeyboard(), click())
 
         verify(navigator).navigateToMain()
     }

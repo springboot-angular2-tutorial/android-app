@@ -165,5 +165,4 @@ class SignupActivityTest : InjectableTest {
         onView(withId(R.id.passwordNextBtn)).perform(closeSoftKeyboard(), click())
     }
 
-
 }
