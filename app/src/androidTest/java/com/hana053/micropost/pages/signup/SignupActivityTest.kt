@@ -7,13 +7,16 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.content
+import com.hana053.micropost.domain.User
+import com.hana053.micropost.interactors.UserInteractor
+import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.TestUser
 import com.hana053.myapp.testing.EmptyResponseBody
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
@@ -89,12 +92,13 @@ class SignupActivityTest : InjectableTest {
         val navigator = mock<Navigator>()
         overrideAppBindings {
             bind<Navigator>(overrides = true) with instance(navigator)
-        }
-        putOverridingModule(SignupActivity::class.java, Kodein.Module {
-            bind<SignupService>(overrides = true) with instance(mock<SignupService> {
-                on { signup(any()) } doReturn Observable.just<Void>(null)
+            bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
+                on { create(any()) } doReturn Observable.just(TestUser)
             })
-        })
+            bind<LoginService>(overrides = true) with instance(mock<LoginService> {
+                on { login(any(), any()) } doReturn Observable.just<Void>(null)
+            })
+        }
 
         activityRule.launchActivity(null)
         moveToEmailWithName("John Doe")
@@ -118,13 +122,13 @@ class SignupActivityTest : InjectableTest {
 
     @Test
     fun shouldNotNavigateToMainWhenEmailIsAlreadyTaken() {
-        val error = Observable.error<Void>(HttpException(Response.error<Void>(400, EmptyResponseBody())))
-
-        putOverridingModule(SignupActivity::class.java, Kodein.Module {
-            bind<SignupService>(overrides = true) with instance(mock<SignupService> {
-                on { signup(any()) } doReturn error
+        val error = Observable.error<User>(HttpException(Response.error<Void>(400, EmptyResponseBody())))
+        overrideAppBindings {
+            bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
+                on { create(any()) } doReturn error
             })
-        })
+        }
+
         activityRule.launchActivity(null)
         moveToEmailWithName("John Doe")
         moveToPasswordWithEmail("test@test.com")

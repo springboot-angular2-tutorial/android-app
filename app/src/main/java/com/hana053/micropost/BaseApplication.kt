@@ -5,8 +5,6 @@ import android.support.annotation.VisibleForTesting
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
 import com.github.salomonbrys.kodein.android.androidActivityScope
-import com.hana053.micropost.activity.activityModule
-import com.hana053.micropost.interactors.interactorModule
 import com.hana053.micropost.pages.login.LoginActivity
 import com.hana053.micropost.pages.login.loginModule
 import com.hana053.micropost.pages.main.MainActivity
@@ -21,8 +19,6 @@ import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.pages.top.topModule
 import com.hana053.micropost.pages.usershow.UserShowActivity
 import com.hana053.micropost.pages.usershow.userShowModule
-import com.hana053.micropost.services.serviceModule
-import com.hana053.micropost.system.systemServiceModule
 
 abstract class BaseApplication : Application(), KodeinAware {
 
@@ -55,11 +51,6 @@ abstract class BaseApplication : Application(), KodeinAware {
 
     fun getOverridingModule(clazz: Class<*>): Kodein.Module {
         return overridingModules[clazz]!!
-    }
-
-    @VisibleForTesting
-    fun putOverridingModule(clazz: Class<*>, module: Kodein.Module) {
-        overridingModules.put(clazz, module)
     }
 
 }

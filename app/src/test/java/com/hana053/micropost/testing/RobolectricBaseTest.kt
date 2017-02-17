@@ -25,28 +25,4 @@ abstract class RobolectricBaseTest {
         testScheduler.advance()
     }
 
-    fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {
-        val application = RuntimeEnvironment.application as TestApplication
-        val kodein = Kodein {
-            extend(application.kodein)
-            init()
-        }
-        application.setKodein(kodein)
-    }
-
-    fun putOverridingModule(clazz: Class<*>, module: Kodein.Module, overrides: Boolean = true) {
-        val app = RuntimeEnvironment.application as TestApplication
-
-        if (overrides) {
-            // override existing module
-            val currentModule = app.getOverridingModule(clazz)
-            app.putOverridingModule(clazz, Kodein.Module {
-                import(currentModule)
-                import(module)
-            })
-        } else {
-            // just replacing module
-            app.putOverridingModule(clazz, module)
-        }
-    }
 }

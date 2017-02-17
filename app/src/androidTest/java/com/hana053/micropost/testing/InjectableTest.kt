@@ -23,18 +23,4 @@ interface InjectableTest {
         })
     }
 
-    fun putOverridingModule(clazz: Class<*>, module: Kodein.Module, overrides: Boolean = true) {
-        if (overrides) {
-            // override existing module
-            val currentModule = app.getOverridingModule(clazz)
-            app.putOverridingModule(clazz, Kodein.Module {
-                import(currentModule, allowOverride = true)
-                import(module, allowOverride = true)
-            })
-        } else {
-            // just replacing module
-            app.putOverridingModule(clazz, module)
-        }
-    }
-
 }
