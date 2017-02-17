@@ -1,10 +1,7 @@
-package com.hana053.micropost.pages.main
+package com.hana053.micropost.pages.relateduserlist
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
@@ -15,29 +12,38 @@ import com.hana053.micropost.services.LoginService
 import rx.subscriptions.CompositeSubscription
 
 
-class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
+class RelatedUserListActivity : AppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
     private val loginService: LoginService by instance()
-    private val presenter: MainPresenter by instance()
-    private val view: MainView by instance()
+    private val view: RelatedUserListView by instance()
+    private val presenter: RelatedUserListPresenter by lazy {
+        injector.instance<RelatedUserListPresenter>(listType()).value
+    }
 
     private var subscription: CompositeSubscription? = null
 
+    enum class ListType {
+        FOLLOWER, FOLLOWING
+    }
+
     companion object {
-        val REQUEST_POST = 1
+        val KEY_USER_ID = "KEY_USER_ID"
+        val KEY_LIST_TYPE = "KEY_LIST_TYPE"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_related_user_list)
         initializeInjector()
 
         if (!loginService.auth()) return
 
-        subscription = presenter.bind(view)
+        val userId = intent.extras.getLong(KEY_USER_ID)
+        subscription = presenter.bind(view, userId)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -45,22 +51,10 @@ class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
         destroyInjector()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_POST && resultCode == Activity.RESULT_OK) {
-            presenter.newPostSubmittedSubject.onNext(null)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_logout -> {
-                loginService.logout()
+            android.R.id.home -> {
+                finish()
                 return true
             }
         }
@@ -68,6 +62,7 @@ class MainActivity : AppCompatActivity(), AppCompatActivityInjector {
     }
 
     override fun provideOverridingModule()
-        = getOverridingModule(MainActivity::class.java)
+        = getOverridingModule(RelatedUserListActivity::class.java)
 
+    private fun listType() = intent.extras.getSerializable(KEY_LIST_TYPE) as ListType
 }

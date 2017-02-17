@@ -26,12 +26,7 @@
         <activity android:name=".pages.signup.SignupActivity"/>
         <activity android:name=".pages.usershow.UserShowActivity"/>
         <activity android:name=".pages.micropostnew.MicropostNewActivity"/>
-        <!--<activity-->
-        <!--android:name=".ui.pages.relateduserlist.followinglist.FollowingListActivity"-->
-        <!--android:label="@string/Followings" />-->
-        <!--<activity-->
-        <!--android:name=".ui.pages.relateduserlist.followerlist.FollowerListActivity"-->
-        <!--android:label="@string/Followers" />-->
+        <activity android:name=".pages.relateduserlist.RelatedUserListActivity"/>
     </application>
 
 </manifest>
