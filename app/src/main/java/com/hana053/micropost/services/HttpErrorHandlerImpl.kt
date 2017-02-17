@@ -8,15 +8,11 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 internal class HttpErrorHandlerImpl(
+    private val loginService: LoginService,
     context: Context
 ) : HttpErrorHandler {
 
-    private val context: Context
-
-    init {
-        // Confirm getting application context
-        this.context = context.applicationContext
-    }
+    private val context: Context = context.applicationContext
 
     override fun handleError(throwable: Throwable) {
         try {

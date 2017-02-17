@@ -18,6 +18,7 @@ import com.hana053.micropost.testing.atPositionOnView
 import com.hana053.micropost.testing.fakeAuthToken
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.*
+import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +36,10 @@ class MainActivityTest : InjectableTest {
     fun shouldBeOpenedWhenAuthenticated() {
         overrideAppBindings { fakeAuthToken("secret") }
         activityRule.launchActivity(null)
-        onView(withText(R.string.home)).check(matches(isDisplayed()))
+        onView(allOf(
+            isDescendantOfA(withResourceName("android:id/action_bar_container")),
+            withText(R.string.home)
+        ))
     }
 
     @Test

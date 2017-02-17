@@ -17,12 +17,7 @@ class LoginPresenter(
     context: Context
 ) {
 
-    private val context: Context
-
-    init {
-        // Confirm getting application context
-        this.context = context.applicationContext
-    }
+    private val context: Context = context.applicationContext
 
     fun bind(view: LoginView) {
         val emailChanges = view.emailChanges.share()

@@ -14,4 +14,3 @@ fun activityModule() = Kodein.Module {
 
 }
 
-

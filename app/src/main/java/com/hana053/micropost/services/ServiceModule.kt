@@ -9,7 +9,7 @@ import com.github.salomonbrys.kodein.singleton
 fun serviceModule() = Kodein.Module {
 
     bind<HttpErrorHandler>() with singleton {
-        HttpErrorHandlerImpl(instance())
+        HttpErrorHandlerImpl(instance(), instance())
     }
 
     bind<AuthTokenService>() with singleton {
@@ -17,7 +17,7 @@ fun serviceModule() = Kodein.Module {
     }
 
     bind<LoginService>() with singleton {
-        LoginServiceImpl(instance(), instance(), instance(), instance())
+        LoginServiceImpl(instance(), instance(), instance())
     }
 
 }

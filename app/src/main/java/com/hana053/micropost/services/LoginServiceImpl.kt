@@ -1,6 +1,5 @@
 package com.hana053.micropost.services
 
-import android.content.Context
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.LoginInteractor
 import rx.Observable
@@ -11,16 +10,8 @@ import rx.schedulers.Schedulers
 class LoginServiceImpl(
     private val loginInteractor: LoginInteractor,
     private val authTokenService: AuthTokenService,
-    private val navigator: Navigator,
-    context: Context
+    private val navigator: Navigator
 ) : LoginService {
-
-    private val context: Context
-
-    init {
-        // Confirm getting application context
-        this.context = context.applicationContext
-    }
 
     override fun login(email: String, password: String): Observable<Void> {
         return loginInteractor
