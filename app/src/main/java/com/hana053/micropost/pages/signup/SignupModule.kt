@@ -16,11 +16,11 @@ fun signupModule() = Kodein.Module {
     }
 
     bind<SignupNavigator>() with autoScopedSingleton(androidActivityScope) {
-        SignupNavigator(instance())
+        SignupNavigatorImpl(instance())
     }
 
     bind<SignupService>() with autoScopedSingleton(androidActivityScope) {
-        SignupServiceImpl(instance(), instance())
+        SignupServiceImpl(instance(), instance(), instance(), instance(), instance())
     }
 
     import(signupFullNameModule())

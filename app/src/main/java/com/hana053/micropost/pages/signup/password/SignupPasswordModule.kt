@@ -10,7 +10,7 @@ import com.github.salomonbrys.kodein.instance
 fun signupPasswordModule() = Kodein.Module {
 
     bind<SignupPasswordPresenter>() with autoScopedSingleton(androidActivityScope) {
-        SignupPasswordPresenter(instance(), instance(), instance(), instance(), instance(), instance())
+        SignupPasswordPresenter(instance(), instance(), instance())
     }
 
 }
