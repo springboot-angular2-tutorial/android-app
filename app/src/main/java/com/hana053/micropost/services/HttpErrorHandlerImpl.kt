@@ -24,7 +24,7 @@ internal class HttpErrorHandlerImpl(
         } catch (e: HttpException) {
             if (e.code() == 401) {
                 Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show()
-                loginService.logout();
+                loginService.logout()
             } else if (e.code() >= 500) {
                 Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
             }

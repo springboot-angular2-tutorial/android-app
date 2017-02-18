@@ -1,17 +1,23 @@
 package com.hana053.micropost.services
 
-import android.preference.PreferenceManager
+import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Before
 import org.junit.Test
 
 class AuthTokenServiceTest : RobolectricBaseTest() {
 
-    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
-    private val authTokenService = AuthTokenServiceImpl(sharedPreferences)
+    private val authTokenService by lazy { app.appKodein().instance<AuthTokenService>() }
+
+    @Before
+    fun setup() {
+        overrideAppBindingsWithContext()
+    }
 
     @Test
     fun shouldSaveAuthToken() {

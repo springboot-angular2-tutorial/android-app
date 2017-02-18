@@ -20,10 +20,10 @@ abstract class RobolectricBaseTest : InjectableTest {
 
     override val app = RuntimeEnvironment.application as BaseApplication
 
-//    private val testScheduler = TestSchedulerProxy.get()
-//
-//    fun advance() {
-//        testScheduler.advance()
-//    }
+    private val testScheduler = TestSchedulerProxy.get()
+
+    fun advance() {
+        testScheduler.advance()
+    }
 
 }

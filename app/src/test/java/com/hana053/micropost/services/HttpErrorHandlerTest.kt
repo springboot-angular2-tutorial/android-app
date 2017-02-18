@@ -1,5 +1,6 @@
 package com.hana053.micropost.services
 
+import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.testing.EmptyResponseBody
@@ -8,6 +9,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.robolectric.shadows.ShadowToast
 import retrofit2.Response
@@ -18,8 +20,14 @@ import java.net.SocketTimeoutException
 
 class HttpErrorHandlerTest : RobolectricBaseTest() {
 
-    private val loginService: LoginService = mock()
-    private val httpErrorHandler = HttpErrorHandlerImpl(loginService, app)
+    private val httpErrorHandler by lazy { app.appKodein().instance<HttpErrorHandler>() }
+
+    @Before
+    fun setup() {
+        overrideAppBindingsWithContext {
+            bind<LoginService>(overrides = true) with instance(mock<LoginService>())
+        }
+    }
 
     @Test
     fun shouldHandleSocketTimeoutException() {
@@ -35,11 +43,10 @@ class HttpErrorHandlerTest : RobolectricBaseTest() {
 
     @Test
     fun shouldHandle401Error() {
-        overrideAppBindings {
-            bind<LoginService>(overrides = true) with instance(loginService)
-        }
         httpErrorHandler.handleError(createHttpException(401))
         assertThat(ShadowToast.getTextOfLatestToast(), `is`("Please sign in."))
+
+        val loginService = app.appKodein().instance<LoginService>()
         verify(loginService).logout()
     }
 
