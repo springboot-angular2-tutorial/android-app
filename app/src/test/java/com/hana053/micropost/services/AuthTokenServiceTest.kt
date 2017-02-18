@@ -1,23 +1,18 @@
 package com.hana053.micropost.services
 
-import com.github.salomonbrys.kodein.android.appKodein
-import com.github.salomonbrys.kodein.instance
+import android.preference.PreferenceManager
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.Before
 import org.junit.Test
+import org.robolectric.RuntimeEnvironment
 
 class AuthTokenServiceTest : RobolectricBaseTest() {
 
-    private val authTokenService by lazy { app.appKodein().instance<AuthTokenService>() }
-
-    @Before
-    fun setup() {
-        overrideAppBindingsWithContext()
-    }
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
+    private val authTokenService = AuthTokenServiceImpl(sharedPreferences)
 
     @Test
     fun shouldSaveAuthToken() {
@@ -34,7 +29,6 @@ class AuthTokenServiceTest : RobolectricBaseTest() {
 
     @Test
     fun shouldDetermineIsMyself() {
-        // This token has user_id = 1
         authTokenService.setAuthToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNDc5NDUwNDY0fQ.Dy33qbg6EnP1bL2DmItMNGDEunrYP7-rzf586wxb2D-wW8WCsFrKdCeCU_ZHq_A7-kg_LxBykyaoG_26z-k9uA")
 
         val user1 = TestUser.copy(id = 1)
