@@ -1,4 +1,4 @@
-package com.hana053.myapp.testing
+package com.hana053.micropost.testing
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody

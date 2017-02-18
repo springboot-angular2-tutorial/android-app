@@ -19,6 +19,7 @@ interface InjectableTest {
     fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {
         app.setKodein(Kodein {
             import(appModule(), allowOverride = true)
+            import(blockedInteractorModule(), allowOverride = true)
             init()
         })
     }

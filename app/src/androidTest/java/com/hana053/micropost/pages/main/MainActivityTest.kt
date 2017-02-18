@@ -34,7 +34,13 @@ class MainActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings {
+            fakeAuthToken("secret")
+            bind<FeedInteractor>(overrides = true) with instance(mock<FeedInteractor> {
+                // just avoid exception
+                on { loadNextFeed(anyOrNull()) } doReturn Observable.empty()
+            })
+        }
         activityRule.launchActivity(null)
         onView(allOf(
             isDescendantOfA(withResourceName("android:id/action_bar_container")),

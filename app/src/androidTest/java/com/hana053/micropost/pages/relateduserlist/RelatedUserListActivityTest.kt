@@ -40,7 +40,13 @@ class RelatedUserListActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings {
+            fakeAuthToken("secret")
+            bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
+                // just avoiding error
+                on { listFollowers(userId = 1, maxId = null) } doReturn Observable.empty()
+            })
+        }
         launchActivity(FOLLOWER, 1)
         onView(allOf(
             isDescendantOfA(withResourceName("android:id/action_bar_container")),
@@ -67,7 +73,7 @@ class RelatedUserListActivityTest : InjectableTest {
                     TestRelatedUser.copy(relationshipId = 1, name = "John Doe")
                 ))
                 // just avoiding error
-                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty<List<RelatedUser>>()
+                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty()
             })
         }
         launchActivity(FOLLOWER, 1)
@@ -88,7 +94,7 @@ class RelatedUserListActivityTest : InjectableTest {
                     TestRelatedUser.copy(relationshipId = 0, name = "Old Follower")
                 ))
                 // just avoiding error
-                on { listFollowers(userId = 1, maxId = 0) } doReturn Observable.empty<List<RelatedUser>>()
+                on { listFollowers(userId = 1, maxId = 0) } doReturn Observable.empty()
             })
         }
         launchActivity(FOLLOWER, 1)
@@ -110,7 +116,7 @@ class RelatedUserListActivityTest : InjectableTest {
                     TestRelatedUser.copy(relationshipId = 1, isFollowedByMe = false) // Follow btn will be shown
                 ))
                 // just avoiding error
-                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty<List<RelatedUser>>()
+                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty()
             })
             bind<RelationshipInteractor>(overrides = true) with instance(mock<RelationshipInteractor> {
                 on { follow(1) } doReturn Observable.just<Void>(null)
@@ -132,7 +138,7 @@ class RelatedUserListActivityTest : InjectableTest {
                     TestRelatedUser.copy(id = 100, relationshipId = 1)
                 ))
                 // just avoiding error
-                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty<List<RelatedUser>>()
+                on { listFollowers(userId = 1, maxId = 1) } doReturn Observable.empty()
             })
             bind<Navigator>(overrides = true) with instance(navigator)
         }
@@ -146,7 +152,13 @@ class RelatedUserListActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticatedAsFollowing() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings {
+            fakeAuthToken("secret")
+            bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
+                // just avoiding error
+                on { listFollowings(userId = 1, maxId = null) } doReturn Observable.empty()
+            })
+        }
         launchActivity(FOLLOWING, 1)
         onView(allOf(
             isDescendantOfA(withResourceName("android:id/action_bar_container")),
@@ -163,7 +175,7 @@ class RelatedUserListActivityTest : InjectableTest {
                     TestRelatedUser.copy(relationshipId = 1, name = "John Doe")
                 ))
                 // just avoiding error
-                on { listFollowings(userId = 1, maxId = 1) } doReturn Observable.empty<List<RelatedUser>>()
+                on { listFollowings(userId = 1, maxId = 1) } doReturn Observable.empty()
             })
         }
         launchActivity(FOLLOWING, 1)

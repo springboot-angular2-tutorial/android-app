@@ -15,9 +15,9 @@ import com.hana053.micropost.content
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.interactors.UserInteractor
 import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.TestUser
-import com.hana053.myapp.testing.EmptyResponseBody
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock

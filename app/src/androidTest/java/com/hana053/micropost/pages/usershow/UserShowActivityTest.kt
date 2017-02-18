@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
@@ -16,10 +17,7 @@ import com.hana053.micropost.interactors.RelationshipInteractor
 import com.hana053.micropost.interactors.UserInteractor
 import com.hana053.micropost.interactors.UserMicropostInteractor
 import com.hana053.micropost.testing.*
-import com.nhaarman.mockito_kotlin.anyOrNull
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,7 +34,11 @@ class UserShowActivityTest : InjectableTest {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings {
+            fakeAuthToken("secret")
+            fakeLoadingPosts()
+            fakeLoadingDetail()
+        }
         launchActivityWithUserId(1)
         onView(withText(R.string.followers)).check(matches(isDisplayed()))
         onView(withText(R.string.followings)).check(matches(isDisplayed()))
@@ -58,6 +60,7 @@ class UserShowActivityTest : InjectableTest {
     fun shouldShowUser() {
         overrideAppBindings {
             fakeAuthToken("secret")
+            fakeLoadingPosts()
             bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
                 on { get(1) } doReturn Observable.just(TestUser.copy(name = "John Doe"))
             })
@@ -77,10 +80,10 @@ class UserShowActivityTest : InjectableTest {
             fakeAuthTokenAndBind("secret") {
                 on { isMyself(anyOrNull()) } doReturn false // ensure button is shown
             }
+            fakeLoadingPosts()
             bind<UserInteractor>(overrides = true) with instance(userInteractor)
             bind<RelationshipInteractor>(overrides = true) with instance(mock<RelationshipInteractor> {
                 on { follow(1) } doReturn Observable.just<Void>(null)
-                on { unfollow(1) } doReturn Observable.just<Void>(null)
             })
         }
 
@@ -100,6 +103,8 @@ class UserShowActivityTest : InjectableTest {
         val navigator: Navigator = mock()
         overrideAppBindings {
             fakeAuthToken("secret")
+            fakeLoadingPosts()
+            fakeLoadingDetail()
             bind<Navigator>(overrides = true) with instance(navigator)
         }
 
@@ -114,6 +119,8 @@ class UserShowActivityTest : InjectableTest {
         val navigator: Navigator = mock()
         overrideAppBindings {
             fakeAuthToken("secret")
+            fakeLoadingPosts()
+            fakeLoadingDetail()
             bind<Navigator>(overrides = true) with instance(navigator)
         }
 
@@ -129,6 +136,7 @@ class UserShowActivityTest : InjectableTest {
     fun shouldShowPosts() {
         overrideAppBindings {
             fakeAuthToken("secret")
+            fakeLoadingDetail()
             bind<UserMicropostInteractor>(overrides = true) with instance(mock<UserMicropostInteractor> {
                 on { loadPrevPosts(1, null) } doReturn Observable.just(listOf(
                     TestMicropost.copy(content = "my test content")
@@ -144,6 +152,18 @@ class UserShowActivityTest : InjectableTest {
 
     private fun launchActivityWithUserId(userId: Long) {
         activityRule.launchActivity(Intent().putExtra(UserShowActivity.KEY_USER_ID, userId))
+    }
+
+    private fun Kodein.Builder.fakeLoadingDetail() {
+        bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
+            on { get(any()) } doReturn Observable.empty()
+        })
+    }
+
+    private fun Kodein.Builder.fakeLoadingPosts() {
+        bind<UserMicropostInteractor>(overrides = true) with instance(mock<UserMicropostInteractor> {
+            on { loadPrevPosts(any(), anyOrNull()) } doReturn Observable.empty()
+        })
     }
 
 }
