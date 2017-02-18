@@ -26,19 +26,19 @@ fun relatedUserListModule() = Kodein.Module {
     }
 
     bind<RelatedUserListPresenter>(FOLLOWER) with autoScopedSingleton(androidActivityScope) {
-        RelatedUserListPresenter(instance(FOLLOWER), instance(), instance(), instance(), instance(), instance())
+        RelatedUserListPresenter(instance(FOLLOWER), instance(), instance(), instance(), instance())
     }
 
     bind<RelatedUserListPresenter>(FOLLOWING) with autoScopedSingleton(androidActivityScope) {
-        RelatedUserListPresenter(instance(FOLLOWING), instance(), instance(), instance(), instance(), instance())
+        RelatedUserListPresenter(instance(FOLLOWING), instance(), instance(), instance(), instance())
     }
 
     bind<RelatedUserListService>(FOLLOWER) with autoScopedSingleton(androidActivityScope) {
-        FollowerListService(instance(), instance(), instance())
+        FollowerListService(instance(), instance(), instance(), instance())
     }
 
     bind<RelatedUserListService>(FOLLOWING) with autoScopedSingleton(androidActivityScope) {
-        FollowingListService(instance(), instance(), instance())
+        FollowingListService(instance(), instance(), instance(), instance())
     }
 
     import(followBtnModule())

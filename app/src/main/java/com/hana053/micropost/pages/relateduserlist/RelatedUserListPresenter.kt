@@ -2,7 +2,6 @@ package com.hana053.micropost.pages.relateduserlist
 
 import android.support.v7.app.AppCompatActivity
 import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.shared.followbtn.FollowBtnService
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
@@ -13,8 +12,7 @@ class RelatedUserListPresenter(
     private val activity: AppCompatActivity,
     private val relatedUserListAdapter: RelatedUserListAdapter,
     private val followBtnService: FollowBtnService,
-    private val navigator: Navigator,
-    private val httpErrorHandler: HttpErrorHandler
+    private val navigator: Navigator
 ) {
 
     fun bind(view: RelatedUserListView, userId: Long) {
@@ -24,7 +22,7 @@ class RelatedUserListPresenter(
         relatedUserListService.listUsers(userId)
             .bindToLifecycle(view.content)
             .withProgressDialog(view.content)
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
 
         view.scrolledToBottom
             .bindToLifecycle(view.content)
@@ -32,12 +30,12 @@ class RelatedUserListPresenter(
                 relatedUserListService.listUsers(userId)
                     .withProgressDialog(view.content)
             }
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
 
         relatedUserListAdapter.followBtnClicksSubject
             .bindToLifecycle(view.content)
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
 
         relatedUserListAdapter.avatarClicksSubject
             .bindToLifecycle(view.content)

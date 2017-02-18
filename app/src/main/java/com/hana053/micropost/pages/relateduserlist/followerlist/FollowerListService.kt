@@ -6,6 +6,7 @@ import com.hana053.micropost.domain.RelatedUser
 import com.hana053.micropost.interactors.RelatedUserListInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListAdapter
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListService
+import com.hana053.micropost.services.HttpErrorHandler
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -14,6 +15,7 @@ import rx.schedulers.Schedulers
 class FollowerListService(
     private val interactor: RelatedUserListInteractor,
     private val adapter: RelatedUserListAdapter,
+    private val httpErrorHandler: HttpErrorHandler,
     context: Context
 ) : RelatedUserListService {
 
@@ -31,6 +33,8 @@ class FollowerListService(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { adapter.addAll(itemCount, it) }
+            .doOnError { httpErrorHandler.handleError(it) }
+            .onErrorResumeNext { Observable.empty() }
     }
 
     override fun title(): String {

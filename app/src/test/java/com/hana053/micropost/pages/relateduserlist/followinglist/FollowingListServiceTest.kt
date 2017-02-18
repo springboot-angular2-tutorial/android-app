@@ -1,0 +1,77 @@
+package com.hana053.micropost.pages.relateduserlist.followinglist
+
+import com.hana053.micropost.domain.RelatedUser
+import com.hana053.micropost.interactors.RelatedUserListInteractor
+import com.hana053.micropost.pages.relateduserlist.RelatedUserListAdapter
+import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.testing.RobolectricBaseTest
+import com.hana053.micropost.testing.TestRelatedUser
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Test
+import org.mockito.Mockito.`when`
+import rx.Observable
+
+
+class FollowingListServiceTest : RobolectricBaseTest() {
+
+    private val relatedUserListInteractor = mock<RelatedUserListInteractor>()
+    private val relatedUserListAdapter = RelatedUserListAdapter()
+    private val httpErrorHandler = mock<HttpErrorHandler>()
+    private val followingListService = FollowingListService(
+        interactor = relatedUserListInteractor,
+        adapter = relatedUserListAdapter,
+        httpErrorHandler = httpErrorHandler,
+        context = app
+    )
+
+    @Test
+    fun shouldListUsers() {
+        val userId = 1L
+        `when`(relatedUserListInteractor.listFollowings(userId, null))
+            .doReturn(Observable.just(listOf(
+                TestRelatedUser.copy(relationshipId = 101)
+            )))
+
+        followingListService.listUsers(userId).subscribe()
+        advance()
+
+        assertThat(relatedUserListAdapter.itemCount, `is`(1))
+        assertThat(relatedUserListAdapter.getLastItemId(), `is`(101L))
+    }
+
+    @Test
+    fun shouldListMoreUsers() {
+        relatedUserListAdapter.addAll(0, listOf(
+            TestRelatedUser.copy(relationshipId = 103)
+        ))
+        val userId = 1L
+        `when`(relatedUserListInteractor.listFollowings(userId, 103))
+            .doReturn(Observable.just(listOf(
+                TestRelatedUser.copy(relationshipId = 102),
+                TestRelatedUser.copy(relationshipId = 101)
+            )))
+
+        followingListService.listUsers(userId).subscribe()
+        advance()
+
+        assertThat(relatedUserListAdapter.itemCount, `is`(3))
+        assertThat(relatedUserListAdapter.getLastItemId(), `is`(101L))
+    }
+
+    @Test
+    fun shouldHandleErrorWhenListUsers() {
+        val userId = 1L
+        val error = Observable.error<List<RelatedUser>>(RuntimeException())
+        `when`(relatedUserListInteractor.listFollowings(userId, null)).doReturn(error)
+
+        followingListService.listUsers(userId).subscribe()
+        advance()
+
+        verify(httpErrorHandler).handleError(any<RuntimeException>())
+    }
+}

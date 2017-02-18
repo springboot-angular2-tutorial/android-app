@@ -9,7 +9,7 @@ import com.github.salomonbrys.kodein.instance
 fun followBtnModule() = Kodein.Module {
 
     bind<FollowBtnService>() with autoScopedSingleton(androidActivityScope) {
-        FollowBtnService(instance())
+        FollowBtnService(instance(), instance())
     }
 
 }
