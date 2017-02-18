@@ -11,7 +11,6 @@ import org.junit.Test
 class AuthTokenServiceTest : RobolectricBaseTest() {
 
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
-
     private val authTokenService = AuthTokenServiceImpl(sharedPreferences)
 
     @Test
