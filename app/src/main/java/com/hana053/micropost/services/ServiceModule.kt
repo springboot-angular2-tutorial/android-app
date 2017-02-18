@@ -17,7 +17,7 @@ fun serviceModule() = Kodein.Module {
     }
 
     bind<LoginService>() with singleton {
-        LoginServiceImpl(instance(), instance(), instance())
+        LoginServiceImpl(instance(), instance(), instance(), instance(), instance())
     }
 
 }

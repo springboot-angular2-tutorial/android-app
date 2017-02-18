@@ -1,23 +1,15 @@
 package com.hana053.micropost.pages.login
 
-import android.content.Context
-import android.widget.Toast
 import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
-import retrofit2.adapter.rxjava.HttpException
 import rx.Observable
 
 class LoginPresenter(
     private val loginService: LoginService,
-    private val navigator: Navigator,
-    private val httpErrorHandler: HttpErrorHandler,
-    context: Context
+    private val navigator: Navigator
 ) {
-
-    private val context: Context = context.applicationContext
 
     fun bind(view: LoginView) {
         val emailChanges = view.emailChanges.share()
@@ -41,15 +33,7 @@ class LoginPresenter(
                 loginService.login(it.first, it.second)
                     .withProgressDialog(view.content)
             }
-            .subscribe({
-                navigator.navigateToMain()
-            }, { e ->
-                if (e is HttpException && e.code() == 401) {
-                    Toast.makeText(context, "Email or Password is wrong.", Toast.LENGTH_LONG).show()
-                } else {
-                    httpErrorHandler.handleError(e)
-                }
-            })
+            .subscribe { navigator.navigateToMain() }
     }
 
 }
