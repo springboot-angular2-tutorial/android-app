@@ -2,6 +2,7 @@ package com.hana053.micropost.pages.usershow.posts
 
 import com.hana053.micropost.domain.Micropost
 import com.hana053.micropost.interactors.UserMicropostInteractor
+import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.shared.posts.PostListAdapter
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -10,7 +11,8 @@ import rx.schedulers.Schedulers
 
 class UserShowPostsService(
     private val postListAdapter: PostListAdapter,
-    private val userMicropostInteractor: UserMicropostInteractor
+    private val userMicropostInteractor: UserMicropostInteractor,
+    private val httpErrorHandler: HttpErrorHandler
 ) {
 
     fun loadPosts(userId: Long): Observable<List<Micropost>> {
@@ -20,6 +22,8 @@ class UserShowPostsService(
         return userMicropostInteractor.loadPrevPosts(userId, maxId)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext({ posts -> postListAdapter.addAll(itemCount, posts) })
+            .doOnNext { postListAdapter.addAll(itemCount, it) }
+            .doOnError { httpErrorHandler.handleError(it) }
+            .onErrorResumeNext { Observable.empty() }
     }
 }

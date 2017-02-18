@@ -17,7 +17,7 @@ fun userShowPostsModule() = Kodein.Module {
     }
 
     bind<UserShowPostsService>() with autoScopedSingleton(androidActivityScope) {
-        UserShowPostsService(instance(), instance())
+        UserShowPostsService(instance(), instance(), instance())
     }
 
     bind<UserShowPostsView>() with autoScopedSingleton(androidActivityScope) {
@@ -26,7 +26,7 @@ fun userShowPostsModule() = Kodein.Module {
     }
 
     bind<UserShowPostsPresenter>() with autoScopedSingleton(androidActivityScope) {
-        UserShowPostsPresenter(instance(), instance())
+        UserShowPostsPresenter(instance())
     }
 
 }

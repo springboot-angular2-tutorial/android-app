@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.user_detail.view.*
 fun userShowDetailModule() = Kodein.Module {
 
     bind<UserShowDetailService>() with autoScopedSingleton(androidActivityScope) {
-        UserShowDetailService(instance())
+        UserShowDetailService(instance(), instance())
     }
 
     bind<UserShowDetailView>() with autoScopedSingleton(androidActivityScope) {
@@ -21,7 +21,7 @@ fun userShowDetailModule() = Kodein.Module {
     }
 
     bind<UserShowDetailPresenter>() with autoScopedSingleton(androidActivityScope) {
-        UserShowDetailPresenter(instance(), instance(), instance(), instance())
+        UserShowDetailPresenter(instance(), instance(), instance())
     }
 
 }
