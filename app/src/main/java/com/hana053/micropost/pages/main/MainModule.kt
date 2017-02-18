@@ -16,7 +16,7 @@ fun mainModule() = Kodein.Module {
     }
 
     bind<MainPresenter>() with autoScopedSingleton(androidActivityScope) {
-        MainPresenter(instance(), instance(), instance(), instance())
+        MainPresenter(instance(), instance(), instance())
     }
 
     bind<MainView>() with autoScopedSingleton(androidActivityScope) {
@@ -25,7 +25,7 @@ fun mainModule() = Kodein.Module {
     }
 
     bind<MainService>() with autoScopedSingleton(androidActivityScope) {
-        MainService(instance(), instance())
+        MainService(instance(), instance(), instance())
     }
 
 }

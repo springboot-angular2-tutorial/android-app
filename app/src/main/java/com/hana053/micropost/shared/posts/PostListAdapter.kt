@@ -17,7 +17,7 @@ import rx.subjects.PublishSubject
 
 
 class PostListAdapter(
-    val posts: MutableList<Micropost> = mutableListOf()
+    private val posts: MutableList<Micropost> = mutableListOf()
 ) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     val avatarClicksSubject: PublishSubject<User> = PublishSubject.create<User>()

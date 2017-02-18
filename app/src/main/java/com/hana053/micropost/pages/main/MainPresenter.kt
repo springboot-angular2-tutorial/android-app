@@ -11,8 +11,7 @@ import rx.subjects.PublishSubject
 class MainPresenter(
     private val mainService: MainService,
     private val postListAdapter: PostListAdapter,
-    private val navigator: Navigator,
-    private val httpErrorHandler: HttpErrorHandler
+    private val navigator: Navigator
 ) {
 
     val newPostSubmittedSubject: PublishSubject<Void> = PublishSubject.create()
@@ -22,17 +21,12 @@ class MainPresenter(
         mainService.loadNextFeed()
             .bindToLifecycle(view.content)
             .withProgressDialog(view.content)
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
 
         view.swipeRefreshes
             .bindToLifecycle(view.content)
             .flatMap { mainService.loadNextFeed() }
-            .subscribe({
-                view.swipeRefreshing.call(false)
-            }, {
-                view.swipeRefreshing.call(false)
-                httpErrorHandler.handleError(it)
-            })
+            .subscribe { view.swipeRefreshing.call(false) }
 
         view.scrolledToBottom
             .bindToLifecycle(view.content)
@@ -40,7 +34,7 @@ class MainPresenter(
                 mainService.loadPrevFeed()
                     .withProgressDialog(view.content)
             }
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
 
         view.newMicropostClicks
             .bindToLifecycle(view.content)
@@ -56,7 +50,7 @@ class MainPresenter(
                 mainService.loadNextFeed()
                     .withProgressDialog(view.content)
             }
-            .subscribe({}, { httpErrorHandler.handleError(it) })
+            .subscribe()
     }
 
 }

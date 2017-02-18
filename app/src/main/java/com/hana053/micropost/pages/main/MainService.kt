@@ -1,6 +1,7 @@
 package com.hana053.micropost.pages.main
 
 import com.hana053.micropost.domain.Micropost
+import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.shared.posts.PostListAdapter
 import com.hana053.myapp.interactors.FeedInteractor
 import rx.Observable
@@ -10,7 +11,8 @@ import rx.schedulers.Schedulers
 
 class MainService(
     private val feedInteractor: FeedInteractor,
-    private val postListAdapter: PostListAdapter
+    private val postListAdapter: PostListAdapter,
+    private val httpErrorHandler: HttpErrorHandler
 ) {
 
     fun loadNextFeed(): Observable<List<Micropost>> {
@@ -19,6 +21,8 @@ class MainService(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { postListAdapter.addAll(0, it) }
+            .doOnError { httpErrorHandler.handleError(it) }
+            .onErrorResumeNext(Observable.empty())
     }
 
     fun loadPrevFeed(): Observable<List<Micropost>> {
@@ -28,6 +32,8 @@ class MainService(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { postListAdapter.addAll(itemCount, it) }
+            .doOnError { httpErrorHandler.handleError(it) }
+            .onErrorResumeNext(Observable.empty())
     }
 
 }
