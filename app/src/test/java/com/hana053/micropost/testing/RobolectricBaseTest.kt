@@ -1,10 +1,9 @@
 package com.hana053.micropost.testing
 
 import android.os.Build
-import com.github.salomonbrys.kodein.Kodein
-
+import com.hana053.micropost.Application
+import com.hana053.micropost.BaseApplication
 import com.hana053.micropost.BuildConfig
-
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -14,15 +13,17 @@ import org.robolectric.annotation.Config
 @Config(
     constants = BuildConfig::class,
     packageName = "com.hana053.micropost",
-    application = TestApplication::class,
+    application = Application::class,
     sdk = intArrayOf(Build.VERSION_CODES.LOLLIPOP)
 )
-abstract class RobolectricBaseTest {
+abstract class RobolectricBaseTest : InjectableTest {
 
-    private val testScheduler = TestSchedulerProxy.get()
+    override val app = RuntimeEnvironment.application as BaseApplication
 
-    fun advance() {
-        testScheduler.advance()
-    }
+//    private val testScheduler = TestSchedulerProxy.get()
+//
+//    fun advance() {
+//        testScheduler.advance()
+//    }
 
 }

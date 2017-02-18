@@ -12,10 +12,7 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.MicropostInteractor
-import com.hana053.micropost.testing.InjectableTest
-import com.hana053.micropost.testing.TestMicropost
-import com.hana053.micropost.testing.atPositionOnView
-import com.hana053.micropost.testing.fakeAuthToken
+import com.hana053.micropost.testing.*
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.*
 import org.hamcrest.CoreMatchers.allOf
@@ -27,7 +24,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class MainActivityTest : InjectableTest {
+class MainActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(MainActivity::class.java, false, false)

@@ -12,6 +12,7 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.InjectableTestImpl
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Rule
@@ -21,7 +22,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class TopActivityTest : InjectableTest {
+class TopActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(TopActivity::class.java, false, false)

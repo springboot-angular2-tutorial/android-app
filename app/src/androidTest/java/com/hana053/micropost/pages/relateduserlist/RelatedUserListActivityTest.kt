@@ -12,7 +12,6 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.domain.RelatedUser
 import com.hana053.micropost.interactors.RelatedUserListInteractor
 import com.hana053.micropost.interactors.RelationshipInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
@@ -31,7 +30,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class RelatedUserListActivityTest : InjectableTest {
+class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(RelatedUserListActivity::class.java, false, false)

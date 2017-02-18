@@ -13,6 +13,7 @@ import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.MicropostInteractor
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.InjectableTestImpl
 import com.hana053.micropost.testing.TestMicropost
 import com.hana053.micropost.testing.fakeAuthToken
 import com.nhaarman.mockito_kotlin.any
@@ -29,7 +30,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class MicropostNewActivityTest : InjectableTest {
+class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(MicropostNewActivity::class.java, false, false)

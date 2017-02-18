@@ -15,6 +15,7 @@ import com.hana053.micropost.R
 import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.InjectableTestImpl
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -29,7 +30,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class LoginActivityTest : InjectableTest {
+class LoginActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(LoginActivity::class.java, false, false)

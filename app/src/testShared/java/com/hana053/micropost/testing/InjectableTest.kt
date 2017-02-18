@@ -2,11 +2,14 @@ package com.hana053.micropost.testing
 
 import android.preference.PreferenceManager
 import com.github.salomonbrys.kodein.Kodein
+import com.hana053.micropost.BaseApplication
 import com.hana053.micropost.appModule
 import org.junit.Before
 
 
 interface InjectableTest {
+
+    val app: BaseApplication
 
     @Before
     fun resetSharedPreferences() {

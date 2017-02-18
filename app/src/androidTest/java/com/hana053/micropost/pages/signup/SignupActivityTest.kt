@@ -17,6 +17,7 @@ import com.hana053.micropost.interactors.UserInteractor
 import com.hana053.micropost.services.LoginService
 import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.InjectableTest
+import com.hana053.micropost.testing.InjectableTestImpl
 import com.hana053.micropost.testing.TestUser
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
@@ -36,7 +37,7 @@ import rx.Observable
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class SignupActivityTest : InjectableTest {
+class SignupActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Rule @JvmField
     val activityRule = ActivityTestRule(SignupActivity::class.java, false, false)

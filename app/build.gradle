@@ -35,6 +35,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    sourceSets {
+        test.java.srcDirs += 'src/testShared/java'
+        androidTest.java.srcDirs += 'src/testShared/java'
+    }
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
     }
@@ -68,20 +72,21 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "org.hamcrest:hamcrest-all:$hamcrest_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
+    testCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
     testCompile "org.robolectric:robolectric:$robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$robolectric_version"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary_version}"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
 
-    androidTestCompile "com.android.support.test:runner:${android_support_test_version}"
-    androidTestCompile "com.android.support.test:rules:${android_support_test_version}"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:${espresso_version}", {
+    androidTestCompile "com.android.support.test:runner:$android_support_test_version"
+    androidTestCompile "com.android.support.test:rules:$android_support_test_version"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestCompile "com.android.support:support-annotations:$android_support_version"
     androidTestCompile "org.mockito:mockito-core:$mockito_version"
+    androidTestCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
     androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
-    androidTestCompile "com.nhaarman:mockito-kotlin:1.2.0"
-    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary_version}"
+    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
 }
 repositories {
     mavenCentral()
