@@ -12,7 +12,7 @@ import com.hana053.micropost.content
 fun micropostNewModule() = Kodein.Module {
 
     bind<MicropostNewPresenter>() with autoScopedSingleton(androidActivityScope) {
-        MicropostNewPresenter(instance(), instance(), instance())
+        MicropostNewPresenter(instance(), instance())
     }
 
     bind<MicropostNewView>() with autoScopedSingleton(androidActivityScope) {
@@ -21,7 +21,7 @@ fun micropostNewModule() = Kodein.Module {
     }
 
     bind<MicropostNewService>() with autoScopedSingleton(androidActivityScope) {
-        MicropostNewService(instance())
+        MicropostNewService(instance(), instance())
     }
 
     bind<MicropostNewNavigator>() with autoScopedSingleton(androidActivityScope) {

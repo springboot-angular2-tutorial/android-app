@@ -17,7 +17,6 @@ class MainPresenter(
     val newPostSubmittedSubject: PublishSubject<Void> = PublishSubject.create()
 
     fun bind(view: MainView) {
-
         mainService.loadNextFeed()
             .bindToLifecycle(view.content)
             .withProgressDialog(view.content)

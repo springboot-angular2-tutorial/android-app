@@ -1,14 +1,12 @@
 package com.hana053.micropost.pages.micropostnew
 
-import com.hana053.micropost.services.HttpErrorHandler
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class MicropostNewPresenter(
     private val micropostNewService: MicropostNewService,
-    private val micropostNewNavigator: MicropostNewNavigator,
-    private val httpErrorHandler: HttpErrorHandler
+    private val micropostNewNavigator: MicropostNewNavigator
 ) {
 
     fun bind(view: MicropostNewView) {
@@ -26,11 +24,7 @@ class MicropostNewPresenter(
                 micropostNewService.createPost(it.toString())
                     .withProgressDialog(view.content)
             }
-            .subscribe({
-                micropostNewNavigator.finishWithPost()
-            }, {
-                httpErrorHandler.handleError(it)
-            })
+            .subscribe { micropostNewNavigator.finishWithPost() }
     }
 
 }
