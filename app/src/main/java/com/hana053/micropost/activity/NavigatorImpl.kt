@@ -13,57 +13,54 @@ import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListT
 import com.hana053.micropost.pages.signup.SignupActivity
 import com.hana053.micropost.pages.top.TopActivity
 import com.hana053.micropost.pages.usershow.UserShowActivity
-import java.lang.ref.WeakReference
 
-class NavigatorImpl(activity: Activity) : Navigator {
-
-    private val activity = WeakReference<Activity>(activity)
+class NavigatorImpl(private val activity: Activity) : Navigator {
 
     override fun navigateToTop() {
-        val intent = Intent(activity.get(), TopActivity::class.java)
-        activity.get()?.finishAffinity()
-        activity.get()?.startActivity(intent)
+        val intent = Intent(activity, TopActivity::class.java)
+        activity.finishAffinity()
+        activity.startActivity(intent)
     }
 
     override fun navigateToMain() {
-        val intent = Intent(activity.get(), MainActivity::class.java)
-        activity.get()?.finishAffinity()
-        activity.get()?.startActivity(intent)
+        val intent = Intent(activity, MainActivity::class.java)
+        activity.finishAffinity()
+        activity.startActivity(intent)
     }
 
     override fun navigateToLogin() {
-        val intent = Intent(activity.get(), LoginActivity::class.java)
-        activity.get()?.startActivity(intent)
+        val intent = Intent(activity, LoginActivity::class.java)
+        activity.startActivity(intent)
     }
 
     override fun navigateToSignup() {
-        val intent = Intent(activity.get(), SignupActivity::class.java)
-        activity.get()?.startActivity(intent)
+        val intent = Intent(activity, SignupActivity::class.java)
+        activity.startActivity(intent)
     }
 
     override fun navigateToUserShow(userId: Long) {
-        val intent = Intent(activity.get(), UserShowActivity::class.java)
+        val intent = Intent(activity, UserShowActivity::class.java)
         intent.putExtra(UserShowActivity.KEY_USER_ID, userId)
-        activity.get()?.startActivity(intent)
+        activity.startActivity(intent)
     }
 
     override fun navigateToFollowerList(userId: Long) {
-        val intent = Intent(activity.get(), RelatedUserListActivity::class.java)
+        val intent = Intent(activity, RelatedUserListActivity::class.java)
         intent.putExtra(RelatedUserListActivity.KEY_USER_ID, userId)
         intent.putExtra(RelatedUserListActivity.KEY_LIST_TYPE, FOLLOWER)
-        activity.get()?.startActivity(intent)
+        activity.startActivity(intent)
     }
 
     override fun navigateToFollowingList(userId: Long) {
-        val intent = Intent(activity.get(), RelatedUserListActivity::class.java)
+        val intent = Intent(activity, RelatedUserListActivity::class.java)
         intent.putExtra(RelatedUserListActivity.KEY_USER_ID, userId)
         intent.putExtra(RelatedUserListActivity.KEY_LIST_TYPE, FOLLOWING)
-        activity.get()?.startActivity(intent)
+        activity.startActivity(intent)
     }
 
     override fun navigateToMicropostNew() {
-        val intent = Intent(activity.get(), MicropostNewActivity::class.java)
-        activity.get()?.startActivityForResult(intent, REQUEST_POST)
-        activity.get()?.overridePendingTransition(R.anim.slide_in_up, 0)
+        val intent = Intent(activity, MicropostNewActivity::class.java)
+        activity.startActivityForResult(intent, REQUEST_POST)
+        activity.overridePendingTransition(R.anim.slide_in_up, 0)
     }
 }

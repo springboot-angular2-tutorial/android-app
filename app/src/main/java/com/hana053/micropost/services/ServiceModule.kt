@@ -1,14 +1,12 @@
 package com.hana053.micropost.services
 
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
+import com.github.salomonbrys.kodein.*
+import com.github.salomonbrys.kodein.android.androidActivityScope
 
 
 fun serviceModule() = Kodein.Module {
 
-    bind<HttpErrorHandler>() with singleton {
+    bind<HttpErrorHandler>() with autoScopedSingleton(androidActivityScope)  {
         HttpErrorHandlerImpl(instance(), instance())
     }
 
@@ -16,11 +14,11 @@ fun serviceModule() = Kodein.Module {
         AuthTokenRepositoryImpl(instance())
     }
 
-    bind<AuthService>() with singleton {
+    bind<AuthService>() with autoScopedSingleton(androidActivityScope) {
         AuthServiceImpl(instance(), instance())
     }
 
-    bind<LoginService>() with singleton {
+    bind<LoginService>() with autoScopedSingleton(androidActivityScope)  {
         LoginServiceImpl(instance(), instance(), instance(), instance())
     }
 
