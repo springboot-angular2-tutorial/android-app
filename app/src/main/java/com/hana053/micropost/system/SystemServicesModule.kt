@@ -8,7 +8,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 
 
-fun systemServiceModule() = Kodein.Module {
+fun systemModule() = Kodein.Module {
 
     bind<SharedPreferences>() with singleton {
         PreferenceManager.getDefaultSharedPreferences(instance())
