@@ -10,11 +10,11 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.content
 import com.hana053.micropost.domain.User
-import com.hana053.micropost.interactors.UserInteractor
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.interactor.UserInteractor
+import com.hana053.micropost.service.LoginService
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.InjectableTestImpl

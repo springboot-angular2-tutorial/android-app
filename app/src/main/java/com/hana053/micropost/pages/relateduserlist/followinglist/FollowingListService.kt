@@ -3,10 +3,10 @@ package com.hana053.micropost.pages.relateduserlist.followinglist
 import android.content.Context
 import com.hana053.micropost.R
 import com.hana053.micropost.domain.RelatedUser
-import com.hana053.micropost.interactors.RelatedUserListInteractor
+import com.hana053.micropost.interactor.RelatedUserListInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListAdapter
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListService
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.service.HttpErrorHandler
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

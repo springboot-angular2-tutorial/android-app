@@ -1,6 +1,6 @@
 package com.hana053.micropost.pages.top
 
-import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.service.Navigator
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 

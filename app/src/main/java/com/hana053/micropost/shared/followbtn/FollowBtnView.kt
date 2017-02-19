@@ -5,7 +5,7 @@ import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.domain.User
-import com.hana053.micropost.services.AuthService
+import com.hana053.micropost.service.AuthService
 import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.enabled
 import com.jakewharton.rxbinding.view.visibility

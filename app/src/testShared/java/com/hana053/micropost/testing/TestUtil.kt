@@ -7,7 +7,7 @@ import com.hana053.micropost.domain.Micropost
 import com.hana053.micropost.domain.RelatedUser
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.domain.UserStats
-import com.hana053.micropost.services.AuthTokenRepository
+import com.hana053.micropost.repository.AuthTokenRepository
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 

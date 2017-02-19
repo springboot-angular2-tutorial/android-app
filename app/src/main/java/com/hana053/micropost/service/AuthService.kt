@@ -1,4 +1,4 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
 import com.hana053.micropost.domain.User
 

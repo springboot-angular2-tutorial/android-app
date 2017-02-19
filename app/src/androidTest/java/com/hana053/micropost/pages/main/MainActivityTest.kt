@@ -10,8 +10,8 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.interactors.MicropostInteractor
+import com.hana053.micropost.interactor.MicropostInteractor
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.testing.*
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.*

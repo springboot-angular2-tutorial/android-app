@@ -3,7 +3,7 @@ package com.hana053.micropost.testing
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.interactors.*
+import com.hana053.micropost.interactor.*
 import com.hana053.myapp.interactors.FeedInteractor
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.anyOrNull

@@ -1,6 +1,7 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
-import com.hana053.micropost.interactors.LoginInteractor
+import com.hana053.micropost.interactor.LoginInteractor
+import com.hana053.micropost.repository.AuthTokenRepository
 import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.nhaarman.mockito_kotlin.any

@@ -1,8 +1,8 @@
 package com.hana053.micropost.shared.followbtn
 
 import com.hana053.micropost.domain.User
-import com.hana053.micropost.interactors.RelationshipInteractor
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.interactor.RelationshipInteractor
+import com.hana053.micropost.service.HttpErrorHandler
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.functions.Action1

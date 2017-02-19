@@ -1,4 +1,4 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
 import android.content.Context
 import android.widget.Toast

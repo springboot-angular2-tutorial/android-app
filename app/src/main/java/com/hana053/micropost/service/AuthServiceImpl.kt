@@ -1,8 +1,9 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
-import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.domain.User
+import com.hana053.micropost.repository.AuthTokenRepository
 import com.nimbusds.jose.JWSObject
+import java.lang.Long
 import java.text.ParseException
 
 
@@ -16,7 +17,7 @@ class AuthServiceImpl(
         try {
             val jwsObject = JWSObject.parse(authToken)
             val sub = jwsObject.payload.toJSONObject()["sub"].toString()
-            return user.id == java.lang.Long.valueOf(sub)
+            return user.id == Long.valueOf(sub)
         } catch (e: ParseException) {
             throw RuntimeException(e)
         }

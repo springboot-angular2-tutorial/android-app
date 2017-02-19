@@ -2,9 +2,9 @@ package com.hana053.micropost.pages.signup
 
 import android.content.Context
 import android.widget.Toast
-import com.hana053.micropost.interactors.UserInteractor
-import com.hana053.micropost.services.HttpErrorHandler
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.interactor.UserInteractor
+import com.hana053.micropost.service.HttpErrorHandler
+import com.hana053.micropost.service.LoginService
 import retrofit2.adapter.rxjava.HttpException
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers

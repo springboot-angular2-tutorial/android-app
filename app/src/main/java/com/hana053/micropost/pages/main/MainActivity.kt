@@ -10,7 +10,7 @@ import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
-import com.hana053.micropost.services.AuthService
+import com.hana053.micropost.service.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 

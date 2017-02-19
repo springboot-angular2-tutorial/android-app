@@ -12,11 +12,11 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.interactors.RelationshipInteractor
-import com.hana053.micropost.interactors.UserInteractor
-import com.hana053.micropost.interactors.UserMicropostInteractor
-import com.hana053.micropost.services.AuthService
+import com.hana053.micropost.interactor.RelationshipInteractor
+import com.hana053.micropost.interactor.UserInteractor
+import com.hana053.micropost.interactor.UserMicropostInteractor
+import com.hana053.micropost.service.AuthService
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.testing.*
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Rule

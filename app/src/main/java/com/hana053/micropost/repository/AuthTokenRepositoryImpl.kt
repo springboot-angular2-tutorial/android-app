@@ -1,4 +1,4 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.repository
 
 import android.content.SharedPreferences
 

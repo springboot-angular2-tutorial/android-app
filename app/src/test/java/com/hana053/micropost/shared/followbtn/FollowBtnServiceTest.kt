@@ -5,8 +5,8 @@ import android.content.Context
 import android.widget.Button
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.interactors.RelationshipInteractor
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.interactor.RelationshipInteractor
+import com.hana053.micropost.service.HttpErrorHandler
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import com.nhaarman.mockito_kotlin.doReturn

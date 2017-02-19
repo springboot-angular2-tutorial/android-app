@@ -1,7 +1,7 @@
 package com.hana053.micropost.pages.login
 
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.service.LoginService
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.Observable

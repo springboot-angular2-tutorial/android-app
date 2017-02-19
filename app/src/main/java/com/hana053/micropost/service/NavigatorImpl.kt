@@ -1,4 +1,4 @@
-package com.hana053.micropost.activity
+package com.hana053.micropost.service
 
 import android.app.Activity
 import android.content.Intent

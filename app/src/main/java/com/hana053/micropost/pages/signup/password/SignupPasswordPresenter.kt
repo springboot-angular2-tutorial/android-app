@@ -1,8 +1,8 @@
 package com.hana053.micropost.pages.signup.password
 
-import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.pages.signup.SignupService
 import com.hana053.micropost.pages.signup.SignupState
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 

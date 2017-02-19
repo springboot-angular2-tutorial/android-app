@@ -1,8 +1,7 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.repository
 
 import android.preference.PreferenceManager
 import com.hana053.micropost.testing.RobolectricBaseTest
-import com.hana053.micropost.testing.TestUser
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat

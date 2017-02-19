@@ -11,7 +11,7 @@ import com.hana053.micropost.pages.usershow.detail.UserShowDetailPresenter
 import com.hana053.micropost.pages.usershow.detail.UserShowDetailView
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsPresenter
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsView
-import com.hana053.micropost.services.AuthService
+import com.hana053.micropost.service.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {

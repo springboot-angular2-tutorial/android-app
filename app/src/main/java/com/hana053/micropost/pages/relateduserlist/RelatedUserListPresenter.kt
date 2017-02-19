@@ -1,7 +1,7 @@
 package com.hana053.micropost.pages.relateduserlist
 
 import android.support.v7.app.AppCompatActivity
-import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.followbtn.FollowBtnService
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle

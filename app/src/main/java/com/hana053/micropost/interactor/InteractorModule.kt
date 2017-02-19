@@ -1,11 +1,11 @@
-package com.hana053.micropost.interactors
+package com.hana053.micropost.interactor
 
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import com.hana053.micropost.BuildConfig
-import com.hana053.micropost.services.AuthTokenRepository
+import com.hana053.micropost.repository.AuthTokenRepository
 import com.hana053.myapp.interactors.FeedInteractor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

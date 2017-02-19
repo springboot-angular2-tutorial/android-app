@@ -1,7 +1,7 @@
 package com.hana053.micropost.pages.usershow.detail
 
-import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.domain.User
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.followbtn.FollowBtnService
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle

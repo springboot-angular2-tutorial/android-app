@@ -1,7 +1,7 @@
 package com.hana053.micropost.pages.main
 
 import com.hana053.micropost.domain.Micropost
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.service.HttpErrorHandler
 import com.hana053.micropost.shared.posts.PostListAdapter
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestMicropost

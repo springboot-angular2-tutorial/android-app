@@ -1,4 +1,4 @@
-package com.hana053.micropost.interactors
+package com.hana053.micropost.interactor
 
 import com.hana053.micropost.domain.Micropost
 import retrofit2.http.GET

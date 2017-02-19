@@ -1,9 +1,9 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
 import android.content.Context
 import android.widget.Toast
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.interactors.LoginInteractor
+import com.hana053.micropost.interactor.LoginInteractor
+import com.hana053.micropost.repository.AuthTokenRepository
 import retrofit2.adapter.rxjava.HttpException
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers

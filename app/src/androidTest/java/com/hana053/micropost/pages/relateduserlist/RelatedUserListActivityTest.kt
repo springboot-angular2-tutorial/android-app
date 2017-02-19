@@ -11,12 +11,12 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.interactors.RelatedUserListInteractor
-import com.hana053.micropost.interactors.RelationshipInteractor
+import com.hana053.micropost.interactor.RelatedUserListInteractor
+import com.hana053.micropost.interactor.RelationshipInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWING
-import com.hana053.micropost.services.AuthService
+import com.hana053.micropost.service.AuthService
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.testing.*
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn

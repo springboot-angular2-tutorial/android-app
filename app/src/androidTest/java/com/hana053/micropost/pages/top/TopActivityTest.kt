@@ -10,7 +10,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.testing.InjectableTest
 import com.hana053.micropost.testing.InjectableTestImpl
 import com.nhaarman.mockito_kotlin.mock

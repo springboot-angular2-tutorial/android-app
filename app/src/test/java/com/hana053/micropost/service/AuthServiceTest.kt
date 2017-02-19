@@ -1,6 +1,6 @@
-package com.hana053.micropost.services
+package com.hana053.micropost.service
 
-import com.hana053.micropost.activity.Navigator
+import com.hana053.micropost.repository.AuthTokenRepository
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import com.hana053.micropost.testing.jwtForUserId1

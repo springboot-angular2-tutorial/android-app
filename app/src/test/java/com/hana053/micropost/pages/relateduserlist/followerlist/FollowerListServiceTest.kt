@@ -1,9 +1,9 @@
 package com.hana053.micropost.pages.relateduserlist.followerlist
 
 import com.hana053.micropost.domain.RelatedUser
-import com.hana053.micropost.interactors.RelatedUserListInteractor
+import com.hana053.micropost.interactor.RelatedUserListInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListAdapter
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.service.HttpErrorHandler
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestRelatedUser
 import com.nhaarman.mockito_kotlin.any

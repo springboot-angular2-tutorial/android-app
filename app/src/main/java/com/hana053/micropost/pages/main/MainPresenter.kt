@@ -1,7 +1,6 @@
 package com.hana053.micropost.pages.main
 
-import com.hana053.micropost.activity.Navigator
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.posts.PostListAdapter
 import com.hana053.micropost.withProgressDialog
 import com.trello.rxlifecycle.kotlin.bindToLifecycle

@@ -1,8 +1,8 @@
 package com.hana053.micropost.pages.micropostnew
 
 import com.hana053.micropost.domain.Micropost
-import com.hana053.micropost.interactors.MicropostInteractor
-import com.hana053.micropost.services.HttpErrorHandler
+import com.hana053.micropost.interactor.MicropostInteractor
+import com.hana053.micropost.service.HttpErrorHandler
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestMicropost
 import com.nhaarman.mockito_kotlin.any

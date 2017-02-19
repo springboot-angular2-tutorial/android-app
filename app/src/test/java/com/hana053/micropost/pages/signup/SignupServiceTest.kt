@@ -1,9 +1,9 @@
 package com.hana053.micropost.pages.signup
 
 import com.hana053.micropost.domain.User
-import com.hana053.micropost.interactors.UserInteractor
-import com.hana053.micropost.services.HttpErrorHandler
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.interactor.UserInteractor
+import com.hana053.micropost.service.HttpErrorHandler
+import com.hana053.micropost.service.LoginService
 import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
