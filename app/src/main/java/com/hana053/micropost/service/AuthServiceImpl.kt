@@ -13,7 +13,7 @@ class AuthServiceImpl(
 ) : AuthService {
 
     override fun isMyself(user: User): Boolean {
-        val authToken = authTokenRepository.getAuthToken() ?: return false
+        val authToken = authTokenRepository.get() ?: return false
         try {
             val jwsObject = JWSObject.parse(authToken)
             val sub = jwsObject.payload.toJSONObject()["sub"].toString()
@@ -25,12 +25,12 @@ class AuthServiceImpl(
     }
 
     override fun logout() {
-        authTokenRepository.clearAuthToken()
+        authTokenRepository.clear()
         navigator.navigateToTop()
     }
 
     override fun auth(): Boolean {
-        if (authTokenRepository.getAuthToken().isNullOrBlank()) {
+        if (authTokenRepository.get().isNullOrBlank()) {
             logout()
             return false
         }

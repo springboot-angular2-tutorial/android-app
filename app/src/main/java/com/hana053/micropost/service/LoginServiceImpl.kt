@@ -24,7 +24,7 @@ class LoginServiceImpl(
             .login(LoginInteractor.LoginRequest(email, password))
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { authTokenRepository.setAuthToken(it.token) }
+            .doOnNext { authTokenRepository.set(it.token) }
             .doOnError { err ->
                 if (err is HttpException && err.code() == 401) {
                     Toast.makeText(context, "Email or Password is wrong.", Toast.LENGTH_LONG).show()

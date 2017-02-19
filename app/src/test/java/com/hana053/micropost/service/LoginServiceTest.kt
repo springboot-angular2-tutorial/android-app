@@ -38,7 +38,7 @@ class LoginServiceTest : RobolectricBaseTest() {
         loginService.login("test@test.com", "secret").subscribe()
         advance()
 
-        verify(authTokenRepository).setAuthToken("my token")
+        verify(authTokenRepository).set("my token")
     }
 
     @Test

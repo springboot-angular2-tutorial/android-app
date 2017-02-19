@@ -21,7 +21,7 @@ val jwtForUserId1 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNDc5NDUwNDY0fQ
 
 fun Kodein.Builder.fakeAuthToken(token: String = jwtForUserId1) {
     bind<AuthTokenRepository>(overrides = true) with instance(mock<AuthTokenRepository> {
-        on { getAuthToken() } doReturn token
+        on { get() } doReturn token
     })
 }
 

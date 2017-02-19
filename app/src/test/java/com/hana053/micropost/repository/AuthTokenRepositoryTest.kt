@@ -15,15 +15,15 @@ class AuthTokenRepositoryTest : RobolectricBaseTest() {
 
     @Test
     fun shouldSaveAuthToken() {
-        authTokenRepository.setAuthToken("my token")
-        assertThat(authTokenRepository.getAuthToken(), `is`("my token"))
+        authTokenRepository.set("my token")
+        assertThat(authTokenRepository.get(), `is`("my token"))
     }
 
     @Test
     fun shouldClearAuthToken() {
-        authTokenRepository.setAuthToken("my token")
-        authTokenRepository.clearAuthToken()
-        assertThat(authTokenRepository.getAuthToken(), nullValue())
+        authTokenRepository.set("my token")
+        authTokenRepository.clear()
+        assertThat(authTokenRepository.get(), nullValue())
     }
 
 }

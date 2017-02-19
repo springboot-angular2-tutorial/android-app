@@ -24,7 +24,7 @@ class AuthServiceTest : RobolectricBaseTest() {
 
     @Test
     fun shouldDetermineIsMyself() {
-        `when`(authTokenRepository.getAuthToken())
+        `when`(authTokenRepository.get())
             .doReturn(jwtForUserId1)
 
         val user1 = TestUser.copy(id = 1)
@@ -38,7 +38,7 @@ class AuthServiceTest : RobolectricBaseTest() {
     fun shouldLogout() {
         authService.logout()
 
-        verify(authTokenRepository).clearAuthToken()
+        verify(authTokenRepository).clear()
         verify(navigator).navigateToTop()
     }
 
@@ -50,7 +50,7 @@ class AuthServiceTest : RobolectricBaseTest() {
 
     @Test
     fun shouldJustReturnTrueWhenAuthenticated() {
-        `when`(authTokenRepository.getAuthToken()).doReturn("test token")
+        `when`(authTokenRepository.get()).doReturn("test token")
         assertThat(authService.auth(), `is`(true))
     }
 }

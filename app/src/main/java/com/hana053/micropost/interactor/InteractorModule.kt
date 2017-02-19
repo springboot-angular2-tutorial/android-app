@@ -19,7 +19,7 @@ fun interactorModule() = Kodein.Module {
 
         OkHttpClient().newBuilder()
             .addInterceptor { chain ->
-                val authToken = authTokenRepository.getAuthToken()
+                val authToken = authTokenRepository.get()
                 val original = chain.request()
                 val builder = original.newBuilder()
                 if (authToken != null)

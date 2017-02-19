@@ -8,17 +8,17 @@ class AuthTokenRepositoryImpl(
 
     private val AUTH_TOKEN = "AUTH_TOKEN"
 
-    override fun getAuthToken(): String? {
+    override fun get(): String? {
         return sharedPreferences.getString(AUTH_TOKEN, null)
     }
 
-    override fun setAuthToken(authToken: String) {
+    override fun set(authToken: String) {
         sharedPreferences.edit()
             .putString(AUTH_TOKEN, authToken)
             .apply()
     }
 
-    override fun clearAuthToken() {
+    override fun clear() {
         sharedPreferences.edit()
             .putString(AUTH_TOKEN, null)
             .apply()
