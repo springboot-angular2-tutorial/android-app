@@ -11,6 +11,7 @@ android:
 
 before_script:
   - cp gradle.properties.example gradle.properties
+  - android list targets
   # Emulator Management: Create, Start and Wait
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
