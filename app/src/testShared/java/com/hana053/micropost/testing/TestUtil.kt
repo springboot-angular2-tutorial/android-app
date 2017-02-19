@@ -7,8 +7,7 @@ import com.hana053.micropost.domain.Micropost
 import com.hana053.micropost.domain.RelatedUser
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.domain.UserStats
-import com.hana053.micropost.services.AuthTokenService
-import com.nhaarman.mockito_kotlin.KStubbing
+import com.hana053.micropost.services.AuthTokenRepository
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 
@@ -17,14 +16,12 @@ val TestUser = User(1, "John Doe", "test@test.com", "hash", false, TestUserStats
 val TestMicropost = Micropost(1, "content", 0, TestUser)
 val TestRelatedUser = RelatedUser(1, "John Doe", "test@test.com", "hash", false, TestUserStats, 1)
 
-fun Kodein.Builder.fakeAuthTokenAndBind(token: String = "", init: KStubbing<AuthTokenService>.() -> Unit) {
-    bind<AuthTokenService>(overrides = true) with instance(mock<AuthTokenService> {
-        on { getAuthToken() } doReturn token
-        init()
-    })
-}
+// This token has userId = 1.
+val jwtForUserId1 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNDc5NDUwNDY0fQ.Dy33qbg6EnP1bL2DmItMNGDEunrYP7-rzf586wxb2D-wW8WCsFrKdCeCU_ZHq_A7-kg_LxBykyaoG_26z-k9uA"
 
-fun Kodein.Builder.fakeAuthToken(token: String = "") {
-    fakeAuthTokenAndBind(token) { }
+fun Kodein.Builder.fakeAuthToken(token: String = jwtForUserId1) {
+    bind<AuthTokenRepository>(overrides = true) with instance(mock<AuthTokenRepository> {
+        on { getAuthToken() } doReturn token
+    })
 }
 

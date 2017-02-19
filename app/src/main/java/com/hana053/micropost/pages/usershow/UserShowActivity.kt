@@ -11,14 +11,14 @@ import com.hana053.micropost.pages.usershow.detail.UserShowDetailPresenter
 import com.hana053.micropost.pages.usershow.detail.UserShowDetailView
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsPresenter
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsView
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.services.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
-    private val loginService: LoginService by instance()
+    private val authService: AuthService by instance()
 
     private val detailView: UserShowDetailView by instance()
     private val detailPresenter: UserShowDetailPresenter by instance()
@@ -35,7 +35,7 @@ class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         setContentView(R.layout.activity_user_show)
         initializeInjector()
 
-        if (!loginService.auth()) return
+        if (!authService.auth()) return
 
         val userId = intent.extras.getLong(KEY_USER_ID)
 

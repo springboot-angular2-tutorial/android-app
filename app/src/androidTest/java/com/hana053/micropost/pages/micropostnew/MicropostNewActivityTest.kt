@@ -37,7 +37,7 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings { fakeAuthToken() }
         activityRule.launchActivity(null)
         onView(withText(R.string.post)).check(matches(isDisplayed()))
     }
@@ -54,7 +54,7 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
 
     @Test
     fun shouldDisableOrEnableBtn() {
-        overrideAppBindings { fakeAuthToken("secret") }
+        overrideAppBindings { fakeAuthToken() }
         activityRule.launchActivity(null)
 
         onView(withId(R.id.postBtn)).check(matches(not(isEnabled())))
@@ -69,7 +69,7 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
             on { create(any()) } doReturn Observable.just(TestMicropost)
         }
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<MicropostInteractor>(overrides = true) with instance(micropostInteractor)
         }
         activityRule.launchActivity(null)

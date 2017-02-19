@@ -16,6 +16,7 @@ import com.hana053.micropost.interactors.RelatedUserListInteractor
 import com.hana053.micropost.interactors.RelationshipInteractor
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWING
+import com.hana053.micropost.services.AuthService
 import com.hana053.micropost.testing.*
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn
@@ -40,7 +41,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 // just avoiding error
                 on { listFollowers(userId = 1, maxId = null) } doReturn Observable.empty()
@@ -66,7 +67,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldShowFollowers() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 on { listFollowers(1, null) } doReturn Observable.just(listOf(
                     TestRelatedUser.copy(relationshipId = 1, name = "John Doe")
@@ -84,7 +85,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldLoadPreviousUsersWhenReachedToBottom() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 on { listFollowers(userId = 1, maxId = null) } doReturn Observable.just(listOf(
                     TestRelatedUser.copy(relationshipId = 1, name = "John Doe")
@@ -107,9 +108,11 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldFollowUserOnList() {
         overrideAppBindings {
-            fakeAuthTokenAndBind("secret") {
+            fakeAuthToken()
+            bind<AuthService>(overrides = true) with instance(mock<AuthService> {
+                on { auth() } doReturn true
                 on { isMyself(anyOrNull()) } doReturn false // ensure button is shown
-            }
+            })
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 on { listFollowers(1, null) } doReturn Observable.just(listOf(
                     TestRelatedUser.copy(relationshipId = 1, isFollowedByMe = false) // Follow btn will be shown
@@ -131,7 +134,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     fun shouldNavigateToUserShowWhenAvatarClicked() {
         val navigator: Navigator = mock()
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 on { listFollowers(1, null) } doReturn Observable.just(listOf(
                     TestRelatedUser.copy(id = 100, relationshipId = 1)
@@ -152,7 +155,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldBeOpenedWhenAuthenticatedAsFollowing() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 // just avoiding error
                 on { listFollowings(userId = 1, maxId = null) } doReturn Observable.empty()
@@ -168,7 +171,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldShowFollowings() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             bind<RelatedUserListInteractor>(overrides = true) with instance(mock<RelatedUserListInteractor> {
                 on { listFollowings(1, null) } doReturn Observable.just(listOf(
                     TestRelatedUser.copy(relationshipId = 1, name = "John Doe")

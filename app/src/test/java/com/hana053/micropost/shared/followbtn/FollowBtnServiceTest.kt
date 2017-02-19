@@ -1,5 +1,6 @@
 package com.hana053.micropost.shared.followbtn
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Button
 import com.github.salomonbrys.kodein.bind
@@ -15,6 +16,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.`when`
+import org.robolectric.Robolectric
 import rx.Observable
 
 
@@ -29,8 +31,10 @@ class FollowBtnServiceTest : RobolectricBaseTest() {
 
     @Before
     fun setup() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
         overrideAppBindings {
             bind<Context>() with instance(app)
+            bind<Activity>() with instance(activity)
         }
     }
 

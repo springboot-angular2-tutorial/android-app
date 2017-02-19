@@ -5,7 +5,7 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import com.hana053.micropost.BuildConfig
-import com.hana053.micropost.services.AuthTokenService
+import com.hana053.micropost.services.AuthTokenRepository
 import com.hana053.myapp.interactors.FeedInteractor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,11 +15,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 fun interactorModule() = Kodein.Module {
 
     bind<OkHttpClient>() with singleton {
-        val authTokenService = instance<AuthTokenService>()
+        val authTokenRepository = instance<AuthTokenRepository>()
 
         OkHttpClient().newBuilder()
             .addInterceptor { chain ->
-                val authToken = authTokenService.getAuthToken()
+                val authToken = authTokenRepository.getAuthToken()
                 val original = chain.request()
                 val builder = original.newBuilder()
                 if (authToken != null)

@@ -12,7 +12,6 @@ import org.robolectric.shadows.ShadowLog
 import org.junit.Before
 
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(
     constants = BuildConfig::class,

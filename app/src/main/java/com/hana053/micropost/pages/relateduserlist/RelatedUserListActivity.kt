@@ -7,7 +7,7 @@ import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.services.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 
@@ -15,7 +15,7 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
 
     override val injector: KodeinInjector = KodeinInjector()
 
-    private val loginService: LoginService by instance()
+    private val authService: AuthService by instance()
     private val view: RelatedUserListView by instance()
     private val presenter: RelatedUserListPresenter by lazy {
         injector.instance<RelatedUserListPresenter>(listType()).value
@@ -35,7 +35,7 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
         setContentView(R.layout.activity_related_user_list)
         initializeInjector()
 
-        if (!loginService.auth()) return
+        if (!authService.auth()) return
 
         val userId = intent.extras.getLong(KEY_USER_ID)
         presenter.bind(view, userId)

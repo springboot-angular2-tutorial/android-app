@@ -16,6 +16,7 @@ import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.RelationshipInteractor
 import com.hana053.micropost.interactors.UserInteractor
 import com.hana053.micropost.interactors.UserMicropostInteractor
+import com.hana053.micropost.services.AuthService
 import com.hana053.micropost.testing.*
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Rule
@@ -35,7 +36,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldBeOpenedWhenAuthenticated() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             fakeLoadingPosts()
             fakeLoadingDetail()
         }
@@ -59,7 +60,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldShowUser() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             fakeLoadingPosts()
             bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
                 on { get(1) } doReturn Observable.just(TestUser.copy(name = "John Doe"))
@@ -77,10 +78,12 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
             )
         }
         overrideAppBindings {
-            fakeAuthTokenAndBind("secret") {
-                on { isMyself(anyOrNull()) } doReturn false // ensure button is shown
-            }
+            fakeAuthToken()
             fakeLoadingPosts()
+            bind<AuthService>(overrides = true) with instance(mock<AuthService> {
+                on { auth() } doReturn true
+                on { isMyself(anyOrNull()) } doReturn false // ensure button is shown
+            })
             bind<UserInteractor>(overrides = true) with instance(userInteractor)
             bind<RelationshipInteractor>(overrides = true) with instance(mock<RelationshipInteractor> {
                 on { follow(1) } doReturn Observable.just<Void>(null)
@@ -102,7 +105,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
     fun shouldNavigateToFollowers() {
         val navigator: Navigator = mock()
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             fakeLoadingPosts()
             fakeLoadingDetail()
             bind<Navigator>(overrides = true) with instance(navigator)
@@ -118,7 +121,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
     fun shouldNavigateToFollowings() {
         val navigator: Navigator = mock()
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             fakeLoadingPosts()
             fakeLoadingDetail()
             bind<Navigator>(overrides = true) with instance(navigator)
@@ -135,7 +138,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
     @Test
     fun shouldShowPosts() {
         overrideAppBindings {
-            fakeAuthToken("secret")
+            fakeAuthToken()
             fakeLoadingDetail()
             bind<UserMicropostInteractor>(overrides = true) with instance(mock<UserMicropostInteractor> {
                 on { loadPrevPosts(1, null) } doReturn Observable.just(listOf(

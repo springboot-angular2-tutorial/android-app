@@ -6,7 +6,9 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Before
 import org.junit.Test
+import org.robolectric.shadows.ShadowLog
 import org.robolectric.shadows.ShadowToast
 import retrofit2.Response
 import retrofit2.adapter.rxjava.HttpException
@@ -16,8 +18,13 @@ import java.net.SocketTimeoutException
 
 class HttpErrorHandlerTest : RobolectricBaseTest() {
 
-    private val loginService = mock<LoginService>()
-    private val httpErrorHandler = HttpErrorHandlerImpl(loginService, app)
+    private val authService = mock<AuthService>()
+    private val httpErrorHandler = HttpErrorHandlerImpl(authService, app)
+
+    @Before
+    fun suppressLog() {
+        ShadowLog.stream = null
+    }
 
     @Test
     fun shouldHandleSocketTimeoutException() {
@@ -35,7 +42,7 @@ class HttpErrorHandlerTest : RobolectricBaseTest() {
     fun shouldHandle401Error() {
         httpErrorHandler.handleError(createHttpException(401))
         assertThat(ShadowToast.getTextOfLatestToast(), `is`("Please sign in."))
-        verify(loginService).logout()
+        verify(authService).logout()
     }
 
     @Test

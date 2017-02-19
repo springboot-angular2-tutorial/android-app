@@ -1,6 +1,5 @@
 package com.hana053.micropost.services
 
-import com.hana053.micropost.activity.Navigator
 import com.hana053.micropost.interactors.LoginInteractor
 import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.RobolectricBaseTest
@@ -21,13 +20,11 @@ import rx.Observable
 class LoginServiceTest : RobolectricBaseTest() {
 
     private val loginInteractor = mock<LoginInteractor>()
-    private val authTokenService = mock<AuthTokenService>()
-    private val navigator = mock<Navigator>()
+    private val authTokenRepository = mock<AuthTokenRepository>()
     private val httpErrorHandler = mock<HttpErrorHandler>()
     private val loginService = LoginServiceImpl(
         loginInteractor = loginInteractor,
-        authTokenService = authTokenService,
-        navigator = navigator,
+        authTokenRepository = authTokenRepository,
         httpErrorHandler = httpErrorHandler,
         context = app
     )
@@ -40,7 +37,7 @@ class LoginServiceTest : RobolectricBaseTest() {
         loginService.login("test@test.com", "secret").subscribe()
         advance()
 
-        verify(authTokenService).setAuthToken("my token")
+        verify(authTokenRepository).setAuthToken("my token")
     }
 
     @Test
@@ -63,27 +60,6 @@ class LoginServiceTest : RobolectricBaseTest() {
         advance()
 
         verify(httpErrorHandler).handleError(any<RuntimeException>())
-    }
-
-    @Test
-    fun shouldLogout() {
-        loginService.logout()
-
-        verify(authTokenService).clearAuthToken()
-        verify(navigator).navigateToTop()
-    }
-
-    @Test
-    fun shouldForceLogoutWhenAuthTokenIsEmpty() {
-        assertThat(loginService.auth(), `is`(false))
-        verify(navigator).navigateToTop()
-    }
-
-    @Test
-    fun shouldJustReturnTrueWhenAuthenticated() {
-        `when`(authTokenService.getAuthToken()).doReturn("test token")
-
-        assertThat(loginService.auth(), `is`(true))
     }
 
 }

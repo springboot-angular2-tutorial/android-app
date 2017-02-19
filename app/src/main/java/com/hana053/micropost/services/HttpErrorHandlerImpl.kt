@@ -8,7 +8,7 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 internal class HttpErrorHandlerImpl(
-    private val loginService: LoginService,
+    private val authService: AuthService,
     context: Context
 ) : HttpErrorHandler {
 
@@ -24,7 +24,7 @@ internal class HttpErrorHandlerImpl(
         } catch (e: HttpException) {
             if (e.code() == 401) {
                 Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show()
-                loginService.logout()
+                authService.logout()
             } else if (e.code() >= 500) {
                 Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
             }
@@ -32,6 +32,6 @@ internal class HttpErrorHandlerImpl(
             Timber.e(e, "handleHttpError: ${e.message}")
             Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
         }
-
     }
+
 }

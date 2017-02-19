@@ -7,7 +7,7 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.content
 import com.hana053.micropost.getOverridingModule
-import com.hana053.micropost.services.LoginService
+import com.hana053.micropost.services.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 
@@ -15,7 +15,7 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     override val injector: KodeinInjector = KodeinInjector()
 
-    private val loginService: LoginService  by instance()
+    private val authService: AuthService  by instance()
     private val presenter: MicropostNewPresenter by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         setContentView(R.layout.activity_micropost_new)
         initializeInjector()
 
-        if (!loginService.auth()) return
+        if (!authService.auth()) return
 
         presenter.bind(MicropostNewView(content()))
     }

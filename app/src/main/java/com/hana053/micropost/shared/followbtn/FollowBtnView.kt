@@ -5,7 +5,7 @@ import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.domain.User
-import com.hana053.micropost.services.AuthTokenService
+import com.hana053.micropost.services.AuthService
 import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.enabled
 import com.jakewharton.rxbinding.view.visibility
@@ -27,9 +27,9 @@ class FollowBtnView(
     private lateinit var _user: User
 
     fun render(user: User) {
-        val authTokenService = button.context.appKodein().instance<AuthTokenService>()
+        val authService = button.context.appKodein().instance<AuthService>()
 
-        button.visibility().call(!authTokenService.isMyself(user))
+        button.visibility().call(!authService.isMyself(user))
         if (user.isFollowedByMe) toUnfollow() else toFollow()
         this._user = user
     }

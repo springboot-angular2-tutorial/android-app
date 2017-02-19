@@ -12,12 +12,16 @@ fun serviceModule() = Kodein.Module {
         HttpErrorHandlerImpl(instance(), instance())
     }
 
-    bind<AuthTokenService>() with singleton {
-        AuthTokenServiceImpl(instance())
+    bind<AuthTokenRepository>() with singleton {
+        AuthTokenRepositoryImpl(instance())
+    }
+
+    bind<AuthService>() with singleton {
+        AuthServiceImpl(instance(), instance())
     }
 
     bind<LoginService>() with singleton {
-        LoginServiceImpl(instance(), instance(), instance(), instance(), instance())
+        LoginServiceImpl(instance(), instance(), instance(), instance())
     }
 
 }
