@@ -21,13 +21,13 @@ class NavigatorImpl(activity: Activity) : Navigator {
 
     override fun navigateToTop() {
         val intent = Intent(activity.get(), TopActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        activity.get()?.finishAffinity()
         activity.get()?.startActivity(intent)
     }
 
     override fun navigateToMain() {
         val intent = Intent(activity.get(), MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        activity.get()?.finishAffinity()
         activity.get()?.startActivity(intent)
     }
 
