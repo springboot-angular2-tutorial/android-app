@@ -16,8 +16,7 @@ fun userShowDetailModule() = Kodein.Module {
     }
 
     bind<UserShowDetailView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>()._user_detail
-        UserShowDetailView(content)
+        instance<Activity>()._user_detail.let(::UserShowDetailView)
     }
 
     bind<UserShowDetailPresenter>() with autoScopedSingleton(androidActivityScope) {

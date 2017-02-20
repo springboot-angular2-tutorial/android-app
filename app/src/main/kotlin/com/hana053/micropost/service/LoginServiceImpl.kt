@@ -25,11 +25,11 @@ class LoginServiceImpl(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { authTokenRepository.set(it.token) }
-            .doOnError { err ->
-                if (err is HttpException && err.code() == 401) {
-                    Toast.makeText(context, "Email or Password is wrong.", Toast.LENGTH_LONG).show()
-                } else {
-                    httpErrorHandler.handleError(err)
+            .doOnError {
+                when {
+                    it is HttpException && it.code() == 401 ->
+                        Toast.makeText(context, "Email or Password is wrong.", Toast.LENGTH_LONG).show()
+                    else -> httpErrorHandler.handleError(it)
                 }
             }
             .onErrorResumeNext(Observable.empty())

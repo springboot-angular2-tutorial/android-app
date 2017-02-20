@@ -22,11 +22,12 @@ internal class HttpErrorHandlerImpl(
         } catch (e: ConnectException) {
             Toast.makeText(context, "Cannot connect to server.", Toast.LENGTH_LONG).show()
         } catch (e: HttpException) {
-            if (e.code() == 401) {
-                Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show()
-                authService.logout()
-            } else if (e.code() >= 500) {
-                Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
+            when {
+                e.code() == 401 -> {
+                    Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show()
+                    authService.logout()
+                }
+                e.code() >= 500 -> Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
             }
         } catch (e: Throwable) {
             Timber.e(e, "handleHttpError: ${e.message}")

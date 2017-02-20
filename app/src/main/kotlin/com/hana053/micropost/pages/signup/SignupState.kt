@@ -8,7 +8,8 @@ data class SignupState(
     var email: String = "",
     var password: String = ""
 ) {
-    fun toSignupRequest(): UserInteractor.SignupRequest {
-        return UserInteractor.SignupRequest(fullName, email, password)
-    }
+
+    fun toSignupRequest(): UserInteractor.SignupRequest =
+        UserInteractor.SignupRequest(fullName, email, password)
+
 }

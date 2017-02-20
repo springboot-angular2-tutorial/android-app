@@ -16,6 +16,8 @@ class FollowBtnService(
     fun handleFollowBtnClicks(view: FollowBtnView): Observable<User> {
         val obs = if (view.isFollowState()) follow(view) else unfollow(view)
         return obs.withBtnDisabled(view.enabled)
+            .doOnError { httpErrorHandler.handleError(it) }
+            .onErrorResumeNext { Observable.empty() }
             .map { view.user }
     }
 
@@ -24,8 +26,6 @@ class FollowBtnService(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { view.toUnfollow() }
-            .doOnError { httpErrorHandler.handleError(it) }
-            .onErrorResumeNext { Observable.empty() }
     }
 
     private fun unfollow(view: FollowBtnView): Observable<Void> {
@@ -33,8 +33,6 @@ class FollowBtnService(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { view.toFollow() }
-            .doOnError { httpErrorHandler.handleError(it) }
-            .onErrorResumeNext { Observable.empty() }
     }
 
     private fun <T> Observable<T>.withBtnDisabled(enabled: Action1<in Boolean>): Observable<T> {

@@ -49,8 +49,6 @@ abstract class BaseApplication : Application(), KodeinAware {
         Pair(RelatedUserListActivity::class.java, relatedUserListModule())
     )
 
-    fun getOverridingModule(clazz: Class<*>): Kodein.Module {
-        return overridingModules[clazz]!!
-    }
+    fun getOverridingModule(clazz: Class<*>): Kodein.Module = overridingModules[clazz]!!
 
 }

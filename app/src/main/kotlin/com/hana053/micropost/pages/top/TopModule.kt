@@ -15,8 +15,7 @@ fun topModule() = Kodein.Module {
     }
 
     bind<TopView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().activity_top
-        TopView(content)
+        instance<Activity>().activity_top.let(::TopView)
     }
 
 }

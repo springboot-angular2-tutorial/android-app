@@ -33,9 +33,9 @@ class SignupEmailPresenter(
             }
     }
 
-    private fun isFormValid(email: CharSequence): Boolean {
-        val emailPattern = "^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@\\[?([\\d\\w\\.-]+)]?$"
-        return email.matches(emailPattern.toRegex())
-    }
+    private fun isFormValid(email: CharSequence): Boolean =
+        "^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@\\[?([\\d\\w\\.-]+)]?$"
+            .let(String::toRegex)
+            .let { email.matches(it) }
 
 }

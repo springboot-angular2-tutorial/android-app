@@ -21,26 +21,24 @@ class SignupServiceImpl(
 
     private val context = context.applicationContext
 
-    override fun signup(request: UserInteractor.SignupRequest): Observable<Void> {
-        return userInteractor.create(request)
+    override fun signup(request: UserInteractor.SignupRequest): Observable<Void> =
+        userInteractor.create(request)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError { err ->
-                if (isEmailAlreadyTaken(err)) {
-                    Toast.makeText(context, "This email is already taken.", Toast.LENGTH_LONG).show()
-                    signupNavigator.navigateToPrev()
-                } else {
-                    httpErrorHandler.handleError(err)
+            .doOnError {
+                when {
+                    isEmailAlreadyTaken(it) -> {
+                        Toast.makeText(context, "This email is already taken.", Toast.LENGTH_LONG).show()
+                        signupNavigator.navigateToPrev()
+                    }
+                    else -> httpErrorHandler.handleError(it)
                 }
             }
             .onErrorResumeNext { Observable.empty() }
             .flatMap {
                 loginService.login(request.email, request.password)
             }
-    }
 
-    private fun isEmailAlreadyTaken(e: Throwable): Boolean {
-        return e is HttpException && e.code() == 400
-    }
+    private fun isEmailAlreadyTaken(e: Throwable): Boolean = e is HttpException && e.code() == 400
 
 }

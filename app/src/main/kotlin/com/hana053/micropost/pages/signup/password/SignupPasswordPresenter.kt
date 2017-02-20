@@ -41,8 +41,6 @@ class SignupPasswordPresenter(
             .subscribe { navigator.navigateToMain() }
     }
 
-    private fun isFormValid(password: CharSequence): Boolean {
-        return password.length >= 8
-    }
+    private fun isFormValid(password: CharSequence): Boolean = password.length >= 8
 
 }

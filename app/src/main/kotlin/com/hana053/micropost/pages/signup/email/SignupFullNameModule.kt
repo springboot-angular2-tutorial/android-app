@@ -16,8 +16,7 @@ fun signupEmailModule() = Kodein.Module {
     }
 
     bind<SignupEmailView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().fragment_signup_email
-        SignupEmailView(content)
+        instance<Activity>().fragment_signup_email.let(::SignupEmailView)
     }
 
 }

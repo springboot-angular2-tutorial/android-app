@@ -15,22 +15,20 @@ interface Presenter<out T : ViewWrapper> {
     fun bind()
 
     fun <T> Observable<T>.withProgressDialog(): Observable<T> = Observable.using({
-        val progressBar = ProgressBar(view.content.context, null, android.R.attr.progressBarStyle)
-        progressBar.isIndeterminate = true
-        progressBar.visibility = View.VISIBLE
+        ProgressBar(view.context(), null, android.R.attr.progressBarStyle).apply {
+            isIndeterminate = true
+            visibility = View.VISIBLE
 
-        val rl = RelativeLayout(view.content.context)
-        rl.gravity = Gravity.CENTER
-        rl.addView(progressBar)
-
-        val layoutParams = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT
-        )
-
-        view.content.addView(rl, layoutParams)
-
-        progressBar
+            val rl = RelativeLayout(view.content.context).apply {
+                gravity = Gravity.CENTER
+                addView(this@apply)
+            }
+            val layoutParams = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT
+            )
+            view.content.addView(rl, layoutParams)
+        }
     }, { this }, {
         it.visibility = View.GONE
     })

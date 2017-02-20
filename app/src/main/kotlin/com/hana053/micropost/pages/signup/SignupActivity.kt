@@ -22,7 +22,7 @@ class SignupActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         initializeInjector()
 
-        if (savedInstanceState == null) {
+        savedInstanceState?.let {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, SignupFullNameFragment())

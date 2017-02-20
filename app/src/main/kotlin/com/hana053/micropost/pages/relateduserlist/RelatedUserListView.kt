@@ -21,8 +21,7 @@ class RelatedUserListView(
         .filter { !userRecyclerView.canScrollVertically(1) }
 
     init {
-        val context = content.context
-        userRecyclerView.layoutManager = LinearLayoutManager(context)
+        userRecyclerView.layoutManager = LinearLayoutManager(context())
         userRecyclerView.adapter = relatedUserListAdapter
     }
 

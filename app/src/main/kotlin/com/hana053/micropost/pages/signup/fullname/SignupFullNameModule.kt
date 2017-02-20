@@ -16,8 +16,7 @@ fun signupFullNameModule() = Kodein.Module {
     }
 
     bind<SignupFullNameView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().fragment_signup_full_name
-        SignupFullNameView(content)
+        instance<Activity>().fragment_signup_full_name.let(::SignupFullNameView)
     }
 
 }

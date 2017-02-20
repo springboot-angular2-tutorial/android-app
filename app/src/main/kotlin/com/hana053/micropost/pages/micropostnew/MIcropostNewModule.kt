@@ -16,8 +16,7 @@ fun micropostNewModule() = Kodein.Module {
     }
 
     bind<MicropostNewView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().activity_micropost_new
-        MicropostNewView(content)
+        instance<Activity>().activity_micropost_new.let(::MicropostNewView)
     }
 
     bind<MicropostNewService>() with autoScopedSingleton(androidActivityScope) {

@@ -15,9 +15,10 @@ class UserShowPostsView(
     private val postRecyclerView = content.postRecyclerView
 
     init {
-        val context = content.context
-        postRecyclerView.layoutManager = LinearLayoutManager(context)
-        postRecyclerView.adapter = postListAdapter
-        postRecyclerView.isNestedScrollingEnabled = false
+        with(postRecyclerView) {
+            layoutManager = LinearLayoutManager(context())
+            adapter = postListAdapter
+            isNestedScrollingEnabled = false
+        }
     }
 }

@@ -37,7 +37,5 @@ class FollowerListService(
             .onErrorResumeNext { Observable.empty() }
     }
 
-    override fun title(): String {
-        return context.getString(R.string.Followers)
-    }
+    override fun title(): String = context.getString(R.string.Followers)
 }

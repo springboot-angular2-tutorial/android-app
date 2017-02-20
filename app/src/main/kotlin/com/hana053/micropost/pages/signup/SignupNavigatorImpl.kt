@@ -27,12 +27,12 @@ class SignupNavigatorImpl(
     }
 
     override fun navigateToPrev() {
-        val backStackCnt = activity.supportFragmentManager.backStackEntryCount
-        if (backStackCnt == 0) {
-            activity.finish()
-            return
+        activity.supportFragmentManager.backStackEntryCount.let {
+            when (it) {
+                0 -> activity.finish()
+                else -> activity.supportFragmentManager.popBackStack()
+            }
         }
-        activity.supportFragmentManager.popBackStack()
     }
 
 }

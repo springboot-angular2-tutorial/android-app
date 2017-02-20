@@ -20,8 +20,8 @@ fun relatedUserListModule() = Kodein.Module {
     }
 
     bind<RelatedUserListView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().activity_related_user_list
-        RelatedUserListView(content, instance())
+        instance<Activity>().activity_related_user_list
+            .let { RelatedUserListView(it, instance()) }
     }
 
     bind<RelatedUserListPresenter>() with autoScopedSingleton(androidActivityScope) {

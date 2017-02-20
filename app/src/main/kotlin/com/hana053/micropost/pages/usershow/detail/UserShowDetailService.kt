@@ -13,12 +13,11 @@ class UserShowDetailService(
     private val httpErrorHandler: HttpErrorHandler
 ) {
 
-    fun getUser(userId: Long): Observable<User> {
-        return userInteractor.get(userId)
+    fun getUser(userId: Long): Observable<User> =
+        userInteractor.get(userId)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError { httpErrorHandler.handleError(it) }
             .onErrorResumeNext { Observable.empty() }
-    }
 
 }

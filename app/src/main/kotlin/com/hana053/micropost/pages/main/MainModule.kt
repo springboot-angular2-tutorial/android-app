@@ -20,8 +20,8 @@ fun mainModule() = Kodein.Module {
     }
 
     bind<MainView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().activity_main
-        MainView(content, instance())
+        instance<Activity>().activity_main
+            .let { MainView(it, instance()) }
     }
 
     bind<MainService>() with autoScopedSingleton(androidActivityScope) {

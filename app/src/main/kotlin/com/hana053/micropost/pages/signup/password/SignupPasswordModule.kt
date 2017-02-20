@@ -16,8 +16,7 @@ fun signupPasswordModule() = Kodein.Module {
     }
 
     bind<SignupPasswordView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().fragment_signup_password
-        SignupPasswordView(content)
+        instance<Activity>().fragment_signup_password.let(::SignupPasswordView)
     }
 
 }

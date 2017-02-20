@@ -15,8 +15,7 @@ fun loginModule() = Kodein.Module {
     }
 
     bind<LoginView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().activity_login
-        LoginView(content)
+        instance<Activity>().activity_login.let(::LoginView)
     }
 
 }

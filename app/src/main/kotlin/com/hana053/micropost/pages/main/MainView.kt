@@ -31,8 +31,7 @@ class MainView(
     val swipeRefreshing = swipeRefreshLayout.refreshing()
 
     init {
-        val context = content.context
-        postRecyclerView.layoutManager = LinearLayoutManager(context)
+        postRecyclerView.layoutManager = LinearLayoutManager(context())
         postRecyclerView.adapter = postListAdapter
     }
 

@@ -17,19 +17,17 @@ fun interactorModule() = Kodein.Module {
     bind<OkHttpClient>() with singleton {
         val authTokenRepository = instance<AuthTokenRepository>()
 
-        OkHttpClient().newBuilder()
-            .addInterceptor { chain ->
-                val authToken = authTokenRepository.get()
-                val original = chain.request()
-                val builder = original.newBuilder()
-                if (authToken != null)
-                    builder.header("authorization", "Bearer " + authToken)
-                val request = builder
-                    .method(original.method(), original.body())
-                    .build()
-                chain.proceed(request)
-            }
-            .build()
+        OkHttpClient().newBuilder().addInterceptor { chain ->
+            val authToken = authTokenRepository.get()
+            val original = chain.request()
+            val builder = original.newBuilder()
+            if (authToken != null)
+                builder.header("authorization", "Bearer " + authToken)
+            val request = builder
+                .method(original.method(), original.body())
+                .build()
+            chain.proceed(request)
+        }.build()
     }
 
     bind<Retrofit>() with singleton {
@@ -44,38 +42,31 @@ fun interactorModule() = Kodein.Module {
     }
 
     bind<LoginInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(LoginInteractor::class.java)
+        instance<Retrofit>().create(LoginInteractor::class.java)
     }
 
     bind<FeedInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(FeedInteractor::class.java)
+        instance<Retrofit>().create(FeedInteractor::class.java)
     }
 
     bind<UserInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(UserInteractor::class.java)
+        instance<Retrofit>().create(UserInteractor::class.java)
     }
 
     bind<RelationshipInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(RelationshipInteractor::class.java)
+        instance<Retrofit>().create(RelationshipInteractor::class.java)
     }
 
     bind<UserMicropostInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(UserMicropostInteractor::class.java)
+        instance<Retrofit>().create(UserMicropostInteractor::class.java)
     }
 
     bind<MicropostInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(MicropostInteractor::class.java)
+        instance<Retrofit>().create(MicropostInteractor::class.java)
     }
 
     bind<RelatedUserListInteractor>() with singleton {
-        val retrofit = instance<Retrofit>()
-        retrofit.create(RelatedUserListInteractor::class.java)
+        instance<Retrofit>().create(RelatedUserListInteractor::class.java)
     }
 
 }
