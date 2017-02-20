@@ -17,9 +17,8 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
 
     private val authService: AuthService by instance()
     private val view: RelatedUserListView by instance()
-    private val presenter: RelatedUserListPresenter by lazy {
-        injector.instance<RelatedUserListPresenter>(listType()).value
-    }
+    private val presenter: RelatedUserListPresenter by instance()
+    private val relatedUserListService: RelatedUserListService by instance()
 
     enum class ListType {
         FOLLOWER, FOLLOWING
@@ -37,8 +36,10 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
 
         if (!authService.auth()) return
 
-        val userId = intent.extras.getLong(KEY_USER_ID)
-        presenter.bind(view, userId)
+        presenter.bind(view)
+
+        title = relatedUserListService.title()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
 
@@ -60,5 +61,4 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
     override fun provideOverridingModule()
         = getOverridingModule(RelatedUserListActivity::class.java)
 
-    private fun listType() = intent.extras.getSerializable(KEY_LIST_TYPE) as ListType
 }

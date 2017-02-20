@@ -1,6 +1,5 @@
 package com.hana053.micropost.pages.relateduserlist
 
-import android.support.v7.app.AppCompatActivity
 import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.followbtn.FollowBtnService
 import com.hana053.micropost.withProgressDialog
@@ -8,16 +7,14 @@ import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class RelatedUserListPresenter(
+    private val userId: Long,
     private val relatedUserListService: RelatedUserListService,
-    private val activity: AppCompatActivity,
     private val relatedUserListAdapter: RelatedUserListAdapter,
     private val followBtnService: FollowBtnService,
     private val navigator: Navigator
 ) {
 
-    fun bind(view: RelatedUserListView, userId: Long) {
-        activity.title = relatedUserListService.title()
-        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    fun bind(view: RelatedUserListView) {
 
         relatedUserListService.listUsers(userId)
             .bindToLifecycle(view.content)

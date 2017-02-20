@@ -1,11 +1,10 @@
 package com.hana053.micropost.pages.relateduserlist
 
 import android.app.Activity
-import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.*
 import com.github.salomonbrys.kodein.android.androidActivityScope
-import com.github.salomonbrys.kodein.autoScopedSingleton
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
+import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.Companion.KEY_LIST_TYPE
+import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.Companion.KEY_USER_ID
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWING
 import com.hana053.micropost.pages.relateduserlist.followerlist.FollowerListService
@@ -25,20 +24,23 @@ fun relatedUserListModule() = Kodein.Module {
         RelatedUserListView(content, instance())
     }
 
-    bind<RelatedUserListPresenter>(FOLLOWER) with autoScopedSingleton(androidActivityScope) {
-        RelatedUserListPresenter(instance(FOLLOWER), instance(), instance(), instance(), instance())
+    bind<RelatedUserListPresenter>() with autoScopedSingleton(androidActivityScope) {
+        RelatedUserListPresenter(instance("userId"), instance(), instance(), instance(), instance())
     }
 
-    bind<RelatedUserListPresenter>(FOLLOWING) with autoScopedSingleton(androidActivityScope) {
-        RelatedUserListPresenter(instance(FOLLOWING), instance(), instance(), instance(), instance())
+    bind<RelatedUserListService>() with autoScopedSingleton(androidActivityScope) {
+        when (instance<RelatedUserListActivity.ListType>()) {
+            FOLLOWER -> FollowerListService(instance(), instance(), instance(), instance())
+            FOLLOWING -> FollowingListService(instance(), instance(), instance(), instance())
+        }
     }
 
-    bind<RelatedUserListService>(FOLLOWER) with autoScopedSingleton(androidActivityScope) {
-        FollowerListService(instance(), instance(), instance(), instance())
+    bind<Long>("userId") with provider {
+        instance<Activity>().intent.extras.getLong(KEY_USER_ID)
     }
 
-    bind<RelatedUserListService>(FOLLOWING) with autoScopedSingleton(androidActivityScope) {
-        FollowingListService(instance(), instance(), instance(), instance())
+    bind<RelatedUserListActivity.ListType>() with provider {
+        instance<Activity>().intent.extras.getSerializable(KEY_LIST_TYPE) as RelatedUserListActivity.ListType
     }
 
     import(followBtnModule())
