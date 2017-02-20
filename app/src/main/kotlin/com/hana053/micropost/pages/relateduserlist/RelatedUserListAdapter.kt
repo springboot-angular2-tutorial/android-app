@@ -24,34 +24,6 @@ class RelatedUserListAdapter(
     val followBtnClicksSubject: PublishSubject<FollowBtnView> = PublishSubject.create()
     val avatarClicksSubject: PublishSubject<User> = PublishSubject.create()
 
-    override fun getItemCount(): Int {
-        return users.size
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_related_users, parent, false)
-        return ViewHolder(v)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = users[position]
-
-        holder.userName.text = item.name
-        holder.container.tag = item
-
-        AvatarView(holder.avatar).render(item.toUser())
-        holder.avatar.setOnClickListener {
-            avatarClicksSubject.onNext(item.toUser())
-        }
-
-        val followBtnView = FollowBtnView(holder.followBtn)
-        followBtnView.render(item.toUser())
-        holder.followBtn.setOnClickListener {
-            followBtnClicksSubject.onNext(followBtnView)
-        }
-    }
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val container: LinearLayout = view.container
         val avatar: ImageView = view.avatar
@@ -59,9 +31,35 @@ class RelatedUserListAdapter(
         val followBtn: Button = view.followBtn
     }
 
-    fun getLastItemId(): Long? {
-        return users.map { it.relationshipId }.lastOrNull()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_related_users, parent, false)
+            .let(::ViewHolder)
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = users[position]
+
+        holder.apply {
+            container.tag = item
+            userName.text = item.name
+
+            AvatarView(avatar).render(item.toUser())
+            avatar.setOnClickListener {
+                avatarClicksSubject.onNext(item.toUser())
+            }
+
+            FollowBtnView(followBtn).apply {
+                render(item.toUser())
+                followBtn.setOnClickListener {
+                    followBtnClicksSubject.onNext(this)
+                }
+            }
+        }
     }
+
+    override fun getItemCount(): Int = users.size
+
+    fun getLastItemId(): Long? = users.map { it.relationshipId }.lastOrNull()
 
     fun addAll(location: Int, users: List<RelatedUser>): Boolean {
         if (this.users.addAll(location, users)) {

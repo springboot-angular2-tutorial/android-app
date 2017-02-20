@@ -22,29 +22,6 @@ class PostListAdapter(
 
     val avatarClicksSubject: PublishSubject<User> = PublishSubject.create<User>()
 
-    override fun getItemCount(): Int {
-        return posts.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = posts[position]
-        holder.userName.text = item.user.name
-        holder.createdAt.setReferenceTime(item.createdAt)
-        holder.content.text = item.content
-        holder.container.tag = item
-
-        AvatarView(holder.avatar).render(item.user)
-        holder.avatar.setOnClickListener {
-            avatarClicksSubject.onNext(item.user)
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_posts, parent, false)
-        return ViewHolder(v)
-    }
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val container: LinearLayout = view.container
         val avatar: ImageView = view.avatar
@@ -53,15 +30,34 @@ class PostListAdapter(
         val content: TextView = view.content
     }
 
-    fun getFirstItemId(): Long? {
-        return posts.map { it.id }.firstOrNull()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_posts, parent, false)
+            .let(::ViewHolder)
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = posts[position]
+
+        holder.apply {
+            container.tag = item
+            userName.text = item.user.name
+            createdAt.setReferenceTime(item.createdAt)
+            content.text = item.content
+            AvatarView(avatar).render(item.user)
+            avatar.setOnClickListener {
+                avatarClicksSubject.onNext(item.user)
+            }
+        }
+
     }
 
-    fun getLastItemId(): Long? {
-        return posts.map { it.id }.lastOrNull()
-    }
+    override fun getItemCount(): Int = posts.size
 
-    fun addAll(location: Int, posts: Collection<Micropost>): Boolean {
+    fun getFirstItemId(): Long? = posts.map { it.id }.firstOrNull()
+
+    fun getLastItemId(): Long? = posts.map { it.id }.lastOrNull()
+
+    fun addAll(location: Int, posts: List<Micropost>): Boolean {
         if (this.posts.addAll(location, posts)) {
             notifyItemRangeInserted(location, posts.size)
             return true
