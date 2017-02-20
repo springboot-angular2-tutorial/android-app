@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_user_show"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,9 +16,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/user_detail"/>
+            <include layout="@layout/_user_detail"/>
 
-            <include layout="@layout/user_posts"/>
+            <include layout="@layout/_user_posts"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

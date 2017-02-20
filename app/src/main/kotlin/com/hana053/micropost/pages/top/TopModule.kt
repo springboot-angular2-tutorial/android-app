@@ -6,7 +6,7 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
+import kotlinx.android.synthetic.main.activity_top.*
 
 fun topModule() = Kodein.Module {
 
@@ -15,7 +15,7 @@ fun topModule() = Kodein.Module {
     }
 
     bind<TopView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().activity_top
         TopView(content)
     }
 

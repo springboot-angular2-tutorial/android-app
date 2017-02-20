@@ -5,7 +5,7 @@ import com.jakewharton.rxbinding.view.clicks
 import com.jakewharton.rxbinding.view.enabled
 import com.jakewharton.rxbinding.view.visibility
 import com.jakewharton.rxbinding.widget.textChanges
-import kotlinx.android.synthetic.main.signup_email.view.*
+import kotlinx.android.synthetic.main.fragment_signup_email.view.*
 
 
 class SignupEmailView(val content: ViewGroup) {

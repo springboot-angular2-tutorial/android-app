@@ -6,7 +6,7 @@ import com.hana053.micropost.domain.User
 import com.hana053.micropost.shared.avatar.AvatarView
 import com.hana053.micropost.shared.followbtn.FollowBtnView
 import com.jakewharton.rxbinding.view.clicks
-import kotlinx.android.synthetic.main.user_detail.view.*
+import kotlinx.android.synthetic.main._user_detail.view.*
 
 class UserShowDetailView(
     val content: ViewGroup

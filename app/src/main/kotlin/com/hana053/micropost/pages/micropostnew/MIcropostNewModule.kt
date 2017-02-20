@@ -6,7 +6,7 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
+import kotlinx.android.synthetic.main.activity_micropost_new.*
 
 
 fun micropostNewModule() = Kodein.Module {
@@ -16,7 +16,7 @@ fun micropostNewModule() = Kodein.Module {
     }
 
     bind<MicropostNewView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().activity_micropost_new
         MicropostNewView(content)
     }
 

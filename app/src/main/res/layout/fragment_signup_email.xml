@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_signup_email"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_xlarge"
-            android:text="@string/you_ll_need_a_password"
+            android:text="@string/what_s_your_email"
             android:textSize="@dimen/app_text_size_xxlarge"/>
 
         <android.support.design.widget.TextInputLayout
@@ -24,18 +24,18 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/password"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:inputType="textPassword"/>
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"/>
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/passwordInvalid"
+            android:id="@+id/emailInvalid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/password_must_be_longer_than_8_chars"
+            android:text="@string/please_enter_a_valid_email"
             android:visibility="gone"/>
     </LinearLayout>
 
@@ -46,7 +46,7 @@
         android:background="@drawable/border_top">
 
         <Button
-            android:id="@+id/passwordNextBtn"
+            android:id="@+id/emailNextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

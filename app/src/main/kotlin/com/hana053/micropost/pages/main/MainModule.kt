@@ -6,8 +6,8 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
 import com.hana053.micropost.shared.posts.PostListAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 fun mainModule() = Kodein.Module {
 
@@ -20,7 +20,7 @@ fun mainModule() = Kodein.Module {
     }
 
     bind<MainView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().activity_main
         MainView(content, instance())
     }
 

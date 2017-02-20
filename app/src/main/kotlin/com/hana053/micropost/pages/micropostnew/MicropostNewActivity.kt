@@ -5,7 +5,6 @@ import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.content
 import com.hana053.micropost.getOverridingModule
 import com.hana053.micropost.service.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
@@ -17,6 +16,7 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     private val authService: AuthService  by instance()
     private val presenter: MicropostNewPresenter by instance()
+    private val view: MicropostNewView by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         if (!authService.auth()) return
 
-        presenter.bind(MicropostNewView(content()))
+        presenter.bind(view)
     }
 
     override fun onDestroy() {

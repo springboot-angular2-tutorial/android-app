@@ -6,8 +6,7 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
-import kotlinx.android.synthetic.main.user_detail.view.*
+import kotlinx.android.synthetic.main._user_detail.*
 
 fun userShowDetailModule() = Kodein.Module {
 
@@ -16,7 +15,7 @@ fun userShowDetailModule() = Kodein.Module {
     }
 
     bind<UserShowDetailView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content().userDetail
+        val content = instance<Activity>()._user_detail
         UserShowDetailView(content)
     }
 

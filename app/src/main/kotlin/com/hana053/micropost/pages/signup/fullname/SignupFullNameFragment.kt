@@ -8,7 +8,6 @@ import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.SupportFragmentInjector
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.content
 import com.trello.rxlifecycle.components.support.RxFragment
 
 
@@ -17,16 +16,17 @@ class SignupFullNameFragment : RxFragment(), SupportFragmentInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: SignupFullNamePresenter by instance()
+    private val view: SignupFullNameView by instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.signup_full_name, container, false)
+        return inflater.inflate(R.layout.fragment_signup_full_name, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initializeInjector()
 
-        presenter.bind(SignupFullNameView(activity.content()))
+        presenter.bind(view)
     }
 
     override fun onDestroy() {

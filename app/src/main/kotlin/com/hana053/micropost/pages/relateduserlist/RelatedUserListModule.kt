@@ -6,12 +6,12 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWING
 import com.hana053.micropost.pages.relateduserlist.followerlist.FollowerListService
 import com.hana053.micropost.pages.relateduserlist.followinglist.FollowingListService
 import com.hana053.micropost.shared.followbtn.followBtnModule
+import kotlinx.android.synthetic.main.activity_related_user_list.*
 
 
 fun relatedUserListModule() = Kodein.Module {
@@ -21,7 +21,7 @@ fun relatedUserListModule() = Kodein.Module {
     }
 
     bind<RelatedUserListView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().activity_related_user_list
         RelatedUserListView(content, instance())
     }
 

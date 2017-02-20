@@ -6,7 +6,7 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.hana053.micropost.content
+import kotlinx.android.synthetic.main.activity_login.*
 
 fun loginModule() = Kodein.Module {
 
@@ -15,7 +15,7 @@ fun loginModule() = Kodein.Module {
     }
 
     bind<LoginView>() with autoScopedSingleton(androidActivityScope) {
-        val content = instance<Activity>().content()
+        val content = instance<Activity>().activity_login
         LoginView(content)
     }
 

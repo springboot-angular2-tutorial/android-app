@@ -10,7 +10,6 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
-import com.hana053.micropost.content
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.interactor.UserInteractor
 import com.hana053.micropost.service.LoginService
@@ -23,8 +22,8 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import kotlinx.android.synthetic.main.signup_email.view.*
-import kotlinx.android.synthetic.main.signup_full_name.view.*
+import kotlinx.android.synthetic.main.fragment_signup_email.*
+import kotlinx.android.synthetic.main.fragment_signup_full_name.*
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
@@ -144,15 +143,15 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
         moveToEmailWithName("John Doe")
         moveToPasswordWithEmail("test@test.com")
 
-        val content = activityRule.activity.content()
+        val activity = activityRule.activity
 
         onView(withId(android.R.id.content)).perform(pressBack())
         onView(withText(R.string.what_s_your_email)).check(matches(isDisplayed()))
-        assertThat(content.email.text.toString(), `is`("test@test.com"))
+        assertThat(activity.email.text.toString(), `is`("test@test.com"))
 
         onView(withId(android.R.id.content)).perform(pressBack())
         onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
-        assertThat(content.fullName.text.toString(), `is`("John Doe"))
+        assertThat(activity.fullName.text.toString(), `is`("John Doe"))
     }
 
     private fun moveToEmailWithName(name: String) {

@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_signup_full_name"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_xlarge"
-            android:text="@string/what_s_your_email"
+            android:text="@string/hi_what_s_your_name"
             android:textSize="@dimen/app_text_size_xxlarge"/>
 
         <android.support.design.widget.TextInputLayout
@@ -23,18 +25,18 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/email"
+                android:id="@+id/fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"/>
+                android:hint="@string/full_name"
+                android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/emailInvalid"
+            android:id="@+id/fullNameInvalid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/please_enter_a_valid_email"
+            android:text="@string/full_name_must_be_longer_than_4_chars"
             android:visibility="gone"/>
     </LinearLayout>
 
@@ -45,11 +47,10 @@
         android:background="@drawable/border_top">
 
         <Button
-            android:id="@+id/emailNextBtn"
+            android:id="@+id/fullNameNextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:text="@string/next"/>
     </RelativeLayout>
 </RelativeLayout>
