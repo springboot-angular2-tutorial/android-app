@@ -1,18 +1,17 @@
 # Android micropost app
 
-This repository is an example Android application, which is based on Rails tutorial app.
+This repository is an example Android application based on Rails tutorial app.
 
 [![Build Status](https://travis-ci.org/springboot-angular2-tutorial/android-app.svg?branch=master)](https://travis-ci.org/springboot-angular2-tutorial/android-app)
-[![Coverage Status](https://coveralls.io/repos/github/springboot-angular2-tutorial/android-app/badge.svg?branch=master)](https://coveralls.io/github/springboot-angular2-tutorial/android-app?branch=master)
 
-Key components.
-
-* Dagger 2
-* Retrolambda
-* RxJava / RxAndroid
-* Retrofit 2
-* Data Binding
-* Robolectric 3
+* Kotlin 100% without kapt
+* [Kodein](https://github.com/SalomonBrys/Kodein) as Dependency Injection
+* MVP architecture
+* [RxJava](https://github.com/ReactiveX/RxJava) / [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+* [RxBinding](https://github.com/JakeWharton/RxBinding)
+* [Retrofit](https://github.com/square/retrofit)
+* [Robolectric](http://robolectric.org/) for testing model layer
+* [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/) for testing presentation layer
 
 ## Getting Started
 
@@ -40,7 +39,8 @@ Then, just run from Android Studio.
 Testing.
 
 ```
-./gradlew testDebug
+./gradlew testDebugUnitTest
+./gradlew connectedAndroidTest
 ```
 
 Release build.
