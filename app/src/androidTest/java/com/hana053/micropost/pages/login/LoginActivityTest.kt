@@ -51,14 +51,14 @@ class LoginActivityTest : InjectableTest by InjectableTestImpl() {
 
         onView(loginBtn).check(ViewAssertions.matches(not(isEnabled())))
 
-        onView(emailEditText).perform(typeText("test@test.com"))
+        onView(emailEditText).perform(typeText("test@test.com"), closeSoftKeyboard())
         onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
         onView(loginBtn).check(ViewAssertions.matches(isEnabled()))
 
         onView(passwordEditText).perform(clearText(), closeSoftKeyboard())
         onView(loginBtn).check(ViewAssertions.matches(not(isEnabled())))
 
-        onView(emailEditText).perform(clearText())
+        onView(emailEditText).perform(clearText(), closeSoftKeyboard())
         onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
         onView(loginBtn).check(ViewAssertions.matches(not(isEnabled())))
     }
@@ -74,9 +74,9 @@ class LoginActivityTest : InjectableTest by InjectableTestImpl() {
         }
         activityRule.launchActivity(null)
 
-        onView(emailEditText).perform(typeText("test@test.com"))
-        onView(passwordEditText).perform(typeText("secret123"))
-        onView(loginBtn).perform(closeSoftKeyboard(), click())
+        onView(emailEditText).perform(typeText("test@test.com"), closeSoftKeyboard())
+        onView(passwordEditText).perform(typeText("secret123"), closeSoftKeyboard())
+        onView(loginBtn).perform(click())
 
         verify(navigator).navigateToMain()
     }
