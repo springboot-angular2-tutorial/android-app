@@ -14,14 +14,13 @@ class TopActivity : RxAppCompatActivity(), AppCompatActivityInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: TopPresenter by instance()
-    private val view: TopView by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top)
         initializeInjector()
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroy() {

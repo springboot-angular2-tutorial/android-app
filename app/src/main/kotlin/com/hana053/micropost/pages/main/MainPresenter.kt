@@ -1,52 +1,52 @@
 package com.hana053.micropost.pages.main
 
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.posts.PostListAdapter
-import com.hana053.micropost.withProgressDialog
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.subjects.PublishSubject
 
 
 class MainPresenter(
+    override val view: MainView,
     private val mainService: MainService,
     private val postListAdapter: PostListAdapter,
     private val navigator: Navigator
-) {
+) : Presenter<MainView> {
 
     val newPostSubmittedSubject: PublishSubject<Void> = PublishSubject.create()
 
-    fun bind(view: MainView) {
+    override fun bind() {
         mainService.loadNextFeed()
-            .bindToLifecycle(view.content)
-            .withProgressDialog(view.content)
+            .bindToLifecycle()
+            .withProgressDialog()
             .subscribe()
 
         view.swipeRefreshes
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap { mainService.loadNextFeed() }
             .subscribe { view.swipeRefreshing.call(false) }
 
         view.scrolledToBottom
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap {
                 mainService.loadPrevFeed()
-                    .withProgressDialog(view.content)
+                    .withProgressDialog()
             }
             .subscribe()
 
         view.newMicropostClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToMicropostNew() }
 
         postListAdapter.avatarClicksSubject
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToUserShow(it.id) }
 
         newPostSubmittedSubject
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap {
                 mainService.loadNextFeed()
-                    .withProgressDialog(view.content)
+                    .withProgressDialog()
             }
             .subscribe()
     }

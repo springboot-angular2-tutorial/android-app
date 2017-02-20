@@ -20,7 +20,6 @@ class MainActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     private val authService: AuthService by instance()
     private val presenter: MainPresenter by instance()
-    private val view: MainView by instance()
 
     companion object {
         val REQUEST_POST = 1
@@ -33,7 +32,7 @@ class MainActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         if (!authService.auth()) return
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroy() {

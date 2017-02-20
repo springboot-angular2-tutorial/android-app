@@ -17,6 +17,7 @@ class MainService(
 
     fun loadNextFeed(): Observable<List<Micropost>> {
         val sinceId = postListAdapter.getFirstItemId()
+
         return feedInteractor.loadNextFeed(sinceId)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -28,6 +29,7 @@ class MainService(
     fun loadPrevFeed(): Observable<List<Micropost>> {
         val maxId = postListAdapter.getLastItemId()
         val itemCount = postListAdapter.itemCount
+
         return feedInteractor.loadPrevFeed(maxId)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())

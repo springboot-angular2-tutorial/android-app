@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_signup_email.*
 fun signupEmailModule() = Kodein.Module {
 
     bind<SignupEmailPresenter>() with autoScopedSingleton(androidActivityScope) {
-        SignupEmailPresenter(instance(), instance())
+        SignupEmailPresenter(instance(), instance(), instance())
     }
 
     bind<SignupEmailView>() with autoScopedSingleton(androidActivityScope) {

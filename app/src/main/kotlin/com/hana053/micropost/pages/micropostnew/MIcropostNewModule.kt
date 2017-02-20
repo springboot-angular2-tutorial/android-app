@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_micropost_new.*
 fun micropostNewModule() = Kodein.Module {
 
     bind<MicropostNewPresenter>() with autoScopedSingleton(androidActivityScope) {
-        MicropostNewPresenter(instance(), instance())
+        MicropostNewPresenter(instance(), instance(), instance())
     }
 
     bind<MicropostNewView>() with autoScopedSingleton(androidActivityScope) {

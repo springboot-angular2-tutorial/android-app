@@ -1,43 +1,43 @@
 package com.hana053.micropost.pages.usershow.detail
 
 import com.hana053.micropost.domain.User
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.followbtn.FollowBtnService
-import com.hana053.micropost.withProgressDialog
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.Observable
 
 
 class UserShowDetailPresenter(
+    override val view: UserShowDetailView,
     private val userId: Long,
     private val detailService: UserShowDetailService,
     private val followBtnService: FollowBtnService,
     private val navigator: Navigator
-) {
+) : Presenter<UserShowDetailView> {
 
-    fun bind(view: UserShowDetailView) {
-        getUser(view)
-            .bindToLifecycle(view.content)
+    override fun bind() {
+        getUser()
+            .bindToLifecycle()
             .subscribe()
 
         view.followClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
-            .flatMap { getUser(view) }
+            .flatMap { getUser() }
             .subscribe()
 
         view.followersClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToFollowerList(userId) }
 
         view.followingsClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToFollowingList(userId) }
     }
 
-    private fun getUser(view: UserShowDetailView): Observable<User> {
+    private fun getUser(): Observable<User> {
         return detailService.getUser(userId)
-            .withProgressDialog(view.content)
+            .withProgressDialog()
             .doOnNext { view.render(it) }
     }
 

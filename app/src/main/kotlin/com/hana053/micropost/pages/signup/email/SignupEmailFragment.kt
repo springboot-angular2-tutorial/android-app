@@ -16,7 +16,6 @@ class SignupEmailFragment : RxFragment(), SupportFragmentInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: SignupEmailPresenter by instance()
-    private val view: SignupEmailView by instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_signup_email, container, false)
@@ -26,7 +25,7 @@ class SignupEmailFragment : RxFragment(), SupportFragmentInjector {
         super.onActivityCreated(savedInstanceState)
         initializeInjector()
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroyView() {

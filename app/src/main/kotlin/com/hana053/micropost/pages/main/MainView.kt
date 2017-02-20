@@ -2,6 +2,7 @@ package com.hana053.micropost.pages.main
 
 import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
+import com.hana053.micropost.pages.ViewWrapper
 import com.hana053.micropost.shared.posts.PostListAdapter
 import com.jakewharton.rxbinding.support.v4.widget.refreshes
 import com.jakewharton.rxbinding.support.v4.widget.refreshing
@@ -12,9 +13,9 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import rx.Observable
 
 class MainView(
-    val content: ViewGroup,
+    override val content: ViewGroup,
     postListAdapter: PostListAdapter
-) {
+) : ViewWrapper {
 
     private val postRecyclerView = content.postRecyclerView
     private val swipeRefreshLayout = content.swipeRefreshLayout

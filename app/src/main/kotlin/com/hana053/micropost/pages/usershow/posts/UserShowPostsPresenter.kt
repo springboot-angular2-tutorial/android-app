@@ -1,18 +1,18 @@
 package com.hana053.micropost.pages.usershow.posts
 
-import com.hana053.micropost.withProgressDialog
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
+import com.hana053.micropost.pages.Presenter
 
 
 class UserShowPostsPresenter(
+    override val view: UserShowPostsView,
     private val userId: Long,
     private val service: UserShowPostsService
-) {
+) : Presenter<UserShowPostsView> {
 
-    fun bind(view: UserShowPostsView) {
+    override fun bind() {
         service.loadPosts(userId)
-            .bindToLifecycle(view.content)
-            .withProgressDialog(view.content)
+            .bindToLifecycle()
+            .withProgressDialog()
             .subscribe()
     }
 

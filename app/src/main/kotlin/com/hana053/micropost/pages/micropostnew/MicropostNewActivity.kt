@@ -16,7 +16,6 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
     private val authService: AuthService  by instance()
     private val presenter: MicropostNewPresenter by instance()
-    private val view: MicropostNewView by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,7 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         if (!authService.auth()) return
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroy() {

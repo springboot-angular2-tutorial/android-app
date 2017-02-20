@@ -1,20 +1,21 @@
 package com.hana053.micropost.pages.top
 
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.service.Navigator
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class TopPresenter(
+    override val view: TopView,
     private val navigator: Navigator
-) {
+) : Presenter<TopView> {
 
-    fun bind(view: TopView) {
+    override fun bind() {
         view.loginClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToLogin() }
 
         view.signupClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToSignup() }
     }
 

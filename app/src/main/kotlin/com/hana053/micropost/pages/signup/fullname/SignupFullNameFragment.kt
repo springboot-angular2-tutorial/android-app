@@ -16,7 +16,6 @@ class SignupFullNameFragment : RxFragment(), SupportFragmentInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: SignupFullNamePresenter by instance()
-    private val view: SignupFullNameView by instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_signup_full_name, container, false)
@@ -26,7 +25,7 @@ class SignupFullNameFragment : RxFragment(), SupportFragmentInjector {
         super.onActivityCreated(savedInstanceState)
         initializeInjector()
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroy() {

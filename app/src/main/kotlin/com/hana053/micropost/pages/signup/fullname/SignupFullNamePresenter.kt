@@ -1,34 +1,31 @@
 package com.hana053.micropost.pages.signup.fullname
 
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.pages.signup.SignupNavigator
 import com.hana053.micropost.pages.signup.SignupState
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class SignupFullNamePresenter(
+    override val view: SignupFullNameView,
     private val signupState: SignupState,
     private val signupNavigator: SignupNavigator
-) {
+) : Presenter<SignupFullNameView> {
 
-    fun bind(view: SignupFullNameView) {
+    override fun bind() {
         val fullNameChanges = view.fullNameChanges.share()
 
         fullNameChanges
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .map { isFormValid(it) }
-            .subscribe {
-                view.nextBtnEnabled.call(it)
-            }
+            .subscribe { view.nextBtnEnabled.call(it) }
 
         fullNameChanges
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .map { !isFormValid(it) && it.isNotBlank() }
-            .subscribe {
-                view.fullNameInvalidVisibility.call(it)
-            }
+            .subscribe { view.fullNameInvalidVisibility.call(it) }
 
         view.nextBtnClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .withLatestFrom(fullNameChanges, { click, fullName -> fullName })
             .subscribe {
                 signupState.fullName = it.toString()

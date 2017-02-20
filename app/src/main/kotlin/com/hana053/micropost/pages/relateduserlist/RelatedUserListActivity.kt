@@ -16,7 +16,6 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
     override val injector: KodeinInjector = KodeinInjector()
 
     private val authService: AuthService by instance()
-    private val view: RelatedUserListView by instance()
     private val presenter: RelatedUserListPresenter by instance()
     private val relatedUserListService: RelatedUserListService by instance()
 
@@ -36,7 +35,7 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
 
         if (!authService.auth()) return
 
-        presenter.bind(view)
+        presenter.bind()
 
         title = relatedUserListService.title()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

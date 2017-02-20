@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_signup_password.*
 fun signupPasswordModule() = Kodein.Module {
 
     bind<SignupPasswordPresenter>() with autoScopedSingleton(androidActivityScope) {
-        SignupPasswordPresenter(instance(), instance(), instance())
+        SignupPasswordPresenter(instance(), instance(), instance(), instance())
     }
 
     bind<SignupPasswordView>() with autoScopedSingleton(androidActivityScope) {

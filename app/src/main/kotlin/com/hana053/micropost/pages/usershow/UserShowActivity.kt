@@ -8,9 +8,7 @@ import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.R
 import com.hana053.micropost.getOverridingModule
 import com.hana053.micropost.pages.usershow.detail.UserShowDetailPresenter
-import com.hana053.micropost.pages.usershow.detail.UserShowDetailView
 import com.hana053.micropost.pages.usershow.posts.UserShowPostsPresenter
-import com.hana053.micropost.pages.usershow.posts.UserShowPostsView
 import com.hana053.micropost.service.AuthService
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
@@ -19,11 +17,7 @@ class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val authService: AuthService by instance()
-
-    private val detailView: UserShowDetailView by instance()
     private val detailPresenter: UserShowDetailPresenter by instance()
-
-    private val postsView: UserShowPostsView by instance()
     private val postsPresenter: UserShowPostsPresenter by instance()
 
     companion object {
@@ -37,8 +31,8 @@ class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         if (!authService.auth()) return
 
-        detailPresenter.bind(detailView)
-        postsPresenter.bind(postsView)
+        detailPresenter.bind()
+        postsPresenter.bind()
 
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

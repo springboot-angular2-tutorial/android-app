@@ -16,7 +16,6 @@ class SignupPasswordFragment : RxFragment(), SupportFragmentInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: SignupPasswordPresenter by instance()
-    private val view: SignupPasswordView by instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_signup_password, container, false)
@@ -26,7 +25,7 @@ class SignupPasswordFragment : RxFragment(), SupportFragmentInjector {
         super.onActivityCreated(savedInstanceState)
         initializeInjector()
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroyView() {

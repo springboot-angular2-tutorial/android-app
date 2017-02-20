@@ -1,34 +1,31 @@
 package com.hana053.micropost.pages.signup.email
 
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.pages.signup.SignupNavigator
 import com.hana053.micropost.pages.signup.SignupState
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class SignupEmailPresenter(
+    override val view: SignupEmailView,
     private val signupState: SignupState,
     private val signupNavigator: SignupNavigator
-) {
+) : Presenter<SignupEmailView> {
 
-    fun bind(view: SignupEmailView) {
+    override fun bind() {
         val emailChanges = view.emailChanges.share()
 
         emailChanges
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .map { isFormValid(it) }
-            .subscribe {
-                view.nextBtnEnabled.call(it)
-            }
+            .subscribe { view.nextBtnEnabled.call(it) }
 
         emailChanges
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .map { !isFormValid(it) && it.isNotBlank() }
-            .subscribe {
-                view.emailInvalidVisibility.call(it)
-            }
+            .subscribe { view.emailInvalidVisibility.call(it) }
 
         view.nextBtnClicks
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .withLatestFrom(emailChanges, { click, email -> email })
             .subscribe {
                 signupState.email = it.toString()

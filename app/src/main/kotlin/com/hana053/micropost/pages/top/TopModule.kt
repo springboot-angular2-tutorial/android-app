@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_top.*
 fun topModule() = Kodein.Module {
 
     bind<TopPresenter>() with autoScopedSingleton(androidActivityScope) {
-        TopPresenter(instance())
+        TopPresenter(instance(), instance())
     }
 
     bind<TopView>() with autoScopedSingleton(androidActivityScope) {

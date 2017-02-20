@@ -1,41 +1,41 @@
 package com.hana053.micropost.pages.relateduserlist
 
+import com.hana053.micropost.pages.Presenter
 import com.hana053.micropost.service.Navigator
 import com.hana053.micropost.shared.followbtn.FollowBtnService
-import com.hana053.micropost.withProgressDialog
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class RelatedUserListPresenter(
+    override val view: RelatedUserListView,
     private val userId: Long,
     private val relatedUserListService: RelatedUserListService,
     private val relatedUserListAdapter: RelatedUserListAdapter,
     private val followBtnService: FollowBtnService,
     private val navigator: Navigator
-) {
+) : Presenter<RelatedUserListView> {
 
-    fun bind(view: RelatedUserListView) {
+    override fun bind() {
 
         relatedUserListService.listUsers(userId)
-            .bindToLifecycle(view.content)
-            .withProgressDialog(view.content)
+            .bindToLifecycle()
+            .withProgressDialog()
             .subscribe()
 
         view.scrolledToBottom
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap {
                 relatedUserListService.listUsers(userId)
-                    .withProgressDialog(view.content)
+                    .withProgressDialog()
             }
             .subscribe()
 
         relatedUserListAdapter.followBtnClicksSubject
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
             .subscribe()
 
         relatedUserListAdapter.avatarClicksSubject
-            .bindToLifecycle(view.content)
+            .bindToLifecycle()
             .subscribe { navigator.navigateToUserShow(it.id) }
     }
 

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_signup_full_name.*
 fun signupFullNameModule() = Kodein.Module {
 
     bind<SignupFullNamePresenter>() with autoScopedSingleton(androidActivityScope) {
-        SignupFullNamePresenter(instance(), instance())
+        SignupFullNamePresenter(instance(), instance(), instance())
     }
 
     bind<SignupFullNameView>() with autoScopedSingleton(androidActivityScope) {

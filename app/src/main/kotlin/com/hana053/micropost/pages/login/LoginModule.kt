@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 fun loginModule() = Kodein.Module {
 
     bind<LoginPresenter>() with autoScopedSingleton(androidActivityScope) {
-        LoginPresenter(instance(), instance())
+        LoginPresenter(instance(), instance(), instance())
     }
 
     bind<LoginView>() with autoScopedSingleton(androidActivityScope) {

@@ -13,14 +13,13 @@ class LoginActivity : RxAppCompatActivity(), AppCompatActivityInjector {
     override val injector: KodeinInjector = KodeinInjector()
 
     private val presenter: LoginPresenter by instance()
-    private val view: LoginView by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         initializeInjector()
 
-        presenter.bind(view)
+        presenter.bind()
     }
 
     override fun onDestroy() {
