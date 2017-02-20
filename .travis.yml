@@ -26,8 +26,8 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew clean connectedAndroidTest
-  - ./gradlew test
+  - ./gradlew clean connectedAndroidTest --info
+  - ./gradlew test --info
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

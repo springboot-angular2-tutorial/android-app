@@ -39,6 +39,9 @@ android {
         test.java.srcDirs += 'src/testShared/java'
         androidTest.java.srcDirs += 'src/testShared/java'
     }
+    dexOptions {
+        javaMaxHeapSize '2g'
+    }
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
     }
