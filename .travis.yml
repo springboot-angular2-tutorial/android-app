@@ -18,7 +18,7 @@ android:
     - sys-img-armeabi-v7a-android-22
 
 before_script:
-  - cp gradle.properties.example gradle.properties
+  - cp gradle.properties.ci.example gradle.properties
   # Emulator Management: Create, Start and Wait
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
@@ -26,7 +26,7 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew clean test connectedAndroidTest --info
+  - ./gradlew clean testDebugUnitTest connectedAndroidTest --info
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
