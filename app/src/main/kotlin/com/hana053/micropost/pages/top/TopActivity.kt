@@ -28,8 +28,7 @@ class TopActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         destroyInjector()
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(TopActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 
 }
 

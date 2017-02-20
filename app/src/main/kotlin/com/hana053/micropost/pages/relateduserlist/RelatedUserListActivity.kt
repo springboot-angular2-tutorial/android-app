@@ -57,7 +57,6 @@ class RelatedUserListActivity : RxAppCompatActivity(), AppCompatActivityInjector
         return super.onOptionsItemSelected(item)
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(RelatedUserListActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 
 }

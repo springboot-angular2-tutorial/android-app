@@ -27,7 +27,6 @@ class LoginActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         destroyInjector()
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(LoginActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 }
 

@@ -62,7 +62,6 @@ class MainActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(MainActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 
 }

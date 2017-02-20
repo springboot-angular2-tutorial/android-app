@@ -53,7 +53,6 @@ class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(UserShowActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 
 }

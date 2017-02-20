@@ -39,7 +39,6 @@ class SignupActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         signupNavigator.navigateToPrev()
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(SignupActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 
 }

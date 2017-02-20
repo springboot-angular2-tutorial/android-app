@@ -32,6 +32,5 @@ class MicropostNewActivity : RxAppCompatActivity(), AppCompatActivityInjector {
         destroyInjector()
     }
 
-    override fun provideOverridingModule()
-        = getOverridingModule(MicropostNewActivity::class.java)
+    override fun provideOverridingModule() = getOverridingModule()
 }
