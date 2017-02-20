@@ -55,15 +55,15 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
         onView(withId(R.id.fullNameNextBtn)).check(matches(not(isEnabled())))
         onView(withId(R.id.fullNameInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.fullName)).perform(typeText("a"))
+        onView(withId(R.id.fullName)).perform(typeText("a"), closeSoftKeyboard())
         onView(withId(R.id.fullNameInvalid)).check(matches(isDisplayed()))
         onView(withId(R.id.fullNameNextBtn)).check(matches(not(isEnabled())))
 
-        onView(withId(R.id.fullName)).perform(clearText(), typeText("John Doe"))
+        onView(withId(R.id.fullName)).perform(replaceText("John Doe"), closeSoftKeyboard())
         onView(withId(R.id.fullNameNextBtn)).check(matches(isEnabled()))
         onView(withId(R.id.fullNameInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.fullNameNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.fullNameNextBtn)).perform(click())
         onView(withText(R.string.what_s_your_email)).check(matches(isDisplayed()))
     }
 
@@ -76,15 +76,15 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
         onView(withId(R.id.emailNextBtn)).check(matches(not(isEnabled())))
         onView(withId(R.id.emailInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.email)).perform(typeText("a"))
+        onView(withId(R.id.email)).perform(typeText("a"), closeSoftKeyboard())
         onView(withId(R.id.emailInvalid)).check(matches(isDisplayed()))
         onView(withId(R.id.emailNextBtn)).check(matches(not(isEnabled())))
 
-        onView(withId(R.id.email)).perform(clearText(), typeText("test@test.com"))
+        onView(withId(R.id.email)).perform(replaceText("test@test.com"), closeSoftKeyboard())
         onView(withId(R.id.emailNextBtn)).check(matches(isEnabled()))
         onView(withId(R.id.emailInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.emailNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.emailNextBtn)).perform(click())
         onView(withText(R.string.you_ll_need_a_password)).check(matches(isDisplayed()))
     }
 
@@ -108,15 +108,15 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
         onView(withId(R.id.passwordNextBtn)).check(matches(not(isEnabled())))
         onView(withId(R.id.passwordInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.password)).perform(typeText("a"))
+        onView(withId(R.id.password)).perform(typeText("a"), closeSoftKeyboard())
         onView(withId(R.id.passwordInvalid)).check(matches(isDisplayed()))
         onView(withId(R.id.passwordNextBtn)).check(matches(not(isEnabled())))
 
-        onView(withId(R.id.password)).perform(clearText(), typeText("secret123"))
+        onView(withId(R.id.password)).perform(replaceText("secret123"), closeSoftKeyboard())
         onView(withId(R.id.passwordNextBtn)).check(matches(isEnabled()))
         onView(withId(R.id.passwordInvalid)).check(matches(not(isDisplayed())))
 
-        onView(withId(R.id.passwordNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.passwordNextBtn)).perform(click())
 
         verify(navigator).navigateToMain()
     }
@@ -156,18 +156,18 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
     }
 
     private fun moveToEmailWithName(name: String) {
-        onView(withId(R.id.fullName)).perform(typeText(name))
-        onView(withId(R.id.fullNameNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.fullName)).perform(typeText(name), closeSoftKeyboard())
+        onView(withId(R.id.fullNameNextBtn)).perform(click())
     }
 
     private fun moveToPasswordWithEmail(email: String) {
-        onView(withId(R.id.email)).perform(typeText(email))
-        onView(withId(R.id.emailNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.email)).perform(typeText(email), closeSoftKeyboard())
+        onView(withId(R.id.emailNextBtn)).perform(click())
     }
 
     private fun moveToMainWithPassword(password: String) {
-        onView(withId(R.id.password)).perform(typeText(password))
-        onView(withId(R.id.passwordNextBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.password)).perform(typeText(password), closeSoftKeyboard())
+        onView(withId(R.id.passwordNextBtn)).perform(click())
     }
 
 }
