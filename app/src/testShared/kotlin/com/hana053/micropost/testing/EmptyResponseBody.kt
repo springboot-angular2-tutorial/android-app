@@ -5,15 +5,9 @@ import okhttp3.ResponseBody
 import okio.BufferedSource
 
 class EmptyResponseBody : ResponseBody() {
-    override fun contentType(): MediaType? {
-        return null
-    }
 
-    override fun contentLength(): Long {
-        return 0
-    }
+    override fun contentType(): MediaType? = null
+    override fun contentLength(): Long = 0
+    override fun source(): BufferedSource? = null
 
-    override fun source(): BufferedSource? {
-        return null
-    }
 }

@@ -28,9 +28,7 @@ internal class TestSchedulerProxy {
             }
         }
 
-        fun get(): TestSchedulerProxy {
-            return INSTANCE
-        }
+        fun get(): TestSchedulerProxy = INSTANCE
     }
 
 }

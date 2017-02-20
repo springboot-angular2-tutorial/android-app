@@ -6,11 +6,10 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
-import org.robolectric.RuntimeEnvironment
 
 class AuthTokenRepositoryTest : RobolectricBaseTest() {
 
-    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
     private val authTokenRepository = AuthTokenRepositoryImpl(sharedPreferences)
 
     @Test

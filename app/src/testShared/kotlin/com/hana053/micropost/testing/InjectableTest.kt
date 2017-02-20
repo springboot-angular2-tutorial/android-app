@@ -13,10 +13,10 @@ interface InjectableTest {
 
     @Before
     fun resetSharedPreferences() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+        PreferenceManager.getDefaultSharedPreferences(app).edit()
+            .clear()
+            .apply()
+
     }
 
     fun overrideAppBindings(init: Kodein.Builder.() -> Unit) {

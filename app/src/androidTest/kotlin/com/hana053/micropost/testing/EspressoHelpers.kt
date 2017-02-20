@@ -13,11 +13,11 @@ fun atPositionOnView(
     targetId: Int
 ) = object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
 
-    override fun matchesSafely(recyclerView: RecyclerView): Boolean {
-        val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)
-        val targetView = viewHolder.itemView.findViewById(targetId)
-        return matcher.matches(targetView)
-    }
+    override fun matchesSafely(recyclerView: RecyclerView): Boolean =
+        recyclerView.findViewHolderForAdapterPosition(position)
+            .itemView
+            .findViewById(targetId)
+            .let { matcher.matches(it) }
 
     override fun describeTo(description: Description?) {
         description?.appendText("has view id $matcher at position $position")
