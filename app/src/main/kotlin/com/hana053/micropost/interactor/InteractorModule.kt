@@ -18,15 +18,14 @@ fun interactorModule() = Kodein.Module {
         val authTokenRepository = instance<AuthTokenRepository>()
 
         OkHttpClient().newBuilder().addInterceptor { chain ->
-            val authToken = authTokenRepository.get()
             val original = chain.request()
-            val builder = original.newBuilder()
-            if (authToken != null)
-                builder.header("authorization", "Bearer " + authToken)
-            val request = builder
-                .method(original.method(), original.body())
-                .build()
-            chain.proceed(request)
+            val modified = original.newBuilder().apply {
+                authTokenRepository.get()?.let {
+                    header("authorization", "Bearer $it")
+                }
+            }.method(original.method(), original.body()).build()
+
+            chain.proceed(modified)
         }.build()
     }
 
