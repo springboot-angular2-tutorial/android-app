@@ -25,7 +25,7 @@ fun relatedUserListModule() = Kodein.Module {
     }
 
     bind<RelatedUserListPresenter>() with autoScopedSingleton(androidActivityScope) {
-        RelatedUserListPresenter(instance("userId"), instance(), instance(), instance(), instance())
+        RelatedUserListPresenter(instance(KEY_USER_ID), instance(), instance(), instance(), instance())
     }
 
     bind<RelatedUserListService>() with autoScopedSingleton(androidActivityScope) {
@@ -35,7 +35,7 @@ fun relatedUserListModule() = Kodein.Module {
         }
     }
 
-    bind<Long>("userId") with provider {
+    bind<Long>(KEY_USER_ID) with provider {
         instance<Activity>().intent.extras.getLong(KEY_USER_ID)
     }
 

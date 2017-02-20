@@ -5,10 +5,11 @@ import com.trello.rxlifecycle.kotlin.bindToLifecycle
 
 
 class UserShowPostsPresenter(
+    private val userId: Long,
     private val service: UserShowPostsService
 ) {
 
-    fun bind(view: UserShowPostsView, userId: Long) {
+    fun bind(view: UserShowPostsView) {
         service.loadPosts(userId)
             .bindToLifecycle(view.content)
             .withProgressDialog(view.content)

@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.android.androidActivityScope
 import com.github.salomonbrys.kodein.autoScopedSingleton
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
+import com.hana053.micropost.pages.usershow.UserShowActivity.Companion.KEY_USER_ID
 import com.hana053.micropost.shared.posts.PostListAdapter
 import kotlinx.android.synthetic.main._user_posts.*
 
@@ -25,7 +26,7 @@ fun userShowPostsModule() = Kodein.Module {
     }
 
     bind<UserShowPostsPresenter>() with autoScopedSingleton(androidActivityScope) {
-        UserShowPostsPresenter(instance())
+        UserShowPostsPresenter(instance(KEY_USER_ID), instance())
     }
 
 }

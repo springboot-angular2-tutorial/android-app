@@ -9,20 +9,21 @@ import rx.Observable
 
 
 class UserShowDetailPresenter(
+    private val userId: Long,
     private val detailService: UserShowDetailService,
     private val followBtnService: FollowBtnService,
     private val navigator: Navigator
 ) {
 
-    fun bind(view: UserShowDetailView, userId: Long) {
-        getUser(userId, view)
+    fun bind(view: UserShowDetailView) {
+        getUser(view)
             .bindToLifecycle(view.content)
             .subscribe()
 
         view.followClicks
             .bindToLifecycle(view.content)
             .flatMap { followBtnService.handleFollowBtnClicks(it) }
-            .flatMap { getUser(userId, view) }
+            .flatMap { getUser(view) }
             .subscribe()
 
         view.followersClicks
@@ -34,7 +35,7 @@ class UserShowDetailPresenter(
             .subscribe { navigator.navigateToFollowingList(userId) }
     }
 
-    private fun getUser(userId: Long, view: UserShowDetailView): Observable<User> {
+    private fun getUser(view: UserShowDetailView): Observable<User> {
         return detailService.getUser(userId)
             .withProgressDialog(view.content)
             .doOnNext { view.render(it) }

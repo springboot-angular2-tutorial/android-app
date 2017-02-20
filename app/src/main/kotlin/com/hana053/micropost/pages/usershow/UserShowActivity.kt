@@ -37,10 +37,8 @@ class UserShowActivity : RxAppCompatActivity(), AppCompatActivityInjector {
 
         if (!authService.auth()) return
 
-        val userId = intent.extras.getLong(KEY_USER_ID)
-
-        detailPresenter.bind(detailView, userId)
-        postsPresenter.bind(postsView, userId)
+        detailPresenter.bind(detailView)
+        postsPresenter.bind(postsView)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
