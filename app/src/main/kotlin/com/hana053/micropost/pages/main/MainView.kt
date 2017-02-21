@@ -17,22 +17,21 @@ class MainView(
     postListAdapter: PostListAdapter
 ) : ViewWrapper {
 
-    private val postRecyclerView = content.postRecyclerView
-    private val swipeRefreshLayout = content.swipeRefreshLayout
+    private val listPost = content.list_post
+    private val swipeRefresh = content.swipe_refresh
 
     // Events
-    val swipeRefreshes = swipeRefreshLayout.refreshes()
-    val scrolledToBottom: Observable<RecyclerViewScrollEvent> = postRecyclerView
-        .scrollEvents()
-        .filter { !postRecyclerView.canScrollVertically(1) }
-    val newMicropostClicks = content.newMicropostBtn.clicks()
+    val swipeRefreshes = swipeRefresh.refreshes()
+    val scrollsToBottom: Observable<RecyclerViewScrollEvent> = listPost.scrollEvents()
+        .filter { !listPost.canScrollVertically(1) }
+    val newMicropostClicks = content.btn_new_micropost.clicks()
 
     // Props
-    val swipeRefreshing = swipeRefreshLayout.refreshing()
+    val swipeRefreshing = swipeRefresh.refreshing()
 
     init {
-        postRecyclerView.layoutManager = LinearLayoutManager(context())
-        postRecyclerView.adapter = postListAdapter
+        listPost.layoutManager = LinearLayoutManager(context())
+        listPost.adapter = postListAdapter
     }
 
 }

@@ -8,12 +8,12 @@
     tools:context=".pages.main.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/postRecyclerView"
+            android:id="@+id/list_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -26,7 +26,7 @@
         android:layout_alignParentBottom="true">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/newMicropostBtn"
+            android:id="@+id/btn_new_micropost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

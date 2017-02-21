@@ -26,7 +26,7 @@ class MainPresenter(
             .flatMap { mainService.loadNextFeed() }
             .subscribe { view.swipeRefreshing.call(false) }
 
-        view.scrolledToBottom
+        view.scrollsToBottom
             .bindToLifecycle()
             .flatMap {
                 mainService.loadPrevFeed()

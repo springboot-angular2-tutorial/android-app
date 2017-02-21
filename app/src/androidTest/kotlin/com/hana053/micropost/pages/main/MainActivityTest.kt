@@ -70,7 +70,7 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
 
         activityRule.launchActivity(null)
 
-        onView(withId(R.id.postRecyclerView))
+        onView(withId(R.id.list_post))
             .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
     }
 
@@ -91,11 +91,11 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         activityRule.launchActivity(null)
-        onView(withId(R.id.swipeRefreshLayout)).perform(swipeDown())
+        onView(withId(R.id.swipe_refresh)).perform(swipeDown())
 
-        onView(withId(R.id.postRecyclerView))
+        onView(withId(R.id.list_post))
             .check(matches(atPositionOnView(0, withText("my new content"), R.id.content)))
-        onView(withId(R.id.postRecyclerView))
+        onView(withId(R.id.list_post))
             .check(matches(atPositionOnView(1, withText("my test content"), R.id.content)))
     }
 
@@ -117,9 +117,9 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
 
         activityRule.launchActivity(null)
 
-        onView(withId(R.id.postRecyclerView))
+        onView(withId(R.id.list_post))
             .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
-        onView(withId(R.id.postRecyclerView))
+        onView(withId(R.id.list_post))
             .check(matches(atPositionOnView(1, withText("my old content"), R.id.content)))
     }
 
@@ -158,7 +158,7 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         activityRule.launchActivity(null)
-        onView(withId(R.id.newMicropostBtn)).perform(click())
+        onView(withId(R.id.btn_new_micropost)).perform(click())
 
         verify(navigator).navigateToMicropostNew()
     }
@@ -180,7 +180,7 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         activityRule.launchActivity(null)
         verify(feedInteractor, times(1)).loadNextFeed(null)
 
-        onView(withId(R.id.newMicropostBtn)).perform(click())
+        onView(withId(R.id.btn_new_micropost)).perform(click())
         onView(withId(R.id.postEditText)).perform(typeText("hello"))
         onView(withId(R.id.postBtn)).perform(closeSoftKeyboard(), click())
 
