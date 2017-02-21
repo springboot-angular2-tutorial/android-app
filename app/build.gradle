@@ -12,7 +12,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.hana053.micropost.testing.AppTestRunner"
         multiDexEnabled = true
         buildConfigField('String', 'API_URL', getProperty("micropost.apiUrl"))
     }
@@ -95,6 +95,7 @@ dependencies {
     androidTestCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
     androidTestCompile "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito_version"
     androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+    androidTestCompile "com.linkedin.testbutler:test-butler-library:1.2.0"
 }
 repositories {
     mavenCentral()
