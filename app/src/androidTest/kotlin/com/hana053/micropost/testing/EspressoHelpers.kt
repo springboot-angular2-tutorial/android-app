@@ -13,7 +13,7 @@ fun atPositionOnView(
     targetId: Int
 ) = object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
 
-    override fun matchesSafely(recyclerView: RecyclerView): Boolean =
+    override fun matchesSafely(recyclerView: RecyclerView) =
         recyclerView.findViewHolderForAdapterPosition(position)
             .itemView
             .findViewById(targetId)
