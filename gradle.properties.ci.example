@@ -1,1 +1,5 @@
+org.gradle.daemon=true
+org.gradle.jvmargs=-Xmx2560m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+
 micropost.apiUrl="http://localhost/api/"
+
