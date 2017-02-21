@@ -71,7 +71,7 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         activityRule.launchActivity(null)
 
         onView(withId(R.id.list_post))
-            .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
+            .check(matches(atPositionOnView(0, withText("my test content"), R.id.tv_post_content)))
     }
 
     @Test
@@ -94,9 +94,9 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         onView(withId(R.id.swipe_refresh)).perform(swipeDown())
 
         onView(withId(R.id.list_post))
-            .check(matches(atPositionOnView(0, withText("my new content"), R.id.content)))
+            .check(matches(atPositionOnView(0, withText("my new content"), R.id.tv_post_content)))
         onView(withId(R.id.list_post))
-            .check(matches(atPositionOnView(1, withText("my test content"), R.id.content)))
+            .check(matches(atPositionOnView(1, withText("my test content"), R.id.tv_post_content)))
     }
 
     @Test
@@ -118,9 +118,9 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         activityRule.launchActivity(null)
 
         onView(withId(R.id.list_post))
-            .check(matches(atPositionOnView(0, withText("my test content"), R.id.content)))
+            .check(matches(atPositionOnView(0, withText("my test content"), R.id.tv_post_content)))
         onView(withId(R.id.list_post))
-            .check(matches(atPositionOnView(1, withText("my old content"), R.id.content)))
+            .check(matches(atPositionOnView(1, withText("my old content"), R.id.tv_post_content)))
     }
 
     @Test
@@ -139,7 +139,7 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         activityRule.launchActivity(null)
-        onView(withId(R.id.avatar)).perform(click())
+        onView(withId(R.id.img_avatar)).perform(click())
 
         verify(navigator).navigateToUserShow(1)
     }

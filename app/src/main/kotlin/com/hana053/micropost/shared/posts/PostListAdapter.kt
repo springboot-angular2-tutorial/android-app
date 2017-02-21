@@ -24,10 +24,10 @@ class PostListAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val container: LinearLayout = view.container
-        val avatar: ImageView = view.avatar
-        val userName: TextView = view.userName
-        val createdAt: RelativeTimeTextView = view.createdAt
-        val content: TextView = view.content
+        val avatar: ImageView = view.img_avatar
+        val userName: TextView = view.tv_post_user_name
+        val createdAt: RelativeTimeTextView = view.tv_post_created_at
+        val content: TextView = view.tv_post_content
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -48,7 +48,6 @@ class PostListAdapter(
                 avatarClicksSubject.onNext(item.user)
             }
         }
-
     }
 
     override fun getItemCount(): Int = posts.size

@@ -13,7 +13,7 @@
     android:paddingTop="@dimen/margin_small">
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/img_avatar"
         android:layout_width="@dimen/avatar_size_medium"
         android:layout_height="@dimen/avatar_size_medium"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -25,22 +25,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/tv_post_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
 
         <com.github.curioustechizen.ago.RelativeTimeTextView
-            android:id="@+id/createdAt"
+            android:id="@+id/tv_post_created_at"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             tools:ignore="RelativeOverlap"/>
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/tv_post_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userName"/>
+            android:layout_below="@id/tv_post_user_name"/>
     </RelativeLayout>
 </LinearLayout>
