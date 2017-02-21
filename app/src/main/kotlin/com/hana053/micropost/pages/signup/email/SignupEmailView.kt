@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.fragment_signup_email.view.*
 class SignupEmailView(override val content: ViewGroup) : ViewWrapper {
 
     // Events
-    val emailChanges = content.email.textChanges()
-    val nextBtnClicks = content.emailNextBtn.clicks()
+    val emailChanges = content.et_email.textChanges()
+    val nextBtnClicks = content.btn_next.clicks()
 
     // Props
-    val nextBtnEnabled = content.emailNextBtn.enabled()
-    val emailInvalidVisibility = content.emailInvalid.visibility()
+    val nextBtnEnabled = content.btn_next.enabled()
+    val emailInvalidVisibility = content.tv_email_invalid.visibility()
 
 }

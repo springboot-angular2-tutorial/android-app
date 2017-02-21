@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/email"
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -32,7 +32,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/emailInvalid"
+            android:id="@+id/tv_email_invalid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/please_enter_a_valid_email"
@@ -46,11 +46,10 @@
         android:background="@drawable/border_top">
 
         <Button
-            android:id="@+id/emailNextBtn"
+            android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:text="@string/next"/>
     </RelativeLayout>
 </RelativeLayout>

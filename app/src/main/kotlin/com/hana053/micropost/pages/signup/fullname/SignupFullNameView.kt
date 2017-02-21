@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.fragment_signup_full_name.view.*
 class SignupFullNameView(override val content: ViewGroup) : ViewWrapper {
 
     // Events
-    val fullNameChanges = content.fullName.textChanges()
-    val nextBtnClicks = content.fullNameNextBtn.clicks()
+    val fullNameChanges = content.et_full_name.textChanges()
+    val nextBtnClicks = content.btn_next.clicks()
 
     // Props
-    val nextBtnEnabled = content.fullNameNextBtn.enabled()
-    val fullNameInvalidVisibility = content.fullNameInvalid.visibility()
+    val nextBtnEnabled = content.btn_next.enabled()
+    val fullNameInvalidVisibility = content.tv_full_name_invalid.visibility()
 
 }

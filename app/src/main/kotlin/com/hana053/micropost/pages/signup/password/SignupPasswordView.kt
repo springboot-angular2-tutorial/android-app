@@ -12,10 +12,10 @@ import kotlinx.android.synthetic.main.fragment_signup_password.view.*
 class SignupPasswordView(override val content: ViewGroup) : ViewWrapper {
 
     // Events
-    val passwordChanges = content.password.textChanges()
-    val nextBtnClicks = content.passwordNextBtn.clicks()
+    val passwordChanges = content.et_password.textChanges()
+    val nextBtnClicks = content.btn_next.clicks()
 
     // Props
-    val nextBtnEnabled = content.passwordNextBtn.enabled()
-    val passwordInvalidVisibility = content.passwordInvalid.visibility()
+    val nextBtnEnabled = content.btn_next.enabled()
+    val passwordInvalidVisibility = content.tv_password_invalid.visibility()
 }

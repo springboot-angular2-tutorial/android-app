@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/fullName"
+                android:id="@+id/et_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/full_name"
@@ -33,7 +33,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/fullNameInvalid"
+            android:id="@+id/tv_full_name_invalid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/full_name_must_be_longer_than_4_chars"
@@ -47,7 +47,7 @@
         android:background="@drawable/border_top">
 
         <Button
-            android:id="@+id/fullNameNextBtn"
+            android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
