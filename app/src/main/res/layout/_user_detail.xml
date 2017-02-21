@@ -26,7 +26,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/avatar"
+                android:id="@+id/img_avatar"
                 android:layout_width="@dimen/avatar_size_large"
                 android:layout_height="@dimen/avatar_size_large"
                 android:layout_alignParentStart="true"
@@ -36,14 +36,14 @@
                 />
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/avatar"/>
+                android:layout_toEndOf="@+id/img_avatar"/>
 
             <Button
-                android:id="@+id/followBtn"
+                android:id="@+id/btn_follow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -57,42 +57,16 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/followings"
+            <TextView
+                android:id="@+id/tv_followings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_followers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/followingCnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/followings"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/followers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/followerCnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/followers"/>
-            </LinearLayout>
+                android:layout_marginStart="@dimen/margin_small"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -41,8 +41,6 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
             fakeLoadingDetail()
         }
         launchActivityWithUserId(1)
-        onView(withText(R.string.followers)).check(matches(isDisplayed()))
-        onView(withText(R.string.followings)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -67,7 +65,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
             })
         }
         launchActivityWithUserId(1)
-        onView(withText("John Doe")).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_user_name)).check(matches(withText("John Doe")))
     }
 
     @Test
@@ -91,14 +89,14 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         launchActivityWithUserId(1)
-        onView(withId(R.id.followBtn)).check(matches(withText(R.string.Follow)))
+        onView(withId(R.id.btn_follow)).check(matches(withText(R.string.Follow)))
 
         // Do Follow. It will finally fetch user again.
         `when`(userInteractor.get(1)).thenReturn(Observable.just(
             TestUser.copy(name = "John Doe", isFollowedByMe = true)
         ))
-        onView(withId(R.id.followBtn)).perform(click())
-        onView(withId(R.id.followBtn)).check(matches(withText(R.string.Unfollow)))
+        onView(withId(R.id.btn_follow)).perform(click())
+        onView(withId(R.id.btn_follow)).check(matches(withText(R.string.Unfollow)))
     }
 
     @Test
@@ -112,7 +110,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         launchActivityWithUserId(1)
-        onView(withId(R.id.followers)).perform(click())
+        onView(withId(R.id.tv_followers)).perform(click())
 
         verify(navigator).navigateToFollowerList(1)
     }
@@ -128,7 +126,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         launchActivityWithUserId(1)
-        onView(withId(R.id.followings)).perform(click())
+        onView(withId(R.id.tv_followings)).perform(click())
 
         verify(navigator).navigateToFollowingList(1)
     }
@@ -159,7 +157,7 @@ class UserShowActivityTest : InjectableTest by InjectableTestImpl() {
 
     private fun Kodein.Builder.fakeLoadingDetail() {
         bind<UserInteractor>(overrides = true) with instance(mock<UserInteractor> {
-            on { get(any()) } doReturn Observable.empty()
+            on { get(any()) } doReturn Observable.just(TestUser)
         })
     }
 

@@ -2,6 +2,7 @@ package com.hana053.micropost.pages.usershow.detail
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
+import com.hana053.micropost.R
 import com.hana053.micropost.domain.User
 import com.hana053.micropost.pages.ViewWrapper
 import com.hana053.micropost.shared.avatar.AvatarView
@@ -13,15 +14,13 @@ class UserShowDetailView(
     override val content: ViewGroup
 ) : ViewWrapper {
 
-    private val userName = content.userName
-    private val followerCnt = content.followerCnt
-    private val followingCnt = content.followingCnt
-    private val followers = content.followers
-    private val followings = content.followings
+    private val userName = content.tv_user_name
+    private val followers = content.tv_followers
+    private val followings = content.tv_followings
 
     // Sub View
-    private val followBtnView = FollowBtnView(content.followBtn)
-    private val avatarView = AvatarView(content.avatar)
+    private val followBtnView = FollowBtnView(content.btn_follow)
+    private val avatarView = AvatarView(content.img_avatar)
 
     // Events
     val followersClicks = followers.clicks()
@@ -33,8 +32,8 @@ class UserShowDetailView(
         followBtnView.render(user)
         avatarView.render(user)
         userName.text = user.name
-        followingCnt.text = "${user.userStats.followingCnt} "
-        followerCnt.text = "${user.userStats.followerCnt} "
+        followers.text = "${user.userStats.followerCnt} ${context().getString(R.string.followers)}"
+        followings.text = "${user.userStats.followingCnt} ${context().getString(R.string.followings)}"
     }
 
 }
