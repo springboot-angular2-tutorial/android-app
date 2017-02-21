@@ -19,6 +19,7 @@ buildscript {
         mockito_kotlin_version = '1.2.0'
         dexmaker_mockito_version = '2.2.0'
         leakcanary_version = '1.5'
+        testbutler_version = '1.2.0'
     }
     repositories {
         jcenter()
