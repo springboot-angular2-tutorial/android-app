@@ -1,8 +1,11 @@
 package com.hana053.micropost.pages.relateduserlist
 
 import android.app.Activity
-import com.github.salomonbrys.kodein.*
+import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.android.androidActivityScope
+import com.github.salomonbrys.kodein.autoScopedSingleton
+import com.github.salomonbrys.kodein.bind
+import com.github.salomonbrys.kodein.instance
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.Companion.KEY_LIST_TYPE
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.Companion.KEY_USER_ID
 import com.hana053.micropost.pages.relateduserlist.RelatedUserListActivity.ListType.FOLLOWER
@@ -35,15 +38,17 @@ fun relatedUserListModule() = Kodein.Module {
         }
     }
 
-    bind<Long>(KEY_USER_ID) with provider {
-        instance<Activity>().intent.extras.getLong(KEY_USER_ID)
+    bind<Long>(KEY_USER_ID) with autoScopedSingleton(androidActivityScope) {
+        extras().getLong(KEY_USER_ID)
     }
 
-    bind<RelatedUserListActivity.ListType>() with provider {
-        instance<Activity>().intent.extras.getSerializable(KEY_LIST_TYPE) as RelatedUserListActivity.ListType
+    bind<RelatedUserListActivity.ListType>() with autoScopedSingleton(androidActivityScope) {
+        extras().getSerializable(KEY_LIST_TYPE) as RelatedUserListActivity.ListType
     }
 
     import(followBtnModule())
 }
+
+private fun Kodein.extras() = instance<Activity>().intent.extras
 
 
