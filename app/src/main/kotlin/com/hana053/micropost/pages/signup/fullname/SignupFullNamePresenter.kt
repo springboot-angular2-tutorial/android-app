@@ -33,6 +33,6 @@ class SignupFullNamePresenter(
             }
     }
 
-    private fun isFormValid(fullName: CharSequence): Boolean = fullName.length >= 4
+    private fun isFormValid(fullName: CharSequence) = fullName.length >= 4
 
 }

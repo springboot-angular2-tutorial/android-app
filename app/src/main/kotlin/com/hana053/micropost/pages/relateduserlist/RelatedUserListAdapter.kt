@@ -31,7 +31,7 @@ class RelatedUserListAdapter(
         val followBtn: Button = view.followBtn
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         LayoutInflater.from(parent.context)
             .inflate(R.layout.item_related_users, parent, false)
             .let(::ViewHolder)
@@ -57,9 +57,9 @@ class RelatedUserListAdapter(
         }
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount() = users.size
 
-    fun getLastItemId(): Long? = users.map { it.relationshipId }.lastOrNull()
+    fun getLastItemId() = users.map { it.relationshipId }.lastOrNull()
 
     fun addAll(location: Int, users: List<RelatedUser>): Boolean {
         if (this.users.addAll(location, users)) {

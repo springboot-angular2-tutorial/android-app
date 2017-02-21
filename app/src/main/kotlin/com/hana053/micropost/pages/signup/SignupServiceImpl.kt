@@ -39,6 +39,6 @@ class SignupServiceImpl(
                 loginService.login(request.email, request.password)
             }
 
-    private fun isEmailAlreadyTaken(e: Throwable): Boolean = e is HttpException && e.code() == 400
+    private fun isEmailAlreadyTaken(e: Throwable) = e is HttpException && e.code() == 400
 
 }

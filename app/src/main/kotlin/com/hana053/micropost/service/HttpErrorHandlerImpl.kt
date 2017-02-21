@@ -15,24 +15,27 @@ internal class HttpErrorHandlerImpl(
     private val context: Context = context.applicationContext
 
     override fun handleError(throwable: Throwable) {
-        try {
-            throw throwable
-        } catch (e: SocketTimeoutException) {
-            Toast.makeText(context, "Connection timed out.", Toast.LENGTH_LONG).show()
-        } catch (e: ConnectException) {
-            Toast.makeText(context, "Cannot connect to server.", Toast.LENGTH_LONG).show()
-        } catch (e: HttpException) {
-            when {
-                e.code() == 401 -> {
-                    Toast.makeText(context, "Please sign in.", Toast.LENGTH_LONG).show()
-                    authService.logout()
+        when (throwable) {
+            is SocketTimeoutException -> showToast("Connection timed out.")
+            is ConnectException -> showToast("Cannot connect to server.")
+            is HttpException -> {
+                when {
+                    (throwable.code() == 401) -> {
+                        showToast("Please sign in.")
+                        authService.logout()
+                    }
+                    (throwable.code() >= 500) -> showToast("Something bad happened.")
                 }
-                e.code() >= 500 -> Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
             }
-        } catch (e: Throwable) {
-            Timber.e(e, "handleHttpError: ${e.message}")
-            Toast.makeText(context, "Something bad happened.", Toast.LENGTH_LONG).show()
+            is Throwable -> {
+                Timber.e(throwable, "handleHttpError: ${throwable.message}")
+                showToast("Something bad happened.")
+            }
         }
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 
 }

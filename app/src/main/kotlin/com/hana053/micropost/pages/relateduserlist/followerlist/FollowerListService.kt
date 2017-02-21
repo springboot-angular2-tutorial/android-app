@@ -19,11 +19,7 @@ class FollowerListService(
     context: Context
 ) : RelatedUserListService {
 
-    private val context: Context
-
-    init {
-        this.context = context.applicationContext
-    }
+    private val context = context.applicationContext
 
     override fun listUsers(userId: Long): Observable<List<RelatedUser>> {
         val maxId = adapter.getLastItemId()

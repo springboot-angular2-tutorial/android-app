@@ -21,25 +21,22 @@ class FollowBtnService(
             .map { view.user }
     }
 
-    private fun follow(view: FollowBtnView): Observable<Void> {
-        return relationshipInteractor.follow(view.user.id)
+    private fun follow(view: FollowBtnView) =
+        relationshipInteractor.follow(view.user.id)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { view.toUnfollow() }
-    }
 
-    private fun unfollow(view: FollowBtnView): Observable<Void> {
-        return relationshipInteractor.unfollow(view.user.id)
+    private fun unfollow(view: FollowBtnView) =
+        relationshipInteractor.unfollow(view.user.id)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { view.toFollow() }
-    }
 
-    private fun <T> Observable<T>.withBtnDisabled(enabled: Action1<in Boolean>): Observable<T> {
-        return Observable.using({
+    private fun <T> Observable<T>.withBtnDisabled(enabled: Action1<in Boolean>) =
+        Observable.using({
             enabled.call(false)
         }, { this }, {
             enabled.call(true)
         })
-    }
 }

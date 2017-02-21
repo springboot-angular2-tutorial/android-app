@@ -33,7 +33,7 @@ class SignupEmailPresenter(
             }
     }
 
-    private fun isFormValid(email: CharSequence): Boolean =
+    private fun isFormValid(email: CharSequence) =
         "^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@\\[?([\\d\\w\\.-]+)]?$"
             .let(String::toRegex)
             .let { email.matches(it) }

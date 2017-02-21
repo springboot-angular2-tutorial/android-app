@@ -34,9 +34,7 @@ class FollowBtnView(
         this._user = user
     }
 
-    fun clicks(): Observable<FollowBtnView> {
-        return button.clicks().map { this }
-    }
+    fun clicks(): Observable<FollowBtnView> = button.clicks().map { this }
 
     fun toFollow() {
         button.text = FOLLOW
@@ -46,8 +44,6 @@ class FollowBtnView(
         button.text = UNFOLLOW
     }
 
-    fun isFollowState(): Boolean {
-        return button.text == FOLLOW
-    }
+    fun isFollowState() = button.text == FOLLOW
 
 }

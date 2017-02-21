@@ -30,7 +30,7 @@ class PostListAdapter(
         val content: TextView = view.content
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         LayoutInflater.from(parent.context)
             .inflate(R.layout.item_posts, parent, false)
             .let(::ViewHolder)

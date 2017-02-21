@@ -11,7 +11,6 @@ data class RelatedUser(
     val relationshipId: Long
 ) : Avatar {
 
-    fun toUser(): User =
-        User(id, name, email, avatarHash, isFollowedByMe, userStats)
+    fun toUser() = User(id, name, email, avatarHash, isFollowedByMe, userStats)
 
 }
