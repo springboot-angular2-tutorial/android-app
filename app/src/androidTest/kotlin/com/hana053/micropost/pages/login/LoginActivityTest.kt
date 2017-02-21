@@ -35,9 +35,9 @@ class LoginActivityTest : InjectableTest by InjectableTestImpl() {
     @Rule @JvmField
     val activityRule = ActivityTestRule(LoginActivity::class.java, false, false)
 
-    val loginBtn: Matcher<View> = withId(R.id.loginBtn)
-    val emailEditText: Matcher<View> = withId(R.id.emailEditText)
-    val passwordEditText: Matcher<View> = withId(R.id.passwordEditText)
+    val loginBtn: Matcher<View> = withId(R.id.btn_login)
+    val emailEditText: Matcher<View> = withId(R.id.et_email)
+    val passwordEditText: Matcher<View> = withId(R.id.et_password)
 
     @Test
     fun shouldBeOpened() {

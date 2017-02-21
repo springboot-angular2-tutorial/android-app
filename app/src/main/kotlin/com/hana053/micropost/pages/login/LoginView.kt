@@ -11,14 +11,14 @@ import rx.Observable
 class LoginView(override val content: ViewGroup) : ViewWrapper {
 
     // Events
-    val emailChanges: Observable<String> = content.emailEditText
+    val emailChanges: Observable<String> = content.et_email
         .textChanges()
         .map { it.toString() }
-    val passwordChanges: Observable<String> = content.passwordEditText
+    val passwordChanges: Observable<String> = content.et_password
         .textChanges()
         .map { it.toString() }
-    val loginClicks = content.loginBtn.clicks()
+    val loginClicks = content.btn_login.clicks()
 
     // Props
-    val loginEnabled = content.loginBtn.enabled()
+    val loginEnabled = content.btn_login.enabled()
 }
