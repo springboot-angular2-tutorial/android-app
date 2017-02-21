@@ -40,7 +40,7 @@
         android:paddingRight="72dp">
 
         <Button
-            android:id="@+id/signupBtn"
+            android:id="@+id/btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_medium"
@@ -51,7 +51,7 @@
             android:textSize="@dimen/app_text_size_xlarge"/>
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/btn_login"
             android:theme="@style/LoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

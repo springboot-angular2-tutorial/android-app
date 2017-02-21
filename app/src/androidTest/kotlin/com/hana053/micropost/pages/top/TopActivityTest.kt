@@ -42,7 +42,7 @@ class TopActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         activityRule.launchActivity(null)
-        onView(withId(R.id.signupBtn)).perform(click())
+        onView(withId(R.id.btn_signup)).perform(click())
 
         verify(navigator).navigateToSignup()
     }
@@ -55,7 +55,7 @@ class TopActivityTest : InjectableTest by InjectableTestImpl() {
         }
 
         activityRule.launchActivity(null)
-        onView(withId(R.id.loginBtn)).perform(click())
+        onView(withId(R.id.btn_login)).perform(click())
 
         verify(navigator).navigateToLogin()
     }

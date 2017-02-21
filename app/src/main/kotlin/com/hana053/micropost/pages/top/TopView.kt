@@ -7,6 +7,6 @@ import kotlinx.android.synthetic.main.activity_top.view.*
 
 class TopView(override val content: ViewGroup) : ViewWrapper {
 
-    val signupClicks = content.signupBtn.clicks()
-    val loginClicks = content.loginBtn.clicks()
+    val signupClicks = content.btn_signup.clicks()
+    val loginClicks = content.btn_login.clicks()
 }
