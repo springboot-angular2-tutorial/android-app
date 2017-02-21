@@ -21,7 +21,7 @@ class RelatedUserListPresenter(
             .withProgressDialog()
             .subscribe()
 
-        view.scrolledToBottom
+        view.scrollsToBottom
             .bindToLifecycle()
             .flatMap {
                 relatedUserListService.listUsers(userId)

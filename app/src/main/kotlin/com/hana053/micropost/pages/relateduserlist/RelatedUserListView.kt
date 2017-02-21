@@ -14,15 +14,15 @@ class RelatedUserListView(
     relatedUserListAdapter: RelatedUserListAdapter
 ) : ViewWrapper {
 
-    private val userRecyclerView = content.userRecyclerView
+    private val listUser = content.list_user
 
     // Events
-    val scrolledToBottom: Observable<RecyclerViewScrollEvent> = userRecyclerView.scrollEvents()
-        .filter { !userRecyclerView.canScrollVertically(1) }
+    val scrollsToBottom: Observable<RecyclerViewScrollEvent> = listUser.scrollEvents()
+        .filter { !listUser.canScrollVertically(1) }
 
     init {
-        userRecyclerView.layoutManager = LinearLayoutManager(context())
-        userRecyclerView.adapter = relatedUserListAdapter
+        listUser.layoutManager = LinearLayoutManager(context())
+        listUser.adapter = relatedUserListAdapter
     }
 
 }

@@ -22,7 +22,6 @@ import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,10 +47,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
             })
         }
         launchActivity(FOLLOWER, 1)
-        onView(allOf(
-            isDescendantOfA(withResourceName("android:id/action_bar_container")),
-            withText(R.string.Followers)
-        ))
+        onView(withText(R.string.Followers)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -78,8 +74,8 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
         }
         launchActivity(FOLLOWER, 1)
 
-        onView(withId(R.id.userRecyclerView))
-            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.userName)))
+        onView(withId(R.id.list_user))
+            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.tv_user_name)))
     }
 
     @Test
@@ -99,10 +95,10 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
         }
         launchActivity(FOLLOWER, 1)
 
-        onView(withId(R.id.userRecyclerView))
-            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.userName)))
-        onView(withId(R.id.userRecyclerView))
-            .check(matches(atPositionOnView(1, withText("Old Follower"), R.id.userName)))
+        onView(withId(R.id.list_user))
+            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.tv_user_name)))
+        onView(withId(R.id.list_user))
+            .check(matches(atPositionOnView(1, withText("Old Follower"), R.id.tv_user_name)))
     }
 
     @Test
@@ -126,8 +122,8 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
         }
         launchActivity(FOLLOWER, 1)
 
-        onView(withId(R.id.followBtn)).perform(click())
-        onView(withId(R.id.followBtn)).check(matches(withText(R.string.Unfollow)))
+        onView(withId(R.id.btn_follow)).perform(click())
+        onView(withId(R.id.btn_follow)).check(matches(withText(R.string.Unfollow)))
     }
 
     @Test
@@ -145,7 +141,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
             bind<Navigator>(overrides = true) with instance(navigator)
         }
         launchActivity(FOLLOWER, 1)
-        onView(withId(R.id.avatar)).perform(click())
+        onView(withId(R.id.img_avatar)).perform(click())
 
         verify(navigator).navigateToUserShow(100)
     }
@@ -162,10 +158,7 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
             })
         }
         launchActivity(FOLLOWING, 1)
-        onView(allOf(
-            isDescendantOfA(withResourceName("android:id/action_bar_container")),
-            withText(R.string.Followings)
-        ))
+        onView(withText(R.string.Followings)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -182,8 +175,8 @@ class RelatedUserListActivityTest : InjectableTest by InjectableTestImpl() {
         }
         launchActivity(FOLLOWING, 1)
 
-        onView(withId(R.id.userRecyclerView))
-            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.userName)))
+        onView(withId(R.id.list_user))
+            .check(matches(atPositionOnView(0, withText("John Doe"), R.id.tv_user_name)))
     }
 
     private fun launchActivity(listType: RelatedUserListActivity.ListType, userId: Long) {

@@ -26,9 +26,9 @@ class RelatedUserListAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val container: LinearLayout = view.container
-        val avatar: ImageView = view.avatar
-        val userName: TextView = view.userName
-        val followBtn: Button = view.followBtn
+        val avatar: ImageView = view.img_avatar
+        val userName: TextView = view.tv_user_name
+        val followBtn: Button = view.btn_follow
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
