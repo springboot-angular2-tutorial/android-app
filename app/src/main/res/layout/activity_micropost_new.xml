@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/postEditText"
+        android:id="@+id/et_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -25,7 +25,7 @@
         android:background="@drawable/border_top">
 
         <Button
-            android:id="@+id/postBtn"
+            android:id="@+id/btn_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

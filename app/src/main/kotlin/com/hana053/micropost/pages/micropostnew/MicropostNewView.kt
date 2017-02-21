@@ -11,9 +11,9 @@ import kotlinx.android.synthetic.main.activity_micropost_new.view.*
 class MicropostNewView(override val content: ViewGroup) : ViewWrapper {
 
     // Events
-    val postTextChanges = content.postEditText.textChanges()
-    val postBtnClicks = content.postBtn.clicks()
+    val postTextChanges = content.et_post.textChanges()
+    val postBtnClicks = content.btn_post.clicks()
 
     // Props
-    val postBtnEnabled = content.postBtn.enabled()
+    val postBtnEnabled = content.btn_post.enabled()
 }

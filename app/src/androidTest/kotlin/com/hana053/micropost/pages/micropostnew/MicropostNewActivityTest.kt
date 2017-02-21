@@ -57,10 +57,10 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
         overrideAppBindings { fakeAuthToken() }
         activityRule.launchActivity(null)
 
-        onView(withId(R.id.postBtn)).check(matches(not(isEnabled())))
+        onView(withId(R.id.btn_post)).check(matches(not(isEnabled())))
 
-        onView(withId(R.id.postEditText)).perform(typeText("a"))
-        onView(withId(R.id.postBtn)).check(matches(isEnabled()))
+        onView(withId(R.id.et_post)).perform(typeText("a"))
+        onView(withId(R.id.btn_post)).check(matches(isEnabled()))
     }
 
     @Test
@@ -74,8 +74,8 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
         }
         activityRule.launchActivity(null)
 
-        onView(withId(R.id.postEditText)).perform(typeText("a"))
-        onView(withId(R.id.postBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.et_post)).perform(typeText("a"))
+        onView(withId(R.id.btn_post)).perform(closeSoftKeyboard(), click())
 
         verify(micropostInteractor).create(MicropostInteractor.MicropostRequest("a"))
         assertThat(activityRule.activity.isFinishing, `is`(true))

@@ -181,8 +181,8 @@ class MainActivityTest : InjectableTest by InjectableTestImpl() {
         verify(feedInteractor, times(1)).loadNextFeed(null)
 
         onView(withId(R.id.btn_new_micropost)).perform(click())
-        onView(withId(R.id.postEditText)).perform(typeText("hello"))
-        onView(withId(R.id.postBtn)).perform(closeSoftKeyboard(), click())
+        onView(withId(R.id.et_post)).perform(typeText("hello"))
+        onView(withId(R.id.btn_post)).perform(closeSoftKeyboard(), click())
 
         verify(feedInteractor, times(2)).loadNextFeed(null)
     }
