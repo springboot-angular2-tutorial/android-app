@@ -6,7 +6,6 @@ This repository is an example Android application based on Rails tutorial app.
 
 * Kotlin 100% without kapt
 * [Kodein](https://github.com/SalomonBrys/Kodein) as Dependency Injection
-* MVP architecture
 * [RxJava](https://github.com/ReactiveX/RxJava) / [RxAndroid](https://github.com/ReactiveX/RxAndroid)
 * [RxBinding](https://github.com/JakeWharton/RxBinding)
 * [Retrofit](https://github.com/square/retrofit)
