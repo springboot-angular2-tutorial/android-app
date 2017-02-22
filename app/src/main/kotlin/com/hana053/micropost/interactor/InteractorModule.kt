@@ -41,32 +41,33 @@ fun interactorModule() = Kodein.Module {
     }
 
     bind<LoginInteractor>() with singleton {
-        instance<Retrofit>().create(LoginInteractor::class.java)
+        instance<Retrofit>().create<LoginInteractor>()
     }
 
     bind<FeedInteractor>() with singleton {
-        instance<Retrofit>().create(FeedInteractor::class.java)
+        instance<Retrofit>().create<FeedInteractor>()
     }
 
     bind<UserInteractor>() with singleton {
-        instance<Retrofit>().create(UserInteractor::class.java)
+        instance<Retrofit>().create<UserInteractor>()
     }
 
     bind<RelationshipInteractor>() with singleton {
-        instance<Retrofit>().create(RelationshipInteractor::class.java)
+        instance<Retrofit>().create<RelationshipInteractor>()
     }
 
     bind<UserMicropostInteractor>() with singleton {
-        instance<Retrofit>().create(UserMicropostInteractor::class.java)
+        instance<Retrofit>().create<UserMicropostInteractor>()
     }
 
     bind<MicropostInteractor>() with singleton {
-        instance<Retrofit>().create(MicropostInteractor::class.java)
+        instance<Retrofit>().create<MicropostInteractor>()
     }
 
     bind<RelatedUserListInteractor>() with singleton {
-        instance<Retrofit>().create(RelatedUserListInteractor::class.java)
+        instance<Retrofit>().create<RelatedUserListInteractor>()
     }
-
 }
+
+inline fun <reified T : Any> Retrofit.create(): T = create(T::class.java)
 
