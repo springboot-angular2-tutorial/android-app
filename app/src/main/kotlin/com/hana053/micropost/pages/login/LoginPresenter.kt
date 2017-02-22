@@ -15,25 +15,27 @@ class LoginPresenter(
         val emailChanges = view.emailChanges.share()
         val passwordChanges = view.passwordChanges.share()
 
-        val credentials = Observable.combineLatest(emailChanges, passwordChanges, { email, password ->
-            Triple(email, password, email.isNotBlank() && password.isNotBlank())
-        })
+        val emailAndPassword = Observable.combineLatest(emailChanges, passwordChanges, ::EmailAndPassword)
 
-        credentials
+        emailAndPassword
             .bindToLifecycle()
-            .map { it.third }
+            .map { it.isValid() }
             .subscribe { view.loginEnabled.call(it) }
 
         view.loginClicks
             .bindToLifecycle()
-            .withLatestFrom(credentials, { click, credentials ->
-                credentials.first to credentials.second
+            .withLatestFrom(emailAndPassword, { click, emailAndPassword ->
+                emailAndPassword
             })
             .flatMap {
-                loginService.login(it.first, it.second)
+                loginService.login(it.email, it.password)
                     .withProgressDialog()
             }
             .subscribe { navigator.navigateToMain() }
+    }
+
+    data class EmailAndPassword(val email: String, val password: String) {
+        fun isValid() = email.isNotBlank() && password.isNotBlank()
     }
 
 }
