@@ -5,7 +5,7 @@ import android.widget.Toast
 import com.hana053.micropost.interactor.UserInteractor
 import com.hana053.micropost.service.HttpErrorHandler
 import com.hana053.micropost.service.LoginService
-import retrofit2.adapter.rxjava.HttpException
+import retrofit2.HttpException
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

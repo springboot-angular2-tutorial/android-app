@@ -9,8 +9,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import rx.Observable
@@ -36,7 +35,7 @@ class UserShowDetailServiceTest : RobolectricBaseTest() {
         advance()
 
         verify(userInteractor).get(userId)
-        assertThat(user, `is`(TestUser))
+        assertThat(user).isEqualTo(TestUser)
     }
 
     @Test

@@ -25,13 +25,15 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import kotlinx.android.synthetic.main.fragment_signup_email.*
 import kotlinx.android.synthetic.main.fragment_signup_full_name.*
-import org.hamcrest.CoreMatchers.*
+import org.assertj.android.api.Assertions.assertThat
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.adapter.rxjava.HttpException
 import rx.Observable
 
 
@@ -161,11 +163,11 @@ class SignupActivityTest : InjectableTest by InjectableTestImpl() {
 
         onView(withId(android.R.id.content)).perform(pressBack())
         onView(withText(R.string.what_s_your_email)).check(matches(isDisplayed()))
-        assertThat(activity.et_email.text.toString(), `is`("test@test.com"))
+        assertThat(activity.et_email).hasTextString("test@test.com")
 
         onView(withId(android.R.id.content)).perform(pressBack())
         onView(withText(R.string.hi_what_s_your_name)).check(matches(isDisplayed()))
-        assertThat(activity.et_full_name.text.toString(), `is`("John Doe"))
+        assertThat(activity.et_full_name).hasTextString("John Doe")
     }
 
     private fun moveToEmailWithName(name: String) {

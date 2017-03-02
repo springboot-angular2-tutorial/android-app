@@ -2,7 +2,7 @@ package com.hana053.micropost.service
 
 import android.content.Context
 import android.widget.Toast
-import retrofit2.adapter.rxjava.HttpException
+import retrofit2.HttpException
 import timber.log.Timber
 import java.net.ConnectException
 import java.net.SocketTimeoutException

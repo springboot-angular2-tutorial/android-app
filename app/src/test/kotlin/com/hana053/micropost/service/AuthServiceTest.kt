@@ -7,8 +7,7 @@ import com.hana053.micropost.testing.jwtForUserId1
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.`when`
 
@@ -28,10 +27,10 @@ class AuthServiceTest : RobolectricBaseTest() {
             .doReturn(jwtForUserId1)
 
         val user1 = TestUser.copy(id = 1)
-        assertThat(authService.isMyself(user1), `is`(true))
+        assertThat(authService.isMyself(user1)).isTrue()
 
         val user2 = TestUser.copy(id = 2)
-        assertThat(authService.isMyself(user2), `is`(false))
+        assertThat(authService.isMyself(user2)).isFalse()
     }
 
     @Test
@@ -44,13 +43,13 @@ class AuthServiceTest : RobolectricBaseTest() {
 
     @Test
     fun shouldForceLogoutWhenAuthTokenIsEmpty() {
-        assertThat(authService.auth(), `is`(false))
+        assertThat(authService.auth()).isFalse()
         verify(navigator).navigateToTop()
     }
 
     @Test
     fun shouldJustReturnTrueWhenAuthenticated() {
         `when`(authTokenRepository.get()).doReturn("test token")
-        assertThat(authService.auth(), `is`(true))
+        assertThat(authService.auth()).isTrue()
     }
 }

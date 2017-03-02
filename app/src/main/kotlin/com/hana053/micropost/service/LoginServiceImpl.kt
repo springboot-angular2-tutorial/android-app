@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.hana053.micropost.interactor.LoginInteractor
 import com.hana053.micropost.repository.AuthTokenRepository
-import retrofit2.adapter.rxjava.HttpException
+import retrofit2.HttpException
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

@@ -10,8 +10,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import rx.Observable
@@ -40,8 +39,8 @@ class FollowerListServiceTest : RobolectricBaseTest() {
         followerListService.listUsers(userId).subscribe()
         advance()
 
-        assertThat(relatedUserListAdapter.itemCount, `is`(1))
-        assertThat(relatedUserListAdapter.getLastItemId(), `is`(101L))
+        assertThat(relatedUserListAdapter.itemCount).isEqualTo(1)
+        assertThat(relatedUserListAdapter.getLastItemId()).isEqualTo(101)
     }
 
     @Test
@@ -59,8 +58,8 @@ class FollowerListServiceTest : RobolectricBaseTest() {
         followerListService.listUsers(userId).subscribe()
         advance()
 
-        assertThat(relatedUserListAdapter.itemCount, `is`(3))
-        assertThat(relatedUserListAdapter.getLastItemId(), `is`(101L))
+        assertThat(relatedUserListAdapter.itemCount).isEqualTo(3)
+        assertThat(relatedUserListAdapter.getLastItemId()).isEqualTo(101)
     }
 
     @Test

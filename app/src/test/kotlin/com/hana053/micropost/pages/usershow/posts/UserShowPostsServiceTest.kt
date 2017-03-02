@@ -10,8 +10,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import rx.Observable
@@ -39,8 +38,8 @@ class UserShowPostsServiceTest : RobolectricBaseTest() {
         userShowPostsService.loadPosts(userId).subscribe()
         advance()
 
-        assertThat(postListAdapter.itemCount, `is`(1))
-        assertThat(postListAdapter.getFirstItemId(), `is`(1L))
+        assertThat(postListAdapter.itemCount).isEqualTo(1)
+        assertThat(postListAdapter.getFirstItemId()).isEqualTo(1)
     }
 
     @Test
@@ -58,9 +57,9 @@ class UserShowPostsServiceTest : RobolectricBaseTest() {
         userShowPostsService.loadPosts(userId).subscribe()
         advance()
 
-        assertThat(postListAdapter.itemCount, `is`(3))
-        assertThat(postListAdapter.getFirstItemId(), `is`(3L))
-        assertThat(postListAdapter.getLastItemId(), `is`(1L))
+        assertThat(postListAdapter.itemCount).isEqualTo(3)
+        assertThat(postListAdapter.getFirstItemId()).isEqualTo(3)
+        assertThat(postListAdapter.getLastItemId()).isEqualTo(1)
     }
 
     @Test

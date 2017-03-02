@@ -4,14 +4,13 @@ import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.robolectric.shadows.ShadowLog
 import org.robolectric.shadows.ShadowToast
+import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.adapter.rxjava.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
@@ -29,32 +28,32 @@ class HttpErrorHandlerTest : RobolectricBaseTest() {
     @Test
     fun shouldHandleSocketTimeoutException() {
         httpErrorHandler.handleError(SocketTimeoutException())
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("Connection timed out."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Connection timed out.")
     }
 
     @Test
     fun shouldHandleConnectException() {
         httpErrorHandler.handleError(ConnectException())
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("Cannot connect to server."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Cannot connect to server.")
     }
 
     @Test
     fun shouldHandle401Error() {
         httpErrorHandler.handleError(createHttpException(401))
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("Please sign in."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Please sign in.")
         verify(authService).logout()
     }
 
     @Test
     fun shouldHandle500Error() {
         httpErrorHandler.handleError(createHttpException(500))
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("Something bad happened."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Something bad happened.")
     }
 
     @Test
     fun shouldHandleUnknownError() {
         httpErrorHandler.handleError(RuntimeException())
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("Something bad happened."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Something bad happened.")
     }
 
     private fun createHttpException(status: Int): HttpException {

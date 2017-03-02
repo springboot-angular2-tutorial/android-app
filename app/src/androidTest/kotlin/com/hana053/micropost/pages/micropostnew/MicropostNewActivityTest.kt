@@ -1,5 +1,6 @@
 package com.hana053.micropost.pages.micropostnew
 
+import org.assertj.android.api.Assertions.assertThat
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
@@ -20,7 +21,6 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
@@ -78,7 +78,7 @@ class MicropostNewActivityTest : InjectableTest by InjectableTestImpl() {
         onView(withId(R.id.btn_post)).perform(closeSoftKeyboard(), click())
 
         verify(micropostInteractor).create(MicropostInteractor.MicropostRequest("a"))
-        assertThat(activityRule.activity.isFinishing, `is`(true))
+        assertThat(activityRule.activity).isFinishing
     }
 
 }

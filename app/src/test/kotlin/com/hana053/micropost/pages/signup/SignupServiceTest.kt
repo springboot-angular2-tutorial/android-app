@@ -8,13 +8,12 @@ import com.hana053.micropost.testing.EmptyResponseBody
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import com.nhaarman.mockito_kotlin.*
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.robolectric.shadows.ShadowToast
+import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.adapter.rxjava.HttpException
 import rx.Observable
 
 
@@ -58,7 +57,7 @@ class SignupServiceTest : RobolectricBaseTest() {
         signupService.signup(signupRequest).subscribe()
         advance()
 
-        assertThat(ShadowToast.getTextOfLatestToast(), `is`("This email is already taken."))
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("This email is already taken.")
         verify(loginService, never()).login(any(), any())
     }
 

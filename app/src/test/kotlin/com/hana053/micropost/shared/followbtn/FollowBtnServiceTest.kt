@@ -11,8 +11,7 @@ import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.`when`
@@ -48,12 +47,12 @@ class FollowBtnServiceTest : RobolectricBaseTest() {
         view.render(TestUser.copy(id = userId, isFollowedByMe = false))
 
         // just confirm that Follow is shown
-        assertThat(view.isFollowState(), `is`(true))
+        assertThat(view.isFollowState()).isTrue()
 
         followBtnService.handleFollowBtnClicks(view).subscribe()
         advance()
 
-        assertThat(view.isFollowState(), `is`(false))
+        assertThat(view.isFollowState()).isFalse()
     }
 
     @Test
@@ -66,11 +65,11 @@ class FollowBtnServiceTest : RobolectricBaseTest() {
         view.render(TestUser.copy(id = userId, isFollowedByMe = true))
 
         // just confirm that Unfollow is shown
-        assertThat(view.isFollowState(), `is`(false))
+        assertThat(view.isFollowState()).isFalse()
 
         followBtnService.handleFollowBtnClicks(view).subscribe()
         advance()
 
-        assertThat(view.isFollowState(), `is`(true))
+        assertThat(view.isFollowState()).isTrue()
     }
 }

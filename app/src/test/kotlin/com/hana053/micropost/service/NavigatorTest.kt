@@ -11,8 +11,7 @@ import com.hana053.micropost.pages.signup.SignupActivity
 import com.hana053.micropost.pages.usershow.UserShowActivity
 import com.hana053.micropost.testing.RobolectricBaseTest
 import com.hana053.micropost.testing.TestUser
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.robolectric.Robolectric
@@ -39,8 +38,8 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(UserShowActivity::class.java.name))
-        assertThat(intent.extras.getLong(UserShowActivity.KEY_USER_ID), `is`(1L))
+        assertThat(intent.component.className).isEqualTo(UserShowActivity::class.java.name)
+        assertThat(intent.extras.getLong(UserShowActivity.KEY_USER_ID)).isEqualTo(1)
     }
 
     @Test
@@ -50,7 +49,7 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(MainActivity::class.java.name))
+        assertThat(intent.component.className).isEqualTo(MainActivity::class.java.name)
     }
 
     @Test
@@ -60,7 +59,7 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(SignupActivity::class.java.name))
+        assertThat(intent.component.className).isEqualTo(SignupActivity::class.java.name)
     }
 
     @Test
@@ -70,7 +69,7 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(LoginActivity::class.java.name))
+        assertThat(intent.component.className).isEqualTo(LoginActivity::class.java.name)
     }
 
     @Test
@@ -80,12 +79,10 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(RelatedUserListActivity::class.java.name))
-        assertThat(intent.extras.getLong(RelatedUserListActivity.KEY_USER_ID), `is`(1L))
-        assertThat(
-            intent.extras.getSerializable(RelatedUserListActivity.KEY_LIST_TYPE) as RelatedUserListActivity.ListType,
-            `is`(RelatedUserListActivity.ListType.FOLLOWING)
-        )
+        assertThat(intent.component.className).isEqualTo(RelatedUserListActivity::class.java.name)
+        assertThat(intent.extras.getLong(RelatedUserListActivity.KEY_USER_ID)).isEqualTo(1)
+        assertThat(intent.extras.getSerializable(RelatedUserListActivity.KEY_LIST_TYPE) as RelatedUserListActivity.ListType)
+            .isEqualTo(RelatedUserListActivity.ListType.FOLLOWING)
     }
 
     @Test
@@ -95,12 +92,10 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(RelatedUserListActivity::class.java.name))
-        assertThat(intent.extras.getLong(RelatedUserListActivity.KEY_USER_ID), `is`(1L))
-        assertThat(
-            intent.extras.getSerializable(RelatedUserListActivity.KEY_LIST_TYPE) as RelatedUserListActivity.ListType,
-            `is`(RelatedUserListActivity.ListType.FOLLOWER)
-        )
+        assertThat(intent.component.className).isEqualTo(RelatedUserListActivity::class.java.name)
+        assertThat(intent.extras.getLong(RelatedUserListActivity.KEY_USER_ID)).isEqualTo(1)
+        assertThat(intent.extras.getSerializable(RelatedUserListActivity.KEY_LIST_TYPE) as RelatedUserListActivity.ListType)
+            .isEqualTo(RelatedUserListActivity.ListType.FOLLOWER)
     }
 
     @Test
@@ -110,14 +105,14 @@ class NavigatorTest : RobolectricBaseTest() {
         val shadow = Shadows.shadowOf(activity)
         val intent = shadow.nextStartedActivity
 
-        assertThat(intent.component.className, `is`(MicropostNewActivity::class.java.name))
+        assertThat(intent.component.className).isEqualTo(MicropostNewActivity::class.java.name)
 
         shadow.receiveResult(
             Intent(activity, MicropostNewActivity::class.java),
             Activity.RESULT_OK,
             Intent()
         )
-        assertThat(activity.postReceived, `is`(true))
+        assertThat(activity.postReceived).isTrue()
     }
 
     class TestActivity : Activity() {

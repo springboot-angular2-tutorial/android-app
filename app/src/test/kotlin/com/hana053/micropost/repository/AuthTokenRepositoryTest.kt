@@ -2,9 +2,7 @@ package com.hana053.micropost.repository
 
 import android.preference.PreferenceManager
 import com.hana053.micropost.testing.RobolectricBaseTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.nullValue
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class AuthTokenRepositoryTest : RobolectricBaseTest() {
@@ -15,14 +13,14 @@ class AuthTokenRepositoryTest : RobolectricBaseTest() {
     @Test
     fun shouldSaveAuthToken() {
         authTokenRepository.set("my token")
-        assertThat(authTokenRepository.get(), `is`("my token"))
+        assertThat(authTokenRepository.get()).isEqualTo("my token")
     }
 
     @Test
     fun shouldClearAuthToken() {
         authTokenRepository.set("my token")
         authTokenRepository.clear()
-        assertThat(authTokenRepository.get(), nullValue())
+        assertThat(authTokenRepository.get()).isNullOrEmpty()
     }
 
 }
