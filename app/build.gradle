@@ -46,6 +46,7 @@ android {
     }
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+        resolutionStrategy.force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     }
 }
 
