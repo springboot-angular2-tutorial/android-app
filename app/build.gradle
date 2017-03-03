@@ -81,7 +81,7 @@ dependencies {
     testCompile "org.robolectric:robolectric:$robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$robolectric_version"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.6.2'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: assertj_version
 
     androidTestCompile "com.android.support.test:runner:$android_support_test_version"
     androidTestCompile "com.android.support.test:rules:$android_support_test_version"
@@ -94,7 +94,7 @@ dependencies {
     androidTestCompile "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito_version"
     androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
     androidTestCompile "com.linkedin.testbutler:test-butler-library:$testbutler_version"
-    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
+    androidTestCompile "com.squareup.assertj:assertj-android:$assertj_android_version"
 }
 repositories {
     mavenCentral()
