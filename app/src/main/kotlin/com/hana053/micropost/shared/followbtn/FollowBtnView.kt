@@ -30,7 +30,7 @@ class FollowBtnView(
         val authService = button.context.appKodein().instance<AuthService>()
 
         button.visibility().call(!authService.isMyself(user))
-        if (user.isFollowedByMe) toUnfollow() else toFollow()
+        user.isFollowedByMe?.let { if(it) toUnfollow() else toFollow()}
         this._user = user
     }
 

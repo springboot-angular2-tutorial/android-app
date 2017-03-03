@@ -5,7 +5,6 @@ data class User(
     val name: String,
     val email: String?,
     override val avatarHash: String,
-    val isFollowedByMe: Boolean,
+    val isFollowedByMe: Boolean? = null,
     val userStats: UserStats
 ) : Avatar
-
