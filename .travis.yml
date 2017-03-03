@@ -5,16 +5,16 @@ env:
   global:
     - MALLOC_ARENA_MAX=2
 android:
-#  components:
-#    - platform-tools
-#    - tools
-#    - build-tools-25.0.2
-#    - android-22
-#    - android-25
-#    - extra-android-support
-#    - extra-google-m2repository
-#    - extra-android-m2repository
-#    - sys-img-armeabi-v7a-android-22
+  components:
+    - platform-tools
+    - tools
+    - build-tools-25.0.2
+    - android-22
+    - android-25
+    - extra-android-support
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-22
 
 before_script:
   - cp gradle.properties.ci.example gradle.properties
