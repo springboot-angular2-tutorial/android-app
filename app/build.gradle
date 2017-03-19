@@ -45,7 +45,13 @@ android {
         androidTest.java.srcDirs += 'src/testShared/kotlin'
     }
     configurations.all {
-        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+        resolutionStrategy {
+            forcedModules = [
+                    'com.google.code.findbugs:jsr305:3.0.1',
+                    "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+                    "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+            ]
+        }
     }
 }
 
